@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --color-1: #d8577b;
+  --light: #fafafa;
+}
+body {
+  background: var(--light);
+}
