@@ -2,13 +2,13 @@
   "name": "grabeats",
   "version": "1.0.0",
   "description": "A simple food ordering app, featuring an intuitive ordering system and a basic admin panel built with React and Next JS.",
-  "homepage": "https://github.com/johnnyvasconcelos/GrabEats#readme",
+  "homepage": "https://github.com/johnnyvasconcelos/grab-eats#readme",
   "bugs": {
-    "url": "https://github.com/johnnyvasconcelos/GrabEats/issues"
+    "url": "https://github.com/johnnyvasconcelos/grab-eats/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnnyvasconcelos/GrabEats.git"
+    "url": "git+https://github.com/johnnyvasconcelos/grab-eats.git"
   },
   "license": "ISC",
   "author": "Johnny Vasconcelos",

@@ -4,7 +4,7 @@ export default function Document() {
     <Html lang="pt-br">
       <Head>
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.png" />
       </Head>
       <body>
         <Main />
