@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 export default function Home() {
   return (
     <>
@@ -29,14 +30,26 @@ export default function Home() {
             oferecer praticidade e sabor em cada detalhe!
           </p>
           <nav className="flex choose__options">
-            <a className="choose__item flex column">
+            <Link
+              href="/cardapio"
+              className="choose__item flex column"
+              onClick={() => {
+                console.log("comer aqui");
+              }}
+            >
               <img src="/images/group 1.png" alt="Hamburguer Icon PNG." />
               <p className="choose__item--button btn">Para comer aqui</p>
-            </a>
-            <a className="choose__item flex column">
+            </Link>
+            <Link
+              href="/cardapio"
+              className="choose__item flex column"
+              onClick={() => {
+                console.log("levar");
+              }}
+            >
               <img src="/images/group 2.png" alt="Bag Icon PNG." />
               <p className="choose__item--button btn">Para levar</p>
-            </a>
+            </Link>
           </nav>
         </div>
       </section>
