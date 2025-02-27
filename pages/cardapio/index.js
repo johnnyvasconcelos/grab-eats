@@ -6,7 +6,7 @@ function Cardapio() {
     <>
       <Header />
       <main className="offers">
-        <header className="offers__header">
+        <header className="offers__header menu-background">
           <div className="container flex">
             <div className="flex offers__header--info">
               <img src="/images/logo.png" alt="logo" />
@@ -19,7 +19,7 @@ function Cardapio() {
               <span>star</span>5.0
             </div>
           </div>
-          <div className="flex time">
+          <div className="flex time container">
             <span>relógio</span>Aberto
           </div>
         </header>

@@ -14,6 +14,7 @@
   --dark: #323232;
   --dark-gray: #7e8392;
   --section-padding: 60px;
+  --shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
 }
 @font-face {
   font-family: "Poppins";
@@ -53,6 +54,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+.wrapper {
+  overflow-x: hidden;
+  max-width: 100svw;
 }
 .container {
   max-width: 1200px;
@@ -119,6 +124,40 @@ a {
   font-weight: 600;
   padding: 10px;
   margin-top: 10px;
+  width: 100%;
+}
+/* main */
+.main__header {
+  height: 280px;
+  background-image: url("/images/banner.png");
+  background-size: 100%;
+  padding-top: 30px;
+}
+.main__header--buttons {
+  justify-content: space-between;
+}
+.main__header--buttons .main__header--btn {
+  background-color: var(--light);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.main__header--buttons .main__header--btn img {
+  width: 10px;
+}
+.main__header--buttons .main__header--btn.btn-2 img {
+  width: 20px;
+}
+.offers {
+  margin-top: -50px;
+  background-color: var(--light);
+  border-radius: 25px;
+  padding-top: 25px;
+}
+.product .product__image img {
   width: 100%;
 }
 @media (min-width: 345px) {
