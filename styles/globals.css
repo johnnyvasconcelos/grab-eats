@@ -64,7 +64,7 @@ ol {
   max-width: 100svw;
 }
 .container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   width: 90%;
 }
@@ -150,8 +150,8 @@ ol {
   height: 280px;
   background-image: url("/images/banner.png");
   background-attachment: fixed;
-  background-size: 100%;
-  padding-top: 30px;
+  background-size: contains;
+  padding-top: 40px;
 }
 .main__header--buttons {
   justify-content: space-between;
@@ -162,14 +162,30 @@ ol {
   height: 50px;
   width: 50px;
   justify-content: center;
-  overflow: hidden;
   box-shadow: var(--shadow);
 }
 .main__header--buttons .main__header--btn img {
   width: 10px;
 }
+.main__header--buttons .main__header--btn.btn-2 {
+  position: relative;
+}
 .main__header--buttons .main__header--btn.btn-2 img {
   width: 20px;
+}
+.main__header--buttons .main__header--btn.btn-2 .count {
+  position: absolute;
+  background-color: var(--color-3);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  align-items: center;
+  color: var(--light);
+  top: -3px;
+  left: -3px;
 }
 .offers {
   margin-top: -50px;
@@ -279,7 +295,7 @@ ol {
   color: var(--dark-gray);
   margin: 8px 0 15px 0;
   width: 100%;
-  max-width: 250px;
+  max-width: 300px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -321,13 +337,91 @@ ol {
   .offers .offers__products .product .product__text {
     padding-right: 40px;
   }
+  .offers .offers__products .product .product__text .product__ingredients {
+    max-width: 1000px;
+  }
 }
 @media (min-width: 420px) {
+  .main__header {
+    height: 380px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repear;
+  }
   .choose .choose__body .choose__options {
     justify-content: center;
     gap: 10px;
   }
   .choose .choose__body {
     margin-top: 0;
+  }
+}
+@media (min-width: 560px) {
+  .main__header {
+    height: 450px;
+  }
+  .offers
+    .offers__header
+    .container
+    .offers__header--info
+    .offers__header--title
+    .offers__title {
+    font-size: 22px;
+  }
+  .offers .offers__header .container .reviews,
+  .offers
+    .offers__header
+    .container
+    .offers__header--info
+    .offers__header--title
+    .offers__description,
+  .offers .offers__header .time,
+  .offers .offers__categories .container .category {
+    font-size: 16px;
+  }
+  .offers .offers__products h2,
+  .offers .offers__products .product .product__text .product__title,
+  .offers .offers__products .product .product__text .price {
+    font-size: 20px;
+  }
+  .offers .offers__products > .container {
+    margin-top: 40px;
+  }
+  .offers .offers__products .product .product__text {
+    width: 85%;
+  }
+  .offers .offers__products .product .product__image {
+    width: 15%;
+  }
+  .offers .offers__products .product {
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+  .offers .offers__products .product .product__text .product__ingredients {
+    font-size: 18px;
+  }
+}
+@media (min-width: 767px) {
+  .main__header {
+    height: 650px;
+    background-size: cover;
+    background-position: top center;
+    background-attachment: scroll;
+  }
+  .offers
+    .offers__header
+    .container
+    .offers__header--info
+    .offers__header--title
+    .offers__title {
+    font-size: 26px;
+  }
+  .main__header--buttons .main__header--btn.btn-2 .count {
+    font-size: 12px;
+  }
+}
+@media (min-width: 990px) {
+  .main__header {
+    height: 95svh;
   }
 }

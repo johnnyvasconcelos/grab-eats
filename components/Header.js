@@ -9,6 +9,7 @@ const Header = () => {
           </Link>
           <div className="main__header--btn btn-2 flex">
             <img src="/images/bag.svg" alt="market icon svg" />
+            <span class="count flex">1</span>
           </div>
         </div>
       </header>
