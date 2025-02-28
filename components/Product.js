@@ -1,8 +1,9 @@
+import Link from "next/link";
 const Product = () => {
   return (
     <>
       <article className="product">
-        <div className="container flex">
+        <Link href="/produto/" className="container flex">
           <div className="product__text">
             <h3 className="product__title">McOferta Média Big Mac Duplo</h3>
             <p className="product__ingredients">
@@ -16,7 +17,7 @@ const Product = () => {
           <div className="product__image">
             <img src="/images/produto.jpg" alt="product image" />
           </div>
-        </div>
+        </Link>
       </article>
     </>
   );

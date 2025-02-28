@@ -1,10 +1,9 @@
-import Link from "next/link";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
 function Cardapio() {
   return (
     <>
-      <Header />
+      <Header background="/images/banner.png" prevlink="/" />
       <main className="offers">
         <header className="offers__header">
           <div className="container flex">

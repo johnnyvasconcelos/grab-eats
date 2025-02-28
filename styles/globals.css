@@ -148,7 +148,6 @@ ol {
 /* main */
 .main__header {
   height: 280px;
-  background-image: url("/images/banner.png");
   background-attachment: fixed;
   background-size: contains;
   padding-top: 40px;
