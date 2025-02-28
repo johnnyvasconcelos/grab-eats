@@ -11,10 +11,10 @@ const Header = ({ background, prevlink }) => {
           <Link className="main__header--btn btn-1 flex" href={prevlink}>
             <img src="/images/prev.svg" alt="prev icon svg." />
           </Link>
-          <div className="main__header--btn btn-2 flex">
-            <img src="/images/bag.svg" alt="market icon svg" />
-            <span class="count flex">1</span>
-          </div>
+          <Link href="/pedidos/" className="main__header--btn btn-2 flex">
+            <img src="/images/orders.svg" alt="market icon svg" />
+            <span className="count flex">1</span>
+          </Link>
         </div>
       </header>
     </>

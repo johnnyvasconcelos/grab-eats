@@ -5,6 +5,7 @@
 }
 :root {
   --color-1: #ffb100;
+  --color-1-dark: #c88c01;
   --color-2: #0cbc70;
   --color-3: #d52b1e;
   --color-4: #059858;
@@ -15,6 +16,7 @@
   --dark-gray: #7e8392;
   --section-padding: 60px;
   --shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+  --transition: 0.3s all ease-in-out;
 }
 @font-face {
   font-family: "Poppins";
@@ -70,7 +72,6 @@ ol {
 }
 .flex {
   display: flex;
-  justify-content: between;
   align-items: center;
 }
 .column {
@@ -81,6 +82,8 @@ ol {
   border-radius: 40px;
   padding: 15px;
   white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition);
 }
 .btn-min {
   border: 1px solid var(--light-gray);
@@ -98,6 +101,9 @@ ol {
   display: none;
 }
 /* index */
+.choose {
+  padding-bottom: 60px;
+}
 .choose .choose__header {
   padding: var(--section-padding) 0;
 }
@@ -148,9 +154,10 @@ ol {
 /* main */
 .main__header {
   height: 280px;
-  background-attachment: fixed;
-  background-size: contains;
   padding-top: 40px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repear;
 }
 .main__header--buttons {
   justify-content: space-between;
@@ -210,6 +217,25 @@ ol {
   .offers__header--title {
   padding-left: 12px;
 }
+.offers.alt
+  .offers__header
+  .container
+  .offers__header--info
+  .offers__header--title {
+  padding-left: 0px;
+}
+.offers
+  .offers__header
+  .container
+  .offers__header--info
+  .offers__header--title
+  .offers__description
+  .small-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
 .offers
   .offers__header
   .container
@@ -217,6 +243,14 @@ ol {
   .offers__header--title
   .offers__title {
   font-size: 18px;
+}
+.offers.alt
+  .offers__header
+  .container
+  .offers__header--info
+  .offers__header--title
+  .offers__title {
+  font-size: 16px;
 }
 .offers
   .offers__header
@@ -226,6 +260,9 @@ ol {
   .offers__description {
   color: var(--light-gray-hover);
   font-size: 14px;
+}
+.offers.alt {
+  padding-bottom: 100px;
 }
 .offers .offers__header .container .reviews {
   gap: 4px;
@@ -311,6 +348,63 @@ ol {
 .offers .offers__products .product .product__image img {
   width: 100%;
   border-radius: 10px;
+}
+.offers .offers__header .container .price-info {
+  margin-top: 15px;
+  justify-content: space-between;
+}
+.offers .offers__header .container .price-info .price {
+  font-size: 18px;
+  font-weight: 700;
+}
+.offers .offers__header .container .price-info .selector {
+  gap: 10px;
+}
+.offers .offers__header .container .price-info .selector .btn {
+  border: 1px solid var(--light-gray);
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.offers .offers__header .container .price-info .selector .btn img {
+  width: 8px;
+}
+.offers.alt .offers__products.offers__products--description p,
+.offers.alt .offers__products.offers__products--description ul {
+  color: var(--dark-gray);
+  font-size: 14px;
+  margin-top: 10px;
+}
+.offers.alt .offers__products.offers__products--description ul li::before {
+  content: "•";
+  margin-right: 10px;
+}
+.offers.alt .offers__products.offers__products--description h2 img {
+  width: 15px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.offers.alt .footer-area {
+  padding: 20px 0;
+  background-color: var(--light);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+.offers.alt .footer-area .btn {
+  color: var(--light);
+  background-color: var(--color-1);
+  border: 1px solid var(--color-1);
+  width: 100%;
+  font-weight: 600;
+}
+.offers.alt .footer-area .btn:hover {
+  background-color: var(--color-1-dark);
 }
 @media (min-width: 345px) {
   .choose .choose__body .choose__options .choose__item {
@@ -405,7 +499,6 @@ ol {
     height: 650px;
     background-size: cover;
     background-position: top center;
-    background-attachment: scroll;
   }
   .offers
     .offers__header
@@ -417,6 +510,21 @@ ol {
   }
   .main__header--buttons .main__header--btn.btn-2 .count {
     font-size: 12px;
+  }
+  .offers.alt .offers__products.offers__products--description p,
+  .offers.alt .offers__products.offers__products--description ul {
+    font-size: 16px;
+  }
+  .offers .offers__header .container .price-info .price {
+    font-size: 20px;
+  }
+  .offers.alt
+    .offers__header
+    .container
+    .offers__header--info
+    .offers__header--title
+    .offers__title {
+    font-size: 18px;
   }
 }
 @media (min-width: 990px) {
