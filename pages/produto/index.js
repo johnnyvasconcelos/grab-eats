@@ -4,7 +4,7 @@ import PopUps from "../../components/PopUps";
 const ProductItem = () => {
   return (
     <>
-      <Header background="/images/banner-produto.jpg" prevlink="/cardapio" />
+      <Header background="/images/banner-produto.jpg" />
       <main className="offers alt">
         <header className="offers__header">
           <div className="container">

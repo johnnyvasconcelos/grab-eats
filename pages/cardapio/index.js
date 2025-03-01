@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 function Cardapio() {
   return (
     <>
-      <Header background="/images/banner.png" prevlink="/" />
+      <Header background="/images/banner.png" />
       <main className="offers">
         <header className="offers__header">
           <div className="container flex">

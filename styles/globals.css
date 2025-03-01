@@ -6,8 +6,10 @@
 :root {
   --color-1: #ffb100;
   --color-1-dark: #c88c01;
+  --color-1-light: #f8f1e2;
   --color-2: #0cbc70;
   --color-3: #d52b1e;
+  --color-3-light: #daa4a0;
   --color-4: #059858;
   --light: #f4f4f5;
   --light-gray: #dce5e9;
@@ -159,39 +161,45 @@ ol {
   background-position: center center;
   background-repeat: no-repear;
 }
+.main__header.order {
+  height: 110px;
+}
 .main__header--buttons {
   justify-content: space-between;
 }
 .main__header--buttons .main__header--btn {
   background-color: var(--light);
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
   justify-content: center;
   box-shadow: var(--shadow);
 }
 .main__header--buttons .main__header--btn img {
-  width: 10px;
+  width: 8px;
 }
 .main__header--buttons .main__header--btn.btn-2 {
   position: relative;
 }
 .main__header--buttons .main__header--btn.btn-2 img {
-  width: 20px;
+  width: 15px;
 }
 .main__header--buttons .main__header--btn.btn-2 .count {
   position: absolute;
   background-color: var(--color-3);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   justify-content: center;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   align-items: center;
   color: var(--light);
-  top: -3px;
-  left: -3px;
+  top: -4px;
+  left: -4px;
+}
+.main__header--buttons .main__header--btn.order {
+  background-color: var(--light-gray);
 }
 .offers {
   margin-top: -50px;
@@ -406,6 +414,84 @@ ol {
 .offers.alt .footer-area .btn:hover {
   background-color: var(--color-1-dark);
 }
+/* orders */
+.offers.alt .orders {
+  gap: 10px;
+  margin-top: 25px;
+}
+.offers.alt .orders .order {
+  border: 1px solid var(--light-gray);
+  padding: 20px 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+.offers.alt .orders .order .preparing {
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 8px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+.offers.alt .orders .order .preparing.true {
+  background-color: var(--color-1-light);
+  color: var(--color-1);
+}
+.offers.alt .orders .order .preparing.false {
+  background-color: var(--color-2);
+  color: var(--light);
+}
+.offers.alt .orders .order .order__logo {
+  font-weight: 600;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--light-gray);
+}
+.offers.alt .orders .order .order__logo img {
+  width: 15px;
+  display: inline-block;
+  margin-right: 6px;
+}
+.offers.alt .orders .order .order__name {
+  gap: 6px;
+  border-bottom: 1px solid var(--light-gray);
+  padding: 15px 0;
+}
+.offers.alt .orders .order .order__name .quantity {
+  font-size: 12px;
+  border-radius: 50%;
+  background-color: var(--dark-gray);
+  color: var(--light);
+  display: inline-flex;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  min-width: 16px;
+  min-height: 16px;
+}
+.offers.alt .orders .order .order__name .name {
+  font-weight: 300;
+  font-size: 14px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120ch;
+}
+.offers.alt .orders .order .order__price {
+  padding-top: 15px;
+  justify-content: space-between;
+}
+.offers.alt .orders .order .order__price .price {
+  font-size: 12px;
+}
+.offers.alt .orders .order .order__price .add {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-3);
+}
+.offers.alt .orders .order .order__price .add.true {
+  color: var(--color-3-light);
+}
 @media (min-width: 345px) {
   .choose .choose__body .choose__options .choose__item {
     padding: 30px 12px 12px 12px;
@@ -511,8 +597,15 @@ ol {
   .main__header--buttons .main__header--btn.btn-2 .count {
     font-size: 12px;
   }
+  .main__header.order {
+    height: 120px;
+  }
   .offers.alt .offers__products.offers__products--description p,
-  .offers.alt .offers__products.offers__products--description ul {
+  .offers.alt .offers__products.offers__products--description ul,
+  .offers.alt .orders .order .order__name .name,
+  .offers.alt .orders .order .order__price .add,
+  .offers.alt .orders .order .order__price .price,
+  .offers.alt .orders .order .preparing {
     font-size: 16px;
   }
   .offers .offers__header .container .price-info .price {
@@ -523,7 +616,8 @@ ol {
     .container
     .offers__header--info
     .offers__header--title
-    .offers__title {
+    .offers__title,
+  .offers.alt .orders .order .order__logo {
     font-size: 18px;
   }
 }

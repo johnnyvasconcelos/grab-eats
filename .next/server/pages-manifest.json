@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/produto": "pages/produto.js",
-  "/": "pages/index.js",
   "/cardapio": "pages/cardapio.js",
+  "/produto": "pages/produto.js",
   "/pedidos": "pages/pedidos.js"
 }

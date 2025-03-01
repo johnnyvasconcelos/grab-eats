@@ -1,7 +1,7 @@
 const Bag = () => {
   return (
     <>
-      <section class="bag"></section>
+      <section className="bag">bag</section>
     </>
   );
 };
