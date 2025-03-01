@@ -586,6 +586,18 @@ ol {
     background-size: cover;
     background-position: top center;
   }
+  .main__header--buttons .main__header--btn {
+    width: 50px;
+    height: 50px;
+  }
+  .main__header--buttons .main__header--btn.btn-2 img {
+    width: 20px;
+  }
+  .main__header--buttons .main__header--btn.btn-2 .count {
+    width: 15px;
+    height: 15px;
+    font-size: 11px;
+  }
   .offers
     .offers__header
     .container

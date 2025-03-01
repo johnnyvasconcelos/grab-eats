@@ -4,5 +4,6 @@
   "/_document": "pages/_document.js",
   "/cardapio": "pages/cardapio.js",
   "/produto": "pages/produto.js",
-  "/pedidos": "pages/pedidos.js"
+  "/pedidos": "pages/pedidos.js",
+  "/": "pages/index.js"
 }
