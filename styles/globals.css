@@ -98,6 +98,7 @@ ol {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 .no-scroll::-webkit-scrollbar {
   display: none;
@@ -162,7 +163,7 @@ ol {
   background-repeat: no-repear;
 }
 .main__header.order {
-  height: 110px;
+  height: 115px;
 }
 .main__header--buttons {
   justify-content: space-between;
@@ -170,19 +171,19 @@ ol {
 .main__header--buttons .main__header--btn {
   background-color: var(--light);
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   justify-content: center;
   box-shadow: var(--shadow);
 }
 .main__header--buttons .main__header--btn img {
-  width: 8px;
+  width: 10px;
 }
 .main__header--buttons .main__header--btn.btn-2 {
   position: relative;
 }
 .main__header--buttons .main__header--btn.btn-2 img {
-  width: 15px;
+  width: 19px;
 }
 .main__header--buttons .main__header--btn.btn-2 .count {
   position: absolute;

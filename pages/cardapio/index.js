@@ -3,14 +3,14 @@ import Header from "../../components/Header";
 function Cardapio() {
   return (
     <>
-      <Header background="/images/banner.png" />
+      <Header background="/images/banner.jpg" />
       <main className="offers">
         <header className="offers__header">
           <div className="container flex">
             <div className="flex offers__header--info">
               <img src="/images/logo-square.png" alt="logo" />
               <div className="offers__header--title">
-                <h1 className="offers__title">Grab Eats</h1>
+                <h1 className="offers__title">Tempero Brasileiro</h1>
                 <p className="offers__description">Fast Food</p>
               </div>
             </div>
