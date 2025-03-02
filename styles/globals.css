@@ -196,8 +196,8 @@ ol {
   font-weight: 700;
   align-items: center;
   color: var(--light);
-  top: -4px;
-  left: -4px;
+  top: -2px;
+  left: -2px;
 }
 .main__header--buttons .main__header--btn.order {
   background-color: var(--light-gray);
@@ -506,8 +506,11 @@ ol {
   z-index: 100;
   padding: 40px 0;
   overflow-y: auto;
-  transition: 0.3s all ease-in-out;
-  right: -105svh;
+  right: -105svw;
+  transition: 0.5s all ease-in-out;
+}
+.bag.active {
+  right: 0;
 }
 .bag::before {
   content: "";
@@ -519,18 +522,25 @@ ol {
   height: 120%;
   background-color: var(--light);
   z-index: 0;
-  right: -105svh;
+  right: -105svw;
+  transition: 0.5s all ease-in-out;
+}
+.bag.active::before {
+  right: 0;
 }
 .bag::after {
   content: "";
   position: fixed;
-  left: 0;
   top: 0;
   width: 100svw;
   height: 120%;
   background-color: rgba(0, 0, 0, 0.33);
   z-index: -1;
-  left: 105svh;
+  left: 105svw;
+  transition: 0.5s all ease-in-out;
+}
+.bag.active::after {
+  left: 0;
 }
 .bag .container__bag {
   overflow: hidden;
@@ -546,6 +556,9 @@ ol {
 }
 .bag .container__bag .bag__title {
   justify-content: space-between;
+}
+.bag .container__bag .bag__title .close-icon {
+  cursor: pointer;
 }
 .bag .container__bag .bag__title .close-icon img {
   width: 15px;
@@ -594,6 +607,7 @@ ol {
   justify-content: center;
   border: 1px solid var(--light-gray);
   border-radius: 10px;
+  cursor: pointer;
 }
 .bag .container__bag .bag__item .remove img {
   width: 12px;

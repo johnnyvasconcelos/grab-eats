@@ -7,8 +7,8 @@ const Product = () => {
           <div className="product__text">
             <h3 className="product__title">Macarrão Sertanejo</h3>
             <p className="product__ingredients">
-              Massa Italiana com Toque de Xibiu & Tempero Baiano do Sul, Raspa
-              Salsinha e Queijo Parmezão.
+              Massa Italiana com Tempero Baiano e Especiarias, Raspa de Limão e
+              Queijo Parmezão.
             </p>
             <div className="price">
               R$ <span>49,90</span>

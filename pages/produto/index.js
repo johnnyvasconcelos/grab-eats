@@ -1,7 +1,15 @@
+import { useState } from "react";
 import Header from "../../components/Header";
 import Bag from "../../components/Bag";
 import PopUps from "../../components/PopUps";
 const ProductItem = () => {
+  const [openBag, setOpenBag] = useState(false);
+  const [bagItems, setBagItems] = useState([]);
+  const addToBag = () => {
+    const newItem = { id: Date.now(), price: 49.9 };
+    setBagItems((prevItems) => [...prevItems, newItem]);
+    setOpenBag(true);
+  };
   return (
     <>
       <Header background="/images/banner-produto.jpg" />
@@ -42,8 +50,9 @@ const ProductItem = () => {
           <div className="container">
             <h2>Descrição</h2>
             <p>
-              Pensa num prato gostoso, tão bão que dá até caimbra no buxo, pede
-              logo essa caceta porque tá barata! Acompanha whey protein.
+              Preparado com ingredientes selecionados para proporcionar uma
+              refeição marcante e nutritiva. Uma combinação irresistível de
+              tradição e força, ideal para quem busca sabor e energia.
             </p>
           </div>
         </section>
@@ -66,13 +75,21 @@ const ProductItem = () => {
         </section>
         <div className="footer-area">
           <div className="container">
-            <button className="add btn">Adicionar à Sacola</button>
+            <button className="add btn" onClick={addToBag}>
+              Adicionar à Sacola
+            </button>
           </div>
         </div>
       </main>
       <PopUps />
-      <Bag />
+      <Bag
+        openBag={openBag}
+        setOpenBag={setOpenBag}
+        bagItems={bagItems}
+        setBagItems={setBagItems}
+      />
     </>
   );
 };
+
 export default ProductItem;
