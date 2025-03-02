@@ -218,6 +218,7 @@ ol {
 .offers .offers__header .container .offers__header--info img {
   width: 45px;
   height: 50px;
+  border-radius: 10px;
 }
 .offers
   .offers__header
@@ -366,10 +367,10 @@ ol {
   font-size: 18px;
   font-weight: 700;
 }
-.offers .offers__header .container .price-info .selector {
+.selector {
   gap: 10px;
 }
-.offers .offers__header .container .price-info .selector .btn {
+.selector .btn {
   border: 1px solid var(--light-gray);
   padding: 0;
   width: 28px;
@@ -379,7 +380,7 @@ ol {
   align-items: center;
   justify-content: center;
 }
-.offers .offers__header .container .price-info .selector .btn img {
+.selector .btn img {
   width: 8px;
 }
 .offers.alt .offers__products.offers__products--description p,
@@ -492,6 +493,153 @@ ol {
 }
 .offers.alt .orders .order .order__price .add.true {
   color: var(--color-3-light);
+}
+/* bag */
+.bag {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: var(--light);
+  max-width: 800px;
+  width: 90vw;
+  height: 100svh;
+  z-index: 100;
+  padding: 40px 0;
+  overflow-y: auto;
+  transition: 0.3s all ease-in-out;
+  right: -105svh;
+}
+.bag::before {
+  content: "";
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 90vw;
+  max-width: 800px;
+  height: 120%;
+  background-color: var(--light);
+  z-index: 0;
+  right: -105svh;
+}
+.bag::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100svw;
+  height: 120%;
+  background-color: rgba(0, 0, 0, 0.33);
+  z-index: -1;
+  left: 105svh;
+}
+.bag .container__bag {
+  overflow: hidden;
+  padding: 0 20px;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.bag .container__bag::-webkit-scrollbar {
+  display: none;
+}
+.bag .container__bag .bag__title {
+  justify-content: space-between;
+}
+.bag .container__bag .bag__title .close-icon img {
+  width: 15px;
+}
+.bag .container__bag .bag__items {
+  margin-top: 30px;
+  padding-bottom: 100px;
+  width: 100%;
+}
+.bag .container__bag .bag__item {
+  position: relative;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--light-gray);
+}
+.bag .container__bag .bag__item img {
+  width: 30%;
+  max-width: 150px;
+  border-radius: 10px;
+}
+.bag .container__bag .bag__item .bag__item--info {
+  width: 70%;
+}
+.bag .container__bag .bag__item .bag__item--info h5 {
+  font-weight: 500;
+  max-width: 19%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(1ch * 19);
+}
+.bag .container__bag .bag__item .bag__price {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+.bag .container__bag .bag__item .remove {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+}
+.bag .container__bag .bag__item .remove img {
+  width: 12px;
+}
+.bag .bag__footer {
+  z-index: 100;
+  width: 100%;
+  height: auto;
+  bottom: 20px;
+  left: 0;
+}
+.bag .bag__footer .bag__info {
+  border-radius: 10px;
+  border: 1px solid var(--light-gray);
+  padding: 15px 20px;
+  width: 100%;
+  background-color: var(--light);
+}
+.bag .bag__footer .bag__info tbody tr {
+  border-bottom: 1px solid var(--light-gray);
+  justify-content: space-between;
+  padding: 5px 0;
+}
+.bag .bag__footer .bag__info tbody tr td {
+  font-size: 14px;
+}
+.bag .bag__footer .bag__info tbody tr:nth-of-type(3) {
+  border: none;
+}
+.bag .bag__footer .bag__info tbody tr td:nth-of-type(1) {
+  color: var(--dark-gray);
+}
+.bag .bag__footer .bag__info tbody tr td strong {
+  color: var(--dark);
+}
+.bag .bag__footer .btn {
+  width: 100%;
+  background-color: var(--color-1);
+  border: 1px solid var(--color-1);
+  color: var(--light);
+  font-weight: 600;
+  margin-top: 30px;
+}
+.bag .bag__footer .btn:hover {
+  background-color: var(--color-1-dark);
+  border: 1px solid var(--color-1-dark);
 }
 @media (min-width: 345px) {
   .choose .choose__body .choose__options .choose__item {

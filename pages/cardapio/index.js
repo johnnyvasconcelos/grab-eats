@@ -11,7 +11,7 @@ function Cardapio() {
               <img src="/images/logo-square.png" alt="logo" />
               <div className="offers__header--title">
                 <h1 className="offers__title">Tempero Brasileiro</h1>
-                <p className="offers__description">Fast Food</p>
+                <p className="offers__description">Restaurante</p>
               </div>
             </div>
             <div className="reviews flex btn-min">
@@ -27,7 +27,7 @@ function Cardapio() {
         <div className="offers__categories no-scroll">
           <div className="container flex">
             <span className="category check btn-min">Lançamentos</span>
-            <span className="category btn-min">Lanches</span>
+            <span className="category btn-min">Principais</span>
             <span className="category btn-min">Fritas</span>
             <span className="category btn-min">Bebidas</span>
             <span className="category btn-min">Sobremesas</span>

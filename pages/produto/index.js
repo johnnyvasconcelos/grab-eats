@@ -16,16 +16,16 @@ const ProductItem = () => {
                     alt="logo"
                     className="small-logo"
                   />
-                  Fast Food
+                  Restaurante
                 </p>
                 <h1 className="offers__title">
-                  Mc Oferta Média Big Mc Duplo Preço Médio sem Camarão com Casca
-                  Frita Temperada no Azeite Quatro Porções
+                  Oferta Macarrão Preço Médio sem Massa com Casca de Caju Frita
+                  no Shoyu e Caldo de Laranja
                 </h1>
               </div>
             </div>
             <div className="flex price-info">
-              <span className="price">R$ 39,90</span>
+              <span className="price">R$ 49,90</span>
               <div className="selector flex">
                 <span className="btn">
                   <img src="/images/minus.svg" alt="minus svg icon" />
@@ -40,11 +40,10 @@ const ProductItem = () => {
         </header>
         <section className="offers__products offers__products--description">
           <div className="container">
-            <h2>Sobre</h2>
+            <h2>Descrição</h2>
             <p>
-              Quatro hambúrgueres (100% carne bovina), alface americana, queijo
-              fatiado sabor cheddar, molho especial, cebola, picles e pão com
-              gergilim, acompanhamento e bebida.
+              Pensa num prato gostoso, tão bão que dá até caimbra no buxo, pede
+              logo essa caceta porque tá barata! Acompanha whey protein.
             </p>
           </div>
         </section>
@@ -71,8 +70,8 @@ const ProductItem = () => {
           </div>
         </div>
       </main>
-      <Bag />
       <PopUps />
+      <Bag />
     </>
   );
 };
