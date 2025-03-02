@@ -333,7 +333,7 @@ ol {
   padding-right: 12px;
 }
 .offers .offers__products .product .product__text .product__title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
 }
 .offers .offers__products .product .product__text .product__ingredients {
@@ -720,6 +720,7 @@ ol {
   .offers .offers__header .time,
   .offers .offers__categories .container .category {
     font-size: 16px;
+    cursor: pointer;
   }
   .offers .offers__products h2,
   .offers .offers__products .product .product__text .product__title,
@@ -740,7 +741,7 @@ ol {
     margin-bottom: 20px;
   }
   .offers .offers__products .product .product__text .product__ingredients {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @media (min-width: 767px) {

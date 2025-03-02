@@ -1,10 +1,36 @@
 import BagItem from "./BagItem";
-const Bag = ({ openBag, setOpenBag, bagItems, setBagItems }) => {
-  const handleRemoveItem = (id) => {
+const Bag = ({
+  openBag,
+  setOpenBag,
+  bagItems,
+  setBagItems,
+  onIncrease,
+  onDecrease,
+  onRemove,
+}) => {
+  const totalPrice = bagItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  const handleIncrease = (id) => {
+    setBagItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+  const handleDecrease = (id) => {
+    setBagItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  };
+  const handleRemove = (id) => {
     setBagItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
-  const totalPrice = bagItems.reduce((acc, item) => acc + item.price, 0);
-
   return (
     <aside className={openBag ? `bag active` : `bag`}>
       <div className="container__bag">
@@ -20,7 +46,10 @@ const Bag = ({ openBag, setOpenBag, bagItems, setBagItems }) => {
               key={item.id}
               id={item.id}
               price={item.price}
-              onRemove={handleRemoveItem}
+              quantity={item.quantity}
+              onRemove={handleRemove}
+              onIncrease={handleIncrease}
+              onDecrease={handleDecrease}
             />
           ))}
         </div>

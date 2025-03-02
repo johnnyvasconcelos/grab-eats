@@ -1,6 +1,11 @@
+import React, { useState } from "react";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
 function Cardapio() {
+  const [selectedCategory, setSelectedCategory] = useState("Lançamentos");
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
   return (
     <>
       <Header background="/images/banner.jpg" />
@@ -26,16 +31,51 @@ function Cardapio() {
         </header>
         <div className="offers__categories no-scroll">
           <div className="container flex">
-            <span className="category check btn-min">Lançamentos</span>
-            <span className="category btn-min">Principais</span>
-            <span className="category btn-min">Fritas</span>
-            <span className="category btn-min">Bebidas</span>
-            <span className="category btn-min">Sobremesas</span>
+            <span
+              className={`category ${
+                selectedCategory === "Lançamentos" ? "check" : ""
+              } btn-min`}
+              onClick={() => handleCategoryClick("Lançamentos")}
+            >
+              Lançamentos
+            </span>
+            <span
+              className={`category ${
+                selectedCategory === "Principais" ? "check" : ""
+              } btn-min`}
+              onClick={() => handleCategoryClick("Principais")}
+            >
+              Principais
+            </span>
+            <span
+              className={`category ${
+                selectedCategory === "Fritas" ? "check" : ""
+              } btn-min`}
+              onClick={() => handleCategoryClick("Fritas")}
+            >
+              Fritas
+            </span>
+            <span
+              className={`category ${
+                selectedCategory === "Bebidas" ? "check" : ""
+              } btn-min`}
+              onClick={() => handleCategoryClick("Bebidas")}
+            >
+              Bebidas
+            </span>
+            <span
+              className={`category ${
+                selectedCategory === "Sobremesas" ? "check" : ""
+              } btn-min`}
+              onClick={() => handleCategoryClick("Sobremesas")}
+            >
+              Sobremesas
+            </span>
           </div>
         </div>
         <section className="offers__products">
           <div className="container">
-            <h2>Lançamentos</h2>
+            <h2>{selectedCategory}</h2>
           </div>
           <Product />
           <Product />

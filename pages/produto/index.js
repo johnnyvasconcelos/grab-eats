@@ -2,14 +2,31 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Bag from "../../components/Bag";
 import PopUps from "../../components/PopUps";
+
 const ProductItem = () => {
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState(49.9);
+
   const addToBag = () => {
-    const newItem = { id: Date.now(), price: 49.9 };
+    const newItem = { id: Date.now(), price: price, quantity: quantity };
     setBagItems((prevItems) => [...prevItems, newItem]);
     setOpenBag(true);
   };
+
+  const handleMinus = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+      setPrice((prevPrice) => prevPrice - 49.9);
+    }
+  };
+
+  const handlePlus = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+    setPrice((prevPrice) => prevPrice + 49.9); // Increase price by the base price
+  };
+
   return (
     <>
       <Header background="/images/banner-produto.jpg" />
@@ -33,13 +50,14 @@ const ProductItem = () => {
               </div>
             </div>
             <div className="flex price-info">
-              <span className="price">R$ 49,90</span>
+              <span className="price">R$ {price.toFixed(2)}</span>{" "}
+              {/* Preço atualizado */}
               <div className="selector flex">
-                <span className="btn">
+                <span className="btn minus" onClick={handleMinus}>
                   <img src="/images/minus.svg" alt="minus svg icon" />
                 </span>
-                <span>1</span>
-                <span className="btn">
+                <span>{quantity}</span> {/* Exibe a quantidade */}
+                <span className="btn plus" onClick={handlePlus}>
                   <img src="/images/plus.svg" alt="plus svg icon" />
                 </span>
               </div>
