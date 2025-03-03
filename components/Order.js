@@ -1,4 +1,28 @@
+import { useEffect, useState } from "react";
 const Order = ({ preparing }) => {
+  const [nomeRestaurante, setNomeRestaurante] = useState("");
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchRestauranteData = async () => {
+      try {
+        const res = await fetch("/api/restaurante");
+        const data = await res.json();
+        if (res.ok) {
+          setNomeRestaurante(data.nome_restaurante);
+        } else {
+          setError(data.error || "Erro desconhecido");
+          console.error("Erro ao buscar dados:", data.error);
+        }
+      } catch (error) {
+        setError("Erro ao fazer requisição");
+        console.error("Erro ao fazer requisição:", error);
+      }
+    };
+    fetchRestauranteData();
+  }, []);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
   return (
     <>
       <article className="order">
@@ -6,8 +30,8 @@ const Order = ({ preparing }) => {
           {preparing == "true" ? "Em Preparo" : "Finalizado"}
         </span>
         <div className="order__logo">
-          <img src="/images/logo-square.png" alt="logo" />
-          Grab Eats
+          <img src="/images/logo-square.png" alt={`logo ${nomeRestaurante}`} />
+          {nomeRestaurante}
         </div>
         <div className="order__name flex">
           <span className="quantity">1</span>

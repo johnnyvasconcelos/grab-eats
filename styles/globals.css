@@ -307,6 +307,7 @@ ol {
   padding: 8px 15px;
   font-size: 14px;
   color: var(--dark-gray);
+  text-transform: capitalize;
 }
 .offers .offers__categories .container .category.check {
   border: 1px solid var(--color-1);

@@ -1,32 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Bag from "../../components/Bag";
 import PopUps from "../../components/PopUps";
-
 const ProductItem = () => {
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(49.9);
-
   const addToBag = () => {
     const newItem = { id: Date.now(), price: price, quantity: quantity };
     setBagItems((prevItems) => [...prevItems, newItem]);
     setOpenBag(true);
   };
-
   const handleMinus = () => {
     if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
       setPrice((prevPrice) => prevPrice - 49.9);
     }
   };
-
   const handlePlus = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setPrice((prevPrice) => prevPrice + 49.9); // Increase price by the base price
+    setPrice((prevPrice) => prevPrice + 49.9);
   };
-
+  const [categoria, setCategoria] = useState("");
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchRestauranteData = async () => {
+      try {
+        const res = await fetch("/api/restaurante");
+        const data = await res.json();
+        if (res.ok) {
+          setCategoria(data.categoria);
+        } else {
+          setError(data.error || "Erro desconhecido");
+          console.error("Erro ao buscar dados:", data.error);
+        }
+      } catch (error) {
+        setError("Erro ao fazer requisição");
+        console.error("Erro ao fazer requisição:", error);
+      }
+    };
+    fetchRestauranteData();
+  }, []);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
   return (
     <>
       <Header background="/images/banner-produto.jpg" />
@@ -41,7 +59,7 @@ const ProductItem = () => {
                     alt="logo"
                     className="small-logo"
                   />
-                  Restaurante
+                  {categoria}
                 </p>
                 <h1 className="offers__title">
                   Oferta Macarrão Preço Médio sem Massa com Casca de Caju Frita
