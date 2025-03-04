@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
+import Head from "next/head";
 import Bag from "../../components/Bag";
 import PopUps from "../../components/PopUps";
 import { connectDb } from "../../lib/db";
@@ -38,6 +39,9 @@ const ProductItem = ({ product }) => {
     : [];
   return (
     <>
+      <Head>
+        <title>{product.nome_produto}</title>
+      </Head>
       <Header background={`/images/${product.foto}`} />
       <main className="offers alt">
         <header className="offers__header">

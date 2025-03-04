@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
+import Head from "next/head";
 function Cardapio() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [nomeRestaurante, setNomeRestaurante] = useState("");
@@ -35,7 +36,6 @@ function Cardapio() {
           },
         });
         const data = await res.json();
-        console.log("Dados recebidos: ", data);
         if (res.ok) {
           setProdutos(Array.isArray(data) ? data : [data]);
           if (data.length > 0) {
@@ -63,6 +63,9 @@ function Cardapio() {
   };
   return (
     <>
+      <Head>
+        <title>Cardápio</title>
+      </Head>
       <Header background="/images/banner.jpg" />
       <main className="offers">
         <header className="offers__header">

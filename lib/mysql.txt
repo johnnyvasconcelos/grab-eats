@@ -6,6 +6,6 @@ a tabela 'pedidos' com os itens: id - autoincrement, nome - varchar(80), em_prep
 
 a tabela 'produtos' com os itens: id - autoincrement, foto - varchar(80), nome_produto - varchar(80), ingredientes - varchar(250) ou uma área para colocar lista de itens podendo ser até código html, preco - varchar(10) ou numero que possa ser separado por vírgula, categoria_produto varchar(10), descricao do produto
 
-
+a tabela de clientes com nome do cliente cpf e o valor total e cada item que ele pediu / consumiu, nome_cliente, cpf, 
 
 a tabela 'login' com usuario varchar(50), senha varchar(50)

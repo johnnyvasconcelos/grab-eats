@@ -6,5 +6,6 @@
   "/produto/[id]": "pages/produto/[id].js",
   "/pedidos": "pages/pedidos.js",
   "/api/restaurante": "pages/api/restaurante.js",
-  "/api/produtos": "pages/api/produtos.js"
+  "/api/produtos": "pages/api/produtos.js",
+  "/": "pages/index.js"
 }

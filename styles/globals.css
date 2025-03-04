@@ -253,6 +253,7 @@ ol {
   .offers__header--title
   .offers__title {
   font-size: 18px;
+  text-transform: capitalize;
 }
 .offers.alt
   .offers__header
@@ -270,6 +271,7 @@ ol {
   .offers__description {
   color: var(--light-gray-hover);
   font-size: 14px;
+  text-transform: capitalize;
 }
 .offers.alt {
   padding-bottom: 100px;

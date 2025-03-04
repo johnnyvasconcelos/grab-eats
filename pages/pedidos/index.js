@@ -1,8 +1,12 @@
 import Header from "../../components/Header";
 import Order from "../../components/Order";
+import Head from "next/head";
 const Pedidos = () => {
   return (
     <>
+      <Head>
+        <title>Meus Pedidos</title>
+      </Head>
       <Header pedidos="order" />
       <main className="offers alt">
         <section className="offers__products offers__products--description">
