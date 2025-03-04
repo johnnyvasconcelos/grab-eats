@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
-
 function Cardapio() {
-  const [selectedCategory, setSelectedCategory] = useState("Lançamentos");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [categoria, setCategoria] = useState("");
   const [produtos, setProdutos] = useState([]);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchRestauranteData = async () => {
       try {
@@ -28,7 +26,6 @@ function Cardapio() {
     };
     fetchRestauranteData();
   }, []);
-
   useEffect(() => {
     const fetchProdutosData = async () => {
       try {
@@ -38,9 +35,12 @@ function Cardapio() {
           },
         });
         const data = await res.json();
-        console.log("Dados recebidos: ", data); // Log detalhado
+        console.log("Dados recebidos: ", data);
         if (res.ok) {
           setProdutos(Array.isArray(data) ? data : [data]);
+          if (data.length > 0) {
+            setSelectedCategory(data[0].categoria_produto);
+          }
         } else {
           setError(data.error || "Erro desconhecido ao buscar produtos");
           console.error("Erro ao buscar produtos:", data.error);
@@ -50,22 +50,17 @@ function Cardapio() {
         console.error("Erro ao fazer requisição de produtos:", error);
       }
     };
-
     fetchProdutosData();
   }, []);
-
   const categoriasDisponiveis = [
     ...new Set(produtos.map((product) => product.categoria_produto)),
   ];
-
   const filteredProducts = produtos.filter(
     (product) => product.categoria_produto === selectedCategory
   );
-
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
-
   return (
     <>
       <Header background="/images/banner.jpg" />
@@ -116,5 +111,4 @@ function Cardapio() {
     </>
   );
 }
-
 export default Cardapio;

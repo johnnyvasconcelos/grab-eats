@@ -1,12 +1,23 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Bag from "../../components/Bag";
 import PopUps from "../../components/PopUps";
-const ProductItem = () => {
+import { connectDb } from "../../lib/db";
+const ProductItem = ({ product }) => {
+  const router = useRouter();
+  const { id } = router.query;
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(49.9);
+  const [price, setPrice] = useState(product.preco);
+  const [categoria, setCategoria] = useState(product.categoria_produto);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    if (id) {
+      setPrice(product.preco * quantity);
+    }
+  }, [id, quantity]);
   const addToBag = () => {
     const newItem = { id: Date.now(), price: price, quantity: quantity };
     setBagItems((prevItems) => [...prevItems, newItem]);
@@ -15,39 +26,19 @@ const ProductItem = () => {
   const handleMinus = () => {
     if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
-      setPrice((prevPrice) => prevPrice - 49.9);
+      setPrice((prevPrice) => prevPrice - product.preco);
     }
   };
   const handlePlus = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setPrice((prevPrice) => prevPrice + 49.9);
+    setPrice((prevPrice) => prevPrice + product.preco);
   };
-  const [categoria, setCategoria] = useState("");
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchRestauranteData = async () => {
-      try {
-        const res = await fetch("/api/restaurante");
-        const data = await res.json();
-        if (res.ok) {
-          setCategoria(data.categoria);
-        } else {
-          setError(data.error || "Erro desconhecido");
-          console.error("Erro ao buscar dados:", data.error);
-        }
-      } catch (error) {
-        setError("Erro ao fazer requisição");
-        console.error("Erro ao fazer requisição:", error);
-      }
-    };
-    fetchRestauranteData();
-  }, []);
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
+  const ingredientsList = product.ingredientes
+    ? product.ingredientes.split(",")
+    : [];
   return (
     <>
-      <Header background="/images/banner-produto.jpg" />
+      <Header background={`/images/${product.foto}`} />
       <main className="offers alt">
         <header className="offers__header">
           <div className="container">
@@ -59,22 +50,18 @@ const ProductItem = () => {
                     alt="logo"
                     className="small-logo"
                   />
-                  {categoria}
+                  {product.categoria_produto}
                 </p>
-                <h1 className="offers__title">
-                  Oferta Macarrão Preço Médio sem Massa com Casca de Caju Frita
-                  no Shoyu e Caldo de Laranja
-                </h1>
+                <h1 className="offers__title">{product.nome_produto}</h1>{" "}
               </div>
             </div>
             <div className="flex price-info">
-              <span className="price">R$ {price.toFixed(2)}</span>{" "}
-              {/* Preço atualizado */}
+              <span className="price">R$ {price}</span>{" "}
               <div className="selector flex">
                 <span className="btn minus" onClick={handleMinus}>
                   <img src="/images/minus.svg" alt="minus svg icon" />
                 </span>
-                <span>{quantity}</span> {/* Exibe a quantidade */}
+                <span>{quantity}</span>
                 <span className="btn plus" onClick={handlePlus}>
                   <img src="/images/plus.svg" alt="plus svg icon" />
                 </span>
@@ -85,27 +72,23 @@ const ProductItem = () => {
         <section className="offers__products offers__products--description">
           <div className="container">
             <h2>Descrição</h2>
-            <p>
-              Preparado com ingredientes selecionados para proporcionar uma
-              refeição marcante e nutritiva. Uma combinação irresistível de
-              tradição e força, ideal para quem busca sabor e energia.
-            </p>
+            <p>{product.descricao}</p>
           </div>
         </section>
         <section className="offers__products offers__products--description">
           <div className="container">
             <h2>
-              <img src="/images/chef.svg" alt="chef svg icon" />
+              <img src="/images/chef.svg" alt="chef hat svg" />
               Ingredientes
             </h2>
-            <ul className="ingredients--list">
-              <li>Quatro Hambúrgueres de carne bovina</li>
-              <li>Alface americana</li>
-              <li>Queijo processado sabor cheddar</li>
-              <li>Molho especial</li>
-              <li>Cebola</li>
-              <li>Picles</li>
-              <li>Pão com gergilim</li>
+            <ul>
+              {ingredientsList.length > 0 ? (
+                ingredientsList.map((ingredient, index) => (
+                  <li key={index}>{ingredient.trim()}</li>
+                ))
+              ) : (
+                <p>Ingredientes não disponíveis ainda... :/</p>
+              )}
             </ul>
           </div>
         </section>
@@ -127,5 +110,22 @@ const ProductItem = () => {
     </>
   );
 };
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const connection = await connectDb();
+  const [rows] = await connection.execute(
+    "SELECT * FROM produtos WHERE id = ?",
+    [id]
+  );
+  if (rows.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
+  const product = rows[0];
 
+  return {
+    props: { product },
+  };
+}
 export default ProductItem;

@@ -2,10 +2,10 @@ import { connectDb, queryDb } from "../../lib/db";
 export default async function handler(req, res) {
   try {
     await connectDb();
-    const dados = await queryDb("SELECT * FROM dados LIMIT 1");
-
-    if (dados.rows.length > 0) {
-      res.status(200).json(dados.rows[0]);
+    const query = "SELECT * FROM dados LIMIT 1";
+    const dados = await queryDb(query);
+    if (dados.length > 0) {
+      res.status(200).json(dados[0]);
     } else {
       res.status(404).json({ error: "Restaurante não encontrado" });
     }

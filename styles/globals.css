@@ -390,6 +390,9 @@ ol {
   font-size: 14px;
   margin-top: 10px;
 }
+.offers.alt .offers__products.offers__products--description ul li {
+  text-transform: capitalize;
+}
 .offers.alt .offers__products.offers__products--description ul li::before {
   content: "•";
   margin-right: 10px;
