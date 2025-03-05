@@ -1,5 +1,12 @@
 import Link from "next/link";
 const Product = ({ product }) => {
+  const formatPrice = (price) => {
+    const numericPrice = parseFloat(price);
+    if (isNaN(numericPrice)) {
+      return "R$ 0,00";
+    }
+    return numericPrice.toFixed(2).replace(".", ",");
+  };
   return (
     <article className="product">
       <Link href={`/produto/${product.id}`} className="container flex">
@@ -9,7 +16,7 @@ const Product = ({ product }) => {
             {product.descricao}
           </p>
           <div className="price">
-            R$ <span>{product.preco}</span>
+            R$ <span>{formatPrice(product.preco)}</span>
           </div>
         </div>
         <div className="product__image">

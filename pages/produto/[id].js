@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Head from "next/head";
 import Bag from "../../components/Bag";
-import PopUps from "../../components/PopUps";
 import { connectDb } from "../../lib/db";
 const ProductItem = ({ product }) => {
   const router = useRouter();
@@ -14,9 +13,17 @@ const ProductItem = ({ product }) => {
   const [price, setPrice] = useState(product.preco);
   const [categoria, setCategoria] = useState(product.categoria_produto);
   const [error, setError] = useState(null);
+  const formatPrice = (price) => {
+    const numericPrice = parseFloat(price);
+    if (isNaN(numericPrice)) {
+      return "R$ 0,00";
+    }
+    return numericPrice.toFixed(2).replace(".", ",");
+  };
   useEffect(() => {
     if (id) {
-      setPrice(product.preco * quantity);
+      const newPrice = product.preco * quantity;
+      setPrice(newPrice);
     }
   }, [id, quantity]);
   const addToBag = () => {
@@ -33,7 +40,7 @@ const ProductItem = ({ product }) => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
   useEffect(() => {
-    setPrice(parseFloat((product.preco * quantity).toFixed(2)));
+    setPrice(product.preco * quantity);
   }, [quantity]);
   const ingredientsList = product.ingredientes
     ? product.ingredientes.split(",")
@@ -61,7 +68,7 @@ const ProductItem = ({ product }) => {
               </div>
             </div>
             <div className="flex price-info">
-              <span className="price">R$ {price}</span>{" "}
+              <span className="price">R$ {formatPrice(price)}</span>{" "}
               <div className="selector flex">
                 <span className="btn minus" onClick={handleMinus}>
                   <img src="/images/minus.svg" alt="minus svg icon" />
@@ -105,7 +112,6 @@ const ProductItem = ({ product }) => {
           </div>
         </div>
       </main>
-      <PopUps />
       <Bag
         openBag={openBag}
         setOpenBag={setOpenBag}
@@ -128,7 +134,6 @@ export async function getServerSideProps(context) {
     };
   }
   const product = rows[0];
-
   return {
     props: { product },
   };
