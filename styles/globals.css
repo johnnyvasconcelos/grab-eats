@@ -115,20 +115,27 @@ ol {
   align-items: center;
   z-index: 9999;
 }
-.loader {
-  width: 50px;
-  height: 50px;
-  border: 5px solid var(--color-1);
-  border-top-color: var(--light);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.dots-loader span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-1);
+  animation: blink 1.5s infinite;
 }
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+.dots-loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dots-loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 /* index */

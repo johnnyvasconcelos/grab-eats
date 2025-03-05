@@ -4,5 +4,8 @@
   "/_document": "pages/_document.js",
   "/cardapio": "pages/cardapio.js",
   "/api/restaurante": "pages/api/restaurante.js",
-  "/api/produtos": "pages/api/produtos.js"
+  "/api/produtos": "pages/api/produtos.js",
+  "/pedidos": "pages/pedidos.js",
+  "/produto/[id]": "pages/produto/[id].js",
+  "/": "pages/index.js"
 }
