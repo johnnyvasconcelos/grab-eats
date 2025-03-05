@@ -8,49 +8,41 @@ function Cardapio() {
   const [categoria, setCategoria] = useState("");
   const [produtos, setProdutos] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchRestauranteData = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch("/api/restaurante");
-        const data = await res.json();
-        if (res.ok) {
-          setNomeRestaurante(data.nome_restaurante);
-          setCategoria(data.categoria);
+        const resRestaurante = await fetch("/api/restaurante");
+        const dataRestaurante = await resRestaurante.json();
+
+        if (resRestaurante.ok) {
+          setNomeRestaurante(dataRestaurante.nome_restaurante);
+          setCategoria(dataRestaurante.categoria);
         } else {
-          setError(data.error || "Erro desconhecido");
-          console.error("Erro ao buscar dados:", data.error);
+          setError(dataRestaurante.error || "Erro desconhecido");
+        }
+        const resProdutos = await fetch("/api/produtos");
+        const dataProdutos = await resProdutos.json();
+
+        if (resProdutos.ok) {
+          setProdutos(
+            Array.isArray(dataProdutos) ? dataProdutos : [dataProdutos]
+          );
+          if (dataProdutos.length > 0) {
+            setSelectedCategory(dataProdutos[0].categoria_produto);
+          }
+        } else {
+          setError(
+            dataProdutos.error || "Erro desconhecido ao buscar produtos"
+          );
         }
       } catch (error) {
         setError("Erro ao fazer requisição");
-        console.error("Erro ao fazer requisição:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchRestauranteData();
-  }, []);
-  useEffect(() => {
-    const fetchProdutosData = async () => {
-      try {
-        const res = await fetch("/api/produtos", {
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-          },
-        });
-        const data = await res.json();
-        if (res.ok) {
-          setProdutos(Array.isArray(data) ? data : [data]);
-          if (data.length > 0) {
-            setSelectedCategory(data[0].categoria_produto);
-          }
-        } else {
-          setError(data.error || "Erro desconhecido ao buscar produtos");
-          console.error("Erro ao buscar produtos:", data.error);
-        }
-      } catch (error) {
-        setError("Erro ao fazer requisição de produtos");
-        console.error("Erro ao fazer requisição de produtos:", error);
-      }
-    };
-    fetchProdutosData();
+    fetchData();
   }, []);
   const categoriasDisponiveis = [
     ...new Set(produtos.map((product) => product.categoria_produto)),
@@ -66,6 +58,11 @@ function Cardapio() {
       <Head>
         <title>Cardápio</title>
       </Head>
+      {loading && (
+        <div className="loading-screen">
+          <div className="loader"></div>
+        </div>
+      )}
       <Header background="/images/banner.jpg" />
       <main className="offers">
         <header className="offers__header">
@@ -77,14 +74,6 @@ function Cardapio() {
                 <p className="offers__description">{categoria}</p>
               </div>
             </div>
-            <div className="reviews flex btn-min">
-              <img src="/images/star-review.svg" alt="star review svg icon" />
-              5.0
-            </div>
-          </div>
-          <div className="flex time container open">
-            <img src="/images/clock-green.svg" alt="clock time icon svg" />
-            <span>Aberto</span>
           </div>
         </header>
         <div className="offers__categories no-scroll">
