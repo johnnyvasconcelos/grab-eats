@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BagItem from "./BagItem";
 import PopUps from "./PopUps";
 const Bag = ({
@@ -9,6 +10,7 @@ const Bag = ({
   onDecrease,
   onRemove,
 }) => {
+  const [isPopupActive, setIsPopupActive] = useState(false);
   const totalPrice = bagItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -31,6 +33,10 @@ const Bag = ({
   };
   const handleRemove = (id) => {
     setBagItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+  const handleFinalizeOrder = () => {
+    setIsPopupActive(true);
+    setOpenBag(false);
   };
   return (
     <>
@@ -76,12 +82,18 @@ const Bag = ({
                 </tr>
               </tbody>
             </table>
-            <button className="btn order-btn">Finalizar Pedido</button>
+            <button className="btn order-btn" onClick={handleFinalizeOrder}>
+              Finalizar Pedido
+            </button>
           </div>
         </div>
       </aside>
-      <PopUps />
+      <PopUps
+        isPopupActive={isPopupActive}
+        setIsPopupActive={setIsPopupActive}
+      />
     </>
   );
 };
+
 export default Bag;
