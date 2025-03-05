@@ -10,7 +10,6 @@ export default async function handler(req, res) {
       res.status(404).json({ error: "Restaurante não encontrado" });
     }
   } catch (error) {
-    console.error("Erro ao buscar dados do restaurante:", error);
     res.status(500).json({ error: "Erro ao buscar dados do restaurante" });
   }
 }

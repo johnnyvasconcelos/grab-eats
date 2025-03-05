@@ -23,11 +23,9 @@ function Cardapio() {
           setCategoria(data.categoria);
         } else {
           setError(data.error || "Erro desconhecido");
-          console.error("Erro ao buscar dados:", data.error);
         }
       } catch (error) {
         setError("Erro ao fazer requisição");
-        console.error("Erro ao fazer requisição:", error);
       }
     };
     fetchRestauranteData();
@@ -48,11 +46,9 @@ function Cardapio() {
           }
         } else {
           setError(data.error || "Erro desconhecido ao buscar produtos");
-          console.error("Erro ao buscar produtos:", data.error);
         }
       } catch (error) {
         setError("Erro ao fazer requisição de produtos");
-        console.error("Erro ao fazer requisição de produtos:", error);
       } finally {
         setLoading(false);
       }

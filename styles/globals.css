@@ -758,7 +758,7 @@ ol {
   padding: 12px 20px;
   border-radius: 30px;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
 }
 .popup input::placeholder {
@@ -922,10 +922,14 @@ ol {
   .offers.alt .orders .order .order__name .name,
   .offers.alt .orders .order .order__price .add,
   .offers.alt .orders .order .order__price .price,
-  .offers.alt .orders .order .preparing {
+  .offers.alt .orders .order .preparing,
+  .popup label span,
+  .popup input,
+  .popup .btn-area .btn {
     font-size: 16px;
   }
-  .offers .offers__header .container .price-info .price {
+  .offers .offers__header .container .price-info .price,
+  .popup h4 {
     font-size: 20px;
   }
   .offers.alt

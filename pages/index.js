@@ -15,7 +15,6 @@ export default function Home() {
           setBoasVindas(data.boas_vindas);
         } else {
           setError(data.error || "Erro desconhecido");
-          console.error("Erro ao buscar dados:", data.error);
         }
       } catch (error) {
         setError("Erro ao fazer requisição");

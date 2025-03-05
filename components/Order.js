@@ -15,7 +15,6 @@ const Order = ({ preparing }) => {
         }
       } catch (error) {
         setError("Erro ao fazer requisição");
-        console.error("Erro ao fazer requisição:", error);
       }
     };
     fetchRestauranteData();

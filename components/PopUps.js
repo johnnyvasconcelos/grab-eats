@@ -1,7 +1,15 @@
 import { useState } from "react";
 import Link from "next/link";
-const PopUps = ({ isPopupActive, setIsPopupActive }) => {
+const PopUps = ({
+  isPopupActive,
+  setIsPopupActive,
+  setBagItems,
+  bagItems,
+  finalizarPedido,
+}) => {
   const [cpf, setCpf] = useState("");
+  const [nome, setNome] = useState("");
+  const [isFinishPopupActive, setIsFinishPopupActive] = useState(false);
   const formatCpf = (value) => {
     value = value.replace(/\D/g, "");
     if (value.length <= 3) {
@@ -19,13 +27,29 @@ const PopUps = ({ isPopupActive, setIsPopupActive }) => {
     let value = e.target.value;
     setCpf(formatCpf(value));
   };
-
   const handleCpfBlur = () => {
     setCpf(formatCpf(cpf));
   };
   const handleCpfFocus = () => {
     let value = cpf.replace(/\D/g, "");
     setCpf(value);
+  };
+  const handleFinish = () => {
+    if (cpf.replace(/\D/g, "").length !== 11 || nome.trim() === "") {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+    setIsPopupActive(false);
+    setIsFinishPopupActive(true);
+    if (finalizarPedido) {
+      finalizarPedido(nome, cpf);
+    }
+  };
+  const handleCancel = () => {
+    if (bagItems.length > 0) {
+      setBagItems(bagItems.slice(0, -1));
+    }
+    setIsPopupActive(false);
   };
   return (
     <>
@@ -38,7 +62,13 @@ const PopUps = ({ isPopupActive, setIsPopupActive }) => {
             </header>
             <label>
               <span>Seu nome</span>
-              <input type="text" name="cliente" placeholder="Digite seu nome" />
+              <input
+                type="text"
+                name="cliente"
+                placeholder="Digite seu nome"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
             </label>
             <label>
               <span>Seu CPF</span>
@@ -54,17 +84,29 @@ const PopUps = ({ isPopupActive, setIsPopupActive }) => {
               />
             </label>
             <div className="btn-area flex">
-              <button className="btn cancel" type="button">
+              <button
+                className="btn cancel"
+                type="button"
+                onClick={handleCancel}
+              >
                 Cancelar
               </button>
-              <button className="btn finish" type="button">
+              <button
+                className="btn finish"
+                type="button"
+                onClick={handleFinish}
+              >
                 Finalizar
               </button>
             </div>
           </div>
         </form>
       </div>
-      <div className="popup-wrapper">
+      <div
+        className={
+          isFinishPopupActive ? "popup-wrapper active" : "popup-wrapper"
+        }
+      >
         <section className="popup popup-finish">
           <div className="popup-container">
             <header>
@@ -76,7 +118,11 @@ const PopUps = ({ isPopupActive, setIsPopupActive }) => {
               <button className="btn see-orders" type="button">
                 <Link href="/pedidos">Ver pedidos</Link>
               </button>
-              <button className="btn continue" type="button">
+              <button
+                className="btn continue"
+                type="button"
+                onClick={() => setIsFinishPopupActive(false)}
+              >
                 Continuar
               </button>
             </div>
@@ -86,4 +132,5 @@ const PopUps = ({ isPopupActive, setIsPopupActive }) => {
     </>
   );
 };
+
 export default PopUps;
