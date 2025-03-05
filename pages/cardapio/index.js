@@ -10,6 +10,10 @@ function Cardapio() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    const timeout = setTimeout(() => setLoading(false), 16000);
+    return () => clearTimeout(timeout);
+  }, []);
+  useEffect(() => {
     const fetchRestauranteData = async () => {
       try {
         const res = await fetch("/api/restaurante");

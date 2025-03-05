@@ -27,13 +27,14 @@ const ProductItem = ({ product }) => {
   const handleMinus = () => {
     if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
-      setPrice((prevPrice) => prevPrice - product.preco);
     }
   };
   const handlePlus = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setPrice((prevPrice) => prevPrice + product.preco);
   };
+  useEffect(() => {
+    setPrice(parseFloat((product.preco * quantity).toFixed(2)));
+  }, [quantity]);
   const ingredientsList = product.ingredientes
     ? product.ingredientes.split(",")
     : [];
