@@ -50,11 +50,17 @@ export default function Home() {
           <p className="choose__description">{boasVindas}</p>
           {error && <p className="error">{error}</p>}{" "}
           <nav className="flex choose__options">
-            <Link href="/cardapio" className="choose__item flex column">
+            <Link
+              href={{ pathname: "/cardapio", query: { para_levar: "false" } }}
+              className="choose__item flex column"
+            >
               <img src="/images/group 1.png" alt="Hamburguer Icon PNG." />
               <p className="choose__item--button btn">Para comer aqui</p>
             </Link>
-            <Link href="/cardapio" className="choose__item flex column">
+            <Link
+              href={{ pathname: "/cardapio", query: { para_levar: "true" } }}
+              className="choose__item flex column"
+            >
               <img src="/images/group 2.png" alt="Bag Icon PNG." />
               <p className="choose__item--button btn">Para levar</p>
             </Link>

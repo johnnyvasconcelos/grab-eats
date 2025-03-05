@@ -1,5 +1,5 @@
 import Link from "next/link";
-const Product = ({ product }) => {
+const Product = ({ product, paraLevar }) => {
   const formatPrice = (price) => {
     const numericPrice = parseFloat(price);
     if (isNaN(numericPrice)) {
@@ -9,7 +9,10 @@ const Product = ({ product }) => {
   };
   return (
     <article className="product">
-      <Link href={`/produto/${product.id}`} className="container flex">
+      <Link
+        href={`/produto/${product.id}?para_levar=${paraLevar}`}
+        className="container flex"
+      >
         <div className="product__text">
           <h3 className="product__title">{product.nome_produto}</h3>
           <p className="product__description product__ingredients">
@@ -25,6 +28,7 @@ const Product = ({ product }) => {
             alt={`Imagem de ${product.nome_produto}`}
           />
         </div>
+        <div className="para_levar">{paraLevar}</div>
       </Link>
     </article>
   );

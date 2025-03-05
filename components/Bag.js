@@ -1,7 +1,17 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import BagItem from "./BagItem";
 import PopUps from "./PopUps";
-const Bag = ({ openBag, setOpenBag, bagItems, setBagItems }) => {
+const Bag = ({
+  openBag,
+  setOpenBag,
+  bagItems,
+  setBagItems,
+  nomeProduto,
+  paralevar,
+}) => {
+  const router = useRouter();
+  const { para_levar } = router.query;
   const [isPopupActive, setIsPopupActive] = useState(false);
   const totalPrice = bagItems.reduce(
     (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
@@ -28,7 +38,6 @@ const Bag = ({ openBag, setOpenBag, bagItems, setBagItems }) => {
   };
   const handleFinalizeOrder = () => {
     if (bagItems.length === 0) {
-      alert("Sua sacola está vazia!");
       return;
     }
     setIsPopupActive(true);
@@ -41,15 +50,15 @@ const Bag = ({ openBag, setOpenBag, bagItems, setBagItems }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           pedidos: bagItems.map((item) => ({
-            nome: item.nome || "Produto Desconhecido",
-            preco: parseFloat(item.price) || 0,
-            em_preparo: item.em_preparo || false,
-            para_levar: item.para_levar || false,
+            nome: nomeProduto || "Produto Desconhecido",
+            preco: parseFloat(item.price),
+            em_preparo: true,
+            para_levar: para_levar === "true",
             quantity: item.quantity || 1,
           })),
           cliente: {
             nome_cliente: nome,
-            cpf: cpf.replace(/\D/g, ""),
+            cpf: cpf,
           },
         }),
       });
@@ -62,7 +71,6 @@ const Bag = ({ openBag, setOpenBag, bagItems, setBagItems }) => {
       alert("Erro ao finalizar pedido: " + error.message);
     }
   };
-
   return (
     <>
       <aside className={openBag ? "bag active" : "bag"}>

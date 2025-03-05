@@ -465,6 +465,9 @@ ol {
 .offers.alt .footer-area .btn:hover {
   background-color: var(--color-1-dark);
 }
+.para_levar {
+  display: none;
+}
 /* orders */
 .offers.alt .orders {
   gap: 10px;
@@ -759,7 +762,6 @@ ol {
   border-radius: 30px;
   width: 100%;
   font-size: 14px;
-  text-transform: uppercase;
 }
 .popup input::placeholder {
   color: var(--light-gray-hover);

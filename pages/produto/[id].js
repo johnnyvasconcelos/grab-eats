@@ -6,7 +6,8 @@ import Bag from "../../components/Bag";
 import { connectDb } from "../../lib/db";
 const ProductItem = ({ product }) => {
   const router = useRouter();
-  const { id } = router.query;
+  const { para_levar } = router.query;
+  const { id, paraLevar } = router.query;
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -27,7 +28,12 @@ const ProductItem = ({ product }) => {
     }
   }, [id, quantity]);
   const addToBag = () => {
-    const newItem = { id: Date.now(), price: price, quantity: quantity };
+    const newItem = {
+      id: Date.now(),
+      price: price,
+      quantity: quantity,
+      paraLevar: para_levar,
+    };
     setBagItems((prevItems) => [...prevItems, newItem]);
     setOpenBag(true);
   };
@@ -64,11 +70,11 @@ const ProductItem = ({ product }) => {
                   />
                   {product.categoria_produto}
                 </p>
-                <h1 className="offers__title">{product.nome_produto}</h1>{" "}
+                <h1 className="offers__title">{product.nome_produto}</h1>
               </div>
             </div>
             <div className="flex price-info">
-              <span className="price">R$ {formatPrice(price)}</span>{" "}
+              <span className="price">R$ {formatPrice(price)}</span>
               <div className="selector flex">
                 <span className="btn minus" onClick={handleMinus}>
                   <img src="/images/minus.svg" alt="minus svg icon" />
@@ -117,6 +123,8 @@ const ProductItem = ({ product }) => {
         setOpenBag={setOpenBag}
         bagItems={bagItems}
         setBagItems={setBagItems}
+        nomeProduto={product.nome_produto}
+        paralevar={para_levar}
       />
     </>
   );

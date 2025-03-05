@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
 import Head from "next/head";
 function Cardapio() {
+  const router = useRouter();
+  const { para_levar } = router.query;
   const [selectedCategory, setSelectedCategory] = useState("");
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -119,7 +122,11 @@ function Cardapio() {
             <h2>{selectedCategory}</h2>
           </div>
           {filteredProducts.map((product) => (
-            <Product key={product.id} product={product} />
+            <Product
+              key={product.id}
+              product={product}
+              paraLevar={para_levar}
+            />
           ))}
         </section>
       </main>
