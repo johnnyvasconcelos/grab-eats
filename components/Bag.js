@@ -8,6 +8,7 @@ const Bag = ({
   bagItems,
   setBagItems,
   nomeProduto,
+  image,
   paralevar,
 }) => {
   const router = useRouter();
@@ -86,8 +87,9 @@ const Bag = ({
               <BagItem
                 key={item.id}
                 id={item.id}
-                nome={item.nome}
+                nomeProduto={nomeProduto}
                 price={item.price}
+                image={image}
                 quantity={item.quantity}
                 onRemove={handleRemove}
                 onIncrease={handleIncrease}

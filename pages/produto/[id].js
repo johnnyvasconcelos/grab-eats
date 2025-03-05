@@ -125,6 +125,7 @@ const ProductItem = ({ product }) => {
         setBagItems={setBagItems}
         nomeProduto={product.nome_produto}
         paralevar={para_levar}
+        image={product.foto}
       />
     </>
   );

@@ -28,7 +28,6 @@ const Product = ({ product, paraLevar }) => {
             alt={`Imagem de ${product.nome_produto}`}
           />
         </div>
-        <div className="para_levar">{paraLevar}</div>
       </Link>
     </article>
   );

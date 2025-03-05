@@ -1,9 +1,22 @@
-const BagItem = ({ id, price, quantity, onRemove, onIncrease, onDecrease }) => {
+const BagItem = ({
+  id,
+  price,
+  image,
+  quantity,
+  onRemove,
+  nomeProduto,
+  onIncrease,
+  onDecrease,
+}) => {
   return (
     <article className="bag__item flex">
-      <img src="/images/produto-alt.jpg" alt="produto item-sacola" />
+      <img
+        src={`/images/${image}`}
+        alt="produto item-sacola"
+        className="img__item"
+      />
       <div className="bag__item--info">
-        <h5>Mc Oferta Média Big Mac Duas Porções com Cheddar</h5>
+        <h5>{nomeProduto}</h5>
         <strong className="bag__price">
           R$ {(price * quantity).toFixed(2)}
         </strong>{" "}
