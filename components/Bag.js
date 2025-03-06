@@ -44,7 +44,7 @@ const Bag = ({
     setIsPopupActive(true);
     setOpenBag(false);
   };
-  const finalizarPedido = async (nome, cpf) => {
+  const finalizarPedido = async (nome, cpf, mesa) => {
     try {
       const response = await fetch("/api/finalizar", {
         method: "POST",
@@ -56,11 +56,11 @@ const Bag = ({
             em_preparo: true,
             para_levar: para_levar === "true",
             quantity: item.quantity || 1,
-            mesa: item.mesa || "Mesa não informada",
           })),
           cliente: {
             nome_cliente: nome,
             cpf: cpf,
+            mesa: mesa,
           },
         }),
       });

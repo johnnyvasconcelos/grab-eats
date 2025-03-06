@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         item.em_preparo ? 1 : 0,
         item.para_levar ? 1 : 0,
         cliente.nome_cliente || "Nome não informado",
-        item.mesa || "Mesa não informada",
+        cliente.mesa || "Mesa não informada",
       ];
       await queryDb(query, values);
     }
