@@ -30,10 +30,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/cardapio.js"
     ],
-    "/produto/[id]": [
+    "/pedidos": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/produto/[id].js"
+      "static/chunks/pages/pedidos.js"
     ]
   },
   "ampFirstPages": []
