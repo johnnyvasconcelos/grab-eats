@@ -19,7 +19,12 @@ const ProductItem = ({ product }) => {
   const addToBag = () => {
     setBagItems([
       ...bagItems,
-      { id: Date.now(), price, quantity, paraLevar: para_levar },
+      {
+        id: Date.now(),
+        price: parseFloat(product.preco),
+        quantity,
+        paraLevar: para_levar,
+      },
     ]);
     setOpenBag(true);
   };

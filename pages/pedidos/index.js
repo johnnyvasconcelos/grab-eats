@@ -1,7 +1,25 @@
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Order from "../../components/Order";
 import Head from "next/head";
 const Pedidos = () => {
+  const [pedidos, setPedidos] = useState([]);
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      try {
+        const response = await fetch("/api/pedidos");
+        if (!response.ok) {
+          throw new Error("Erro ao buscar pedidos");
+        }
+        const data = await response.json();
+        setPedidos(data);
+      } catch (error) {
+        console.error("Erro ao carregar pedidos:", error);
+      }
+    };
+    fetchPedidos();
+  }, []);
+
   return (
     <>
       <Head>
@@ -16,8 +34,13 @@ const Pedidos = () => {
               Meus Pedidos
             </h2>
             <div className="orders flex column">
-              <Order preparing="true" />
-              <Order preparing="false" />
+              {pedidos.length > 0 ? (
+                pedidos.map((pedido) => (
+                  <Order key={pedido.id} pedido={pedido} />
+                ))
+              ) : (
+                <p className="nothing">Nenhum pedido encontrado.</p>
+              )}
             </div>
           </div>
         </section>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-const Order = ({ preparing }) => {
+const Order = ({ pedido }) => {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -25,8 +25,10 @@ const Order = ({ preparing }) => {
   return (
     <>
       <article className="order">
-        <span className={`preparing ${preparing}`}>
-          {preparing == "true" ? "Em Preparo" : "Finalizado"}
+        <span
+          className={`preparing ${pedido.em_preparo == "1" ? "true" : "false"}`}
+        >
+          {pedido.em_preparo == "1" ? "Em Preparo" : "Finalizado"}
         </span>
         <div className="order__logo">
           <img src="/images/logo-square.png" alt={`logo ${nomeRestaurante}`} />
@@ -34,14 +36,15 @@ const Order = ({ preparing }) => {
         </div>
         <div className="order__name flex">
           <span className="quantity">1</span>
-          <h3 className="name">
-            McOferta Media Big Mac Duplo com Fritas e Queijo Cheddar Porção
-            Família
-          </h3>
+          <h3 className="name">{pedido.nome}</h3>
         </div>
         <div className="order__price flex">
-          <span className="price">R$ 39,90</span>
-          <span className={`add ${preparing}`}>Adicionar à Sacola</span>
+          <span className="price">R$ {pedido.preco.replace(".", ",")}</span>
+          <span
+            className={`add ${pedido.em_preparo == "1" ? "true" : "false"}`}
+          >
+            Adicionar à Sacola
+          </span>
         </div>
       </article>
     </>
