@@ -9,6 +9,7 @@ const PopUps = ({
 }) => {
   const [cpf, setCpf] = useState("");
   const [nome, setNome] = useState("");
+  const [mesa, setMesa] = useState("");
   const [isFinishPopupActive, setIsFinishPopupActive] = useState(false);
   const formatCpf = (value) => {
     value = value.replace(/\D/g, "");
@@ -36,13 +37,13 @@ const PopUps = ({
   };
   const handleFinish = () => {
     if (cpf.replace(/\D/g, "").length !== 11 || nome.trim() === "") {
-      alert("Por favor, preencha todos os campos.");
+      alert("Por favor, preencha Nome e CPF corretamente.");
       return;
     }
     setIsPopupActive(false);
     setIsFinishPopupActive(true);
     if (finalizarPedido) {
-      finalizarPedido(nome, cpf);
+      finalizarPedido(nome, cpf, mesa);
     }
   };
   const handleCancel = () => {
@@ -81,6 +82,21 @@ const PopUps = ({
                 onBlur={handleCpfBlur}
                 onFocus={handleCpfFocus}
                 maxLength="14"
+              />
+            </label>
+            <label>
+              <span>Número da Mesa</span>
+              <input
+                type="number"
+                name="mesa-cliente"
+                placeholder="Digite o número da mesa"
+                value={mesa}
+                inputMode="numeric"
+                onChange={(e) => {
+                  if (e.target.value.length <= 3) {
+                    setMesa(e.target.value);
+                  }
+                }}
               />
             </label>
             <div className="btn-area flex">

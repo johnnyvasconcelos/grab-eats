@@ -35,7 +35,7 @@ const Order = ({ pedido }) => {
           {nomeRestaurante}
         </div>
         <div className="order__name flex">
-          <span className="quantity">1</span>
+          <span className="quantity">{pedido.quantidade}</span>
           <h3 className="name">{pedido.nome}</h3>
         </div>
         <div className="order__price flex">

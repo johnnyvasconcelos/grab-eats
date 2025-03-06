@@ -56,6 +56,7 @@ const Bag = ({
             em_preparo: true,
             para_levar: para_levar === "true",
             quantity: item.quantity || 1,
+            mesa: item.mesa || "Mesa não informada",
           })),
           cliente: {
             nome_cliente: nome,

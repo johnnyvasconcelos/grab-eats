@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     });
   }
   try {
-    const query = `INSERT INTO pedidos (nome, cpf, preco, em_preparo, para_levar, nome_cliente) VALUES (?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO pedidos (nome, cpf, preco, quantidade, em_preparo, para_levar, nome_cliente, mesa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     for (const item of pedidos) {
       if (!item.nome || item.preco === undefined) {
         console.error("Item inválido:", item);
@@ -24,10 +24,12 @@ export default async function handler(req, res) {
       const values = [
         item.nome || "Produto Desconhecido",
         cliente.cpf,
-        parseFloat(item.preco) || 0,
+        parseFloat(item.preco) * (item.quantity || 1),
+        item.quantity || 1,
         item.em_preparo ? 1 : 0,
         item.para_levar ? 1 : 0,
         cliente.nome_cliente || "Nome não informado",
+        item.mesa || "Mesa não informada",
       ];
       await queryDb(query, values);
     }
