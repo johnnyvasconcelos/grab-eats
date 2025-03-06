@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 const PopUps = ({
   isPopupActive,
@@ -11,37 +11,43 @@ const PopUps = ({
   const [nome, setNome] = useState("");
   const [mesa, setMesa] = useState("");
   const [isFinishPopupActive, setIsFinishPopupActive] = useState(false);
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  useEffect(() => {
+    const storedCpf = localStorage.getItem("cpf");
+    const storedNome = localStorage.getItem("nome");
+    if (storedCpf && storedNome) {
+      setCpf(storedCpf);
+      setNome(storedNome);
+      setIsFirstTime(false);
+    }
+  }, []);
   const formatCpf = (value) => {
     value = value.replace(/\D/g, "");
-    if (value.length <= 3) {
-      return value;
-    }
-    if (value.length <= 6) {
-      return value.replace(/(\d{3})(\d{0,})/, "$1.$2");
-    }
-    if (value.length <= 9) {
+    if (value.length <= 3) return value;
+    if (value.length <= 6) return value.replace(/(\d{3})(\d{0,})/, "$1.$2");
+    if (value.length <= 9)
       return value.replace(/(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3");
-    }
     return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3-$4");
   };
   const handleCpfChange = (e) => {
-    let value = e.target.value;
-    setCpf(formatCpf(value));
-  };
-  const handleCpfBlur = () => {
-    setCpf(formatCpf(cpf));
-  };
-  const handleCpfFocus = () => {
-    let value = cpf.replace(/\D/g, "");
-    setCpf(value);
+    setCpf(formatCpf(e.target.value));
   };
   const handleFinish = () => {
-    if (cpf.replace(/\D/g, "").length !== 11 || nome.trim() === "") {
+    if (
+      isFirstTime &&
+      (cpf.replace(/\D/g, "").length !== 11 || nome.trim() === "")
+    ) {
       alert("Por favor, preencha Nome e CPF corretamente.");
       return;
     }
+    if (isFirstTime) {
+      localStorage.setItem("cpf", cpf);
+      localStorage.setItem("nome", nome);
+      setIsFirstTime(false);
+    }
     setIsPopupActive(false);
     setIsFinishPopupActive(true);
+
     if (finalizarPedido) {
       finalizarPedido(nome, cpf, mesa);
     }
@@ -61,29 +67,31 @@ const PopUps = ({
               <h4>Quase lá!</h4>
               <p>Para finalizar o seu pedido, insira os dados abaixo.</p>
             </header>
-            <label>
-              <span>Seu nome</span>
-              <input
-                type="text"
-                name="cliente"
-                placeholder="Digite seu nome"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-              />
-            </label>
-            <label>
-              <span>Seu CPF</span>
-              <input
-                type="text"
-                name="cpf-cliente"
-                placeholder="Digite seu CPF"
-                value={cpf}
-                onChange={handleCpfChange}
-                onBlur={handleCpfBlur}
-                onFocus={handleCpfFocus}
-                maxLength="14"
-              />
-            </label>
+            {isFirstTime && (
+              <>
+                <label>
+                  <span>Seu nome</span>
+                  <input
+                    type="text"
+                    name="cliente"
+                    placeholder="Digite seu nome"
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                  />
+                </label>
+                <label>
+                  <span>Seu CPF</span>
+                  <input
+                    type="text"
+                    name="cpf-cliente"
+                    placeholder="Digite seu CPF"
+                    value={cpf}
+                    onChange={handleCpfChange}
+                    maxLength="14"
+                  />
+                </label>
+              </>
+            )}
             <label>
               <span>Número da Mesa</span>
               <input
@@ -148,5 +156,4 @@ const PopUps = ({
     </>
   );
 };
-
 export default PopUps;
