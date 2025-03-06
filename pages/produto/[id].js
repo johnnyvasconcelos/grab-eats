@@ -6,51 +6,23 @@ import Bag from "../../components/Bag";
 import { connectDb } from "../../lib/db";
 const ProductItem = ({ product }) => {
   const router = useRouter();
-  const { para_levar } = router.query;
-  const { id, paraLevar } = router.query;
+  const { para_levar, id } = router.query;
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(product.preco);
-  const [categoria, setCategoria] = useState(product.categoria_produto);
-  const [error, setError] = useState(null);
-  const formatPrice = (price) => {
-    const numericPrice = parseFloat(price);
-    if (isNaN(numericPrice)) {
-      return "R$ 0,00";
-    }
-    return numericPrice.toFixed(2).replace(".", ",");
-  };
+  const [price, setPrice] = useState(parseFloat(product.preco) || 0);
   useEffect(() => {
-    if (id) {
-      const newPrice = product.preco * quantity;
-      setPrice(newPrice);
-    }
-  }, [id, quantity]);
+    setPrice((parseFloat(product.preco) || 0) * quantity);
+  }, [quantity, product.preco]);
+  const formatPrice = (price) =>
+    isNaN(price) ? "R$ 0,00" : price.toFixed(2).replace(".", ",");
   const addToBag = () => {
-    const newItem = {
-      id: Date.now(),
-      price: price,
-      quantity: quantity,
-      paraLevar: para_levar,
-    };
-    setBagItems((prevItems) => [...prevItems, newItem]);
+    setBagItems([
+      ...bagItems,
+      { id: Date.now(), price, quantity, paraLevar: para_levar },
+    ]);
     setOpenBag(true);
   };
-  const handleMinus = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
-  const handlePlus = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-  useEffect(() => {
-    setPrice(product.preco * quantity);
-  }, [quantity]);
-  const ingredientsList = product.ingredientes
-    ? product.ingredientes.split(",")
-    : [];
   return (
     <>
       <Head>
@@ -76,12 +48,18 @@ const ProductItem = ({ product }) => {
             <div className="flex price-info">
               <span className="price">R$ {formatPrice(price)}</span>
               <div className="selector flex">
-                <span className="btn minus" onClick={handleMinus}>
-                  <img src="/images/minus.svg" alt="minus svg icon" />
+                <span
+                  className="btn minus"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                >
+                  <img src="/images/minus.svg" alt="minus" />
                 </span>
                 <span>{quantity}</span>
-                <span className="btn plus" onClick={handlePlus}>
-                  <img src="/images/plus.svg" alt="plus svg icon" />
+                <span
+                  className="btn plus"
+                  onClick={() => setQuantity((q) => q + 1)}
+                >
+                  <img src="/images/plus.svg" alt="plus" />
                 </span>
               </div>
             </div>
@@ -96,14 +74,13 @@ const ProductItem = ({ product }) => {
         <section className="offers__products offers__products--description">
           <div className="container">
             <h2>
-              <img src="/images/chef.svg" alt="chef hat svg" />
-              Ingredientes
+              <img src="/images/chef.svg" alt="chef hat" /> Ingredientes
             </h2>
             <ul>
-              {ingredientsList.length > 0 ? (
-                ingredientsList.map((ingredient, index) => (
-                  <li key={index}>{ingredient.trim()}</li>
-                ))
+              {product.ingredientes ? (
+                product.ingredientes
+                  .split(",")
+                  .map((ing, i) => <li key={i}>{ing.trim()}</li>)
               ) : (
                 <p>Ingredientes não disponíveis ainda... :/</p>
               )}
@@ -130,21 +107,12 @@ const ProductItem = ({ product }) => {
     </>
   );
 };
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+export async function getServerSideProps({ query }) {
   const connection = await connectDb();
   const [rows] = await connection.execute(
     "SELECT * FROM produtos WHERE id = ?",
-    [id]
+    [query.id]
   );
-  if (rows.length === 0) {
-    return {
-      notFound: true,
-    };
-  }
-  const product = rows[0];
-  return {
-    props: { product },
-  };
+  return rows.length ? { props: { product: rows[0] } } : { notFound: true };
 }
 export default ProductItem;

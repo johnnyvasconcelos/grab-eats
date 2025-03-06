@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     }
     res.status(200).json(results[0]);
   } catch (error) {
-    console.error("Erro na consulta:", error); // Log do erro
+    console.error("Erro na consulta:", error);
     res.status(500).json({ error: "Erro interno do servidor" });
   }
 }

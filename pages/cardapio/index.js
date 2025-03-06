@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Product from "../../components/Product";
 import Header from "../../components/Header";
 import Head from "next/head";
-function Cardapio() {
+export default function Cardapio() {
   const router = useRouter();
   const { para_levar } = router.query;
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -17,56 +17,38 @@ function Cardapio() {
     return () => clearTimeout(timeout);
   }, []);
   useEffect(() => {
-    const fetchRestauranteData = async () => {
-      try {
-        const res = await fetch("/api/restaurante");
-        const data = await res.json();
-        if (res.ok) {
+    fetch("/api/restaurante")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.nome_restaurante && data.categoria) {
           setNomeRestaurante(data.nome_restaurante);
           setCategoria(data.categoria);
         } else {
-          setError(data.error || "Erro desconhecido");
+          setError("Erro ao carregar dados do restaurante");
         }
-      } catch (error) {
-        setError("Erro ao fazer requisição");
-      }
-    };
-    fetchRestauranteData();
+      })
+      .catch(() => setError("Erro ao fazer requisição"));
   }, []);
   useEffect(() => {
-    const fetchProdutosData = async () => {
-      try {
-        const res = await fetch("/api/produtos", {
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-          },
-        });
-        const data = await res.json();
-        if (res.ok) {
-          setProdutos(Array.isArray(data) ? data : [data]);
-          if (data.length > 0) {
-            setSelectedCategory(data[0].categoria_produto);
-          }
+    fetch("/api/produtos")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProdutos(data);
+          setSelectedCategory(data[0].categoria_produto);
         } else {
-          setError(data.error || "Erro desconhecido ao buscar produtos");
+          setError("Nenhum produto encontrado");
         }
-      } catch (error) {
-        setError("Erro ao fazer requisição de produtos");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProdutosData();
+      })
+      .catch(() => setError("Erro ao carregar produtos"))
+      .finally(() => setLoading(false));
   }, []);
   const categoriasDisponiveis = [
-    ...new Set(produtos.map((product) => product.categoria_produto)),
+    ...new Set(produtos.map((p) => p.categoria_produto)),
   ];
   const filteredProducts = produtos.filter(
-    (product) => product.categoria_produto === selectedCategory
+    (p) => p.categoria_produto === selectedCategory
   );
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
   return (
     <>
       <Head>
@@ -86,19 +68,19 @@ function Cardapio() {
         <header className="offers__header">
           <div className="container flex">
             <div className="flex offers__header--info">
-              <img src="/images/logo-square.png" alt="logo" />
+              <img src="/images/logo-square.png" alt="Logo do restaurante" />
               <div className="offers__header--title">
                 <h1 className="offers__title">{nomeRestaurante}</h1>
                 <p className="offers__description">{categoria}</p>
               </div>
             </div>
             <div className="reviews flex btn-min">
-              <img src="/images/star-review.svg" alt="star review svg icon" />
+              <img src="/images/star-review.svg" alt="Ícone de avaliação" />
               5.0
             </div>
           </div>
           <div className="flex time container open">
-            <img src="/images/clock-green.svg" alt="clock time icon svg" />
+            <img src="/images/clock-green.svg" alt="Ícone de horário" />
             <span>Aberto</span>
           </div>
         </header>
@@ -107,10 +89,10 @@ function Cardapio() {
             {categoriasDisponiveis.map((category) => (
               <span
                 key={category}
-                className={`category ${
-                  selectedCategory === category ? "btn-min check" : ""
-                } btn-min`}
-                onClick={() => handleCategoryClick(category)}
+                className={`category btn-min ${
+                  selectedCategory === category ? "check" : ""
+                }`}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </span>
@@ -133,4 +115,3 @@ function Cardapio() {
     </>
   );
 }
-export default Cardapio;

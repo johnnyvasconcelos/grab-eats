@@ -23,7 +23,7 @@
 @font-face {
   font-family: "Poppins";
   src: url("/fonts/Poppins-Bold.ttf") format("truetype");
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
 }
 @font-face {
@@ -41,13 +41,7 @@
 @font-face {
   font-family: "Poppins";
   src: url("/fonts/Poppins-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins";
-  src: url("/fonts/Poppins-Light.ttf") format("truetype");
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
 }
 body {
@@ -145,43 +139,43 @@ ol {
 .choose .choose__header {
   padding: var(--section-padding) 0;
 }
-.choose .choose__header .choose__header--title {
+.choose .choose__header--title {
   font-size: 14px;
   margin-top: 8px;
   text-transform: capitalize;
   font-weight: 600;
 }
-.choose .choose__header .choose__header--logo {
+.choose .choose__header--logo {
   width: 60px;
 }
 .choose .choose__body {
   margin-top: 30px;
   text-align: center;
 }
-.choose .choose__body .choose__title {
+.choose .choose__title {
   font-size: 18px;
   font-weight: 600;
 }
-.choose .choose__body .choose__description {
+.choose .choose__description {
   color: var(--dark-gray);
   font-size: 12px;
   margin-top: 15px;
 }
-.choose .choose__body .choose__options {
+.choose .choose__options {
   justify-content: space-between;
   margin-top: 40px;
 }
-.choose .choose__body .choose__options .choose__item {
+.choose .choose__options .choose__item {
   border: 1px solid var(--light-gray);
   width: 49%;
   padding: 30px 5px 5px 5px;
   border-radius: 15px;
   gap: 20px;
 }
-.choose .choose__body .choose__options .choose__item img {
+.choose .choose__options .choose__item img {
   width: 60px;
 }
-.choose .choose__body .choose__options .choose__item .choose__item--button {
+.choose .choose__options .choose__item--button {
   background: var(--light-gray);
   font-size: 12px;
   font-weight: 600;
@@ -220,7 +214,7 @@ ol {
 .main__header--buttons .main__header--btn.btn-2 img {
   width: 19px;
 }
-.main__header--buttons .main__header--btn.btn-2 .count {
+.main__header--buttons .count {
   position: absolute;
   background-color: var(--color-3);
   border-radius: 50%;
@@ -255,55 +249,26 @@ ol {
   height: 50px;
   border-radius: 10px;
 }
-.offers
-  .offers__header
-  .container
-  .offers__header--info
-  .offers__header--title {
+.offers .offers__header .offers__header--title {
   padding-left: 12px;
 }
-.offers.alt
-  .offers__header
-  .container
-  .offers__header--info
-  .offers__header--title {
+.offers.alt .offers__header .offers__header--title {
   padding-left: 0px;
 }
-.offers
-  .offers__header
-  .container
-  .offers__header--info
-  .offers__header--title
-  .offers__description
-  .small-logo {
+.offers .offers__header .small-logo {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   margin-right: 10px;
 }
-.offers
-  .offers__header
-  .container
-  .offers__header--info
-  .offers__header--title
-  .offers__title {
+.offers .offers__header .offers__title {
   font-size: 18px;
   text-transform: capitalize;
 }
-.offers.alt
-  .offers__header
-  .container
-  .offers__header--info
-  .offers__header--title
-  .offers__title {
+.offers.alt .offers__header .offers__title {
   font-size: 16px;
 }
-.offers
-  .offers__header
-  .container
-  .offers__header--info
-  .offers__header--title
-  .offers__description {
+.offers .offers__header .offers__description {
   color: var(--light-gray-hover);
   font-size: 14px;
   text-transform: capitalize;
@@ -311,12 +276,12 @@ ol {
 .offers.alt {
   padding-bottom: 100px;
 }
-.offers .offers__header .container .reviews {
+.offers .offers__header .reviews {
   gap: 4px;
   font-size: 12px;
   font-weight: 500;
 }
-.offers .offers__header .container .reviews img {
+.offers .offers__header .reviews img {
   width: 12px;
 }
 .offers .offers__header .time {
@@ -340,13 +305,13 @@ ol {
 .offers .offers__categories .container {
   gap: 10px;
 }
-.offers .offers__categories .container .category {
+.offers .offers__categories .category {
   padding: 8px 15px;
   font-size: 14px;
   color: var(--dark-gray);
   text-transform: capitalize;
 }
-.offers .offers__categories .container .category.check {
+.offers .offers__categories .category.check {
   border: 1px solid var(--color-1);
   color: var(--light);
   background-color: var(--color-1);
@@ -366,15 +331,15 @@ ol {
   padding: 20px 0 15px 0;
   margin: 10px 0;
 }
-.offers .offers__products .product .product__text {
+.offers .offers__products .product__text {
   width: 75%;
   padding-right: 12px;
 }
-.offers .offers__products .product .product__text .product__title {
+.offers .offers__products .product__title {
   font-size: 16px;
   font-weight: 400;
 }
-.offers .offers__products .product .product__text .product__ingredients {
+.offers .offers__products .product__ingredients {
   font-size: 14px;
   color: var(--dark-gray);
   margin: 8px 0 15px 0;
@@ -386,11 +351,11 @@ ol {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.offers .offers__products .product .product__text .price {
+.offers .offers__products .price {
   font-size: 16px;
   font-weight: 600;
 }
-.offers .offers__products .product .product__image {
+.offers .offers__products .product__image {
   width: 25%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
@@ -398,18 +363,18 @@ ol {
   align-items: center;
   justify-content: center;
 }
-.offers .offers__products .product .product__image img {
+.offers .offers__products .product__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
 }
-.offers .offers__header .container .price-info {
+.offers .offers__header .price-info {
   margin-top: 15px;
   justify-content: space-between;
 }
-.offers .offers__header .container .price-info .price {
+.offers .offers__header .price-info .price {
   font-size: 18px;
   font-weight: 700;
 }
@@ -435,10 +400,10 @@ ol {
   font-size: 14px;
   margin-top: 10px;
 }
-.offers.alt .offers__products.offers__products--description ul li {
+.offers.alt .offers__products.offers__products--description li {
   text-transform: capitalize;
 }
-.offers.alt .offers__products.offers__products--description ul li::before {
+.offers.alt .offers__products.offers__products--description li::before {
   content: "•";
   margin-right: 10px;
 }
@@ -470,13 +435,13 @@ ol {
   gap: 10px;
   margin-top: 25px;
 }
-.offers.alt .orders .order {
+.offers.alt .order {
   border: 1px solid var(--light-gray);
   padding: 20px 15px;
   border-radius: 10px;
   width: 100%;
 }
-.offers.alt .orders .order .preparing {
+.offers.alt .preparing {
   border-radius: 20px;
   font-size: 12px;
   font-weight: 500;
@@ -484,30 +449,30 @@ ol {
   margin-bottom: 15px;
   display: inline-block;
 }
-.offers.alt .orders .order .preparing.true {
+.offers.alt .preparing.true {
   background-color: var(--color-1-light);
   color: var(--color-1);
 }
-.offers.alt .orders .order .preparing.false {
+.offers.alt .preparing.false {
   background-color: var(--color-2);
   color: var(--light);
 }
-.offers.alt .orders .order .order__logo {
+.offers.alt .order__logo {
   font-weight: 600;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--light-gray);
 }
-.offers.alt .orders .order .order__logo img {
+.offers.alt .order__logo img {
   width: 15px;
   display: inline-block;
   margin-right: 6px;
 }
-.offers.alt .orders .order .order__name {
+.offers.alt .order__name {
   gap: 6px;
   border-bottom: 1px solid var(--light-gray);
   padding: 15px 0;
 }
-.offers.alt .orders .order .order__name .quantity {
+.offers.alt .quantity {
   font-size: 12px;
   border-radius: 50%;
   background-color: var(--dark-gray);
@@ -519,8 +484,8 @@ ol {
   min-width: 16px;
   min-height: 16px;
 }
-.offers.alt .orders .order .order__name .name {
-  font-weight: 300;
+.offers.alt .name {
+  font-weight: 400;
   font-size: 14px;
   max-width: 100%;
   white-space: nowrap;
@@ -528,19 +493,19 @@ ol {
   text-overflow: ellipsis;
   max-width: 120ch;
 }
-.offers.alt .orders .order .order__price {
+.offers.alt .order__price {
   padding-top: 15px;
   justify-content: space-between;
 }
-.offers.alt .orders .order .order__price .price {
+.offers.alt .price {
   font-size: 12px;
 }
-.offers.alt .orders .order .order__price .add {
+.offers.alt .add {
   font-weight: 600;
   font-size: 12px;
   color: var(--color-3);
 }
-.offers.alt .orders .order .order__price .add.true {
+.offers.alt .add.true {
   color: var(--color-3-light);
 }
 /* bag */
@@ -603,36 +568,36 @@ ol {
 .bag .container__bag::-webkit-scrollbar {
   display: none;
 }
-.bag .container__bag .bag__title {
+.bag .bag__title {
   justify-content: space-between;
 }
-.bag .container__bag .bag__title .close-icon {
+.bag .close-icon {
   cursor: pointer;
 }
-.bag .container__bag .bag__title .close-icon img {
+.bag .close-icon img {
   width: 15px;
 }
-.bag .container__bag .bag__items {
+.bag .bag__items {
   margin-top: 30px;
   padding-bottom: 100px;
   width: 100%;
 }
-.bag .container__bag .bag__item {
+.bag .bag__item {
   position: relative;
   gap: 10px;
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--light-gray);
 }
-.bag .container__bag .bag__item img {
+.bag .bag__item img {
   width: 30%;
   max-width: 150px;
   border-radius: 10px;
 }
-.bag .container__bag .bag__item .bag__item--info {
+.bag .bag__item--info {
   width: 70%;
 }
-.bag .container__bag .bag__item .bag__item--info h5 {
+.bag .bag__item--info h5 {
   font-weight: 500;
   max-width: 19%;
   white-space: nowrap;
@@ -640,12 +605,12 @@ ol {
   text-overflow: ellipsis;
   max-width: calc(1ch * 19);
 }
-.bag .container__bag .bag__item .bag__price {
+.bag .bag__price {
   font-size: 14px;
   display: block;
   margin-bottom: 5px;
 }
-.bag .container__bag .bag__item .remove {
+.bag .bag__item .remove {
   position: absolute;
   right: 0;
   top: 50%;
@@ -658,7 +623,7 @@ ol {
   border-radius: 10px;
   cursor: pointer;
 }
-.bag .container__bag .bag__item .remove img {
+.bag .remove img {
   width: 12px;
 }
 .bag .bag__footer {
@@ -668,28 +633,28 @@ ol {
   bottom: 20px;
   left: 0;
 }
-.bag .bag__footer .bag__info {
+.bag .bag__info {
   border-radius: 10px;
   border: 1px solid var(--light-gray);
   padding: 15px 20px;
   width: 100%;
   background-color: var(--light);
 }
-.bag .bag__footer .bag__info tbody tr {
+.bag tbody tr {
   border-bottom: 1px solid var(--light-gray);
   justify-content: space-between;
   padding: 5px 0;
 }
-.bag .bag__footer .bag__info tbody tr td {
+.bag tbody tr td {
   font-size: 14px;
 }
-.bag .bag__footer .bag__info tbody tr:nth-of-type(3) {
+.bag tbody tr:nth-of-type(3) {
   border: none;
 }
-.bag .bag__footer .bag__info tbody tr td:nth-of-type(1) {
+.bag tbody tr td:nth-of-type(1) {
   color: var(--dark-gray);
 }
-.bag .bag__footer .bag__info tbody tr td strong {
+.bag tbody tr td strong {
   color: var(--dark);
 }
 .bag .bag__footer .btn {
@@ -777,21 +742,21 @@ ol {
   margin-top: 20px;
   gap: 15px;
 }
-.popup .btn-area .btn {
+.popup .btn {
   width: 49%;
   border: none;
   font-weight: 600;
   padding: 14px 20px;
 }
-.popup .btn-area .cancel,
-.popup .btn-area .continue {
+.popup .cancel,
+.popup .continue {
   background-color: var(--light);
 }
-.popup .btn-area .finish {
+.popup .finish {
   background-color: var(--color-3);
   color: var(--light);
 }
-.popup .btn-area .see-orders {
+.popup .see-orders {
   background: transparent;
   color: var(--color-2);
 }

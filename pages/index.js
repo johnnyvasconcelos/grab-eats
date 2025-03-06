@@ -6,22 +6,13 @@ export default function Home() {
   const [boasVindas, setBoasVindas] = useState("");
   const [error, setError] = useState(null);
   useEffect(() => {
-    const fetchRestauranteData = async () => {
-      try {
-        const res = await fetch("/api/restaurante");
-        const data = await res.json();
-        if (res.ok) {
-          setNomeRestaurante(data.nome_restaurante);
-          setBoasVindas(data.boas_vindas);
-        } else {
-          setError(data.error || "Erro desconhecido");
-        }
-      } catch (error) {
-        setError("Erro ao fazer requisição");
-        console.error("Erro ao fazer requisição:", error);
-      }
-    };
-    fetchRestauranteData();
+    fetch("/api/restaurante")
+      .then((res) => res.json())
+      .then((data) => {
+        setNomeRestaurante(data.nome_restaurante);
+        setBoasVindas(data.boas_vindas);
+      })
+      .catch(() => setError("Erro ao fazer requisição"));
   }, []);
   return (
     <>
@@ -48,7 +39,7 @@ export default function Home() {
         <div className="choose__body">
           <p className="none choose__title">Seja bem-vindo!</p>
           <p className="choose__description">{boasVindas}</p>
-          {error && <p className="error">{error}</p>}{" "}
+          {error && <p className="error">{error}</p>}
           <nav className="flex choose__options">
             <Link
               href={{ pathname: "/cardapio", query: { para_levar: "false" } }}
