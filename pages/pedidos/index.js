@@ -28,15 +28,26 @@ const Pedidos = () => {
       console.error("Erro ao carregar pedidos:", error);
     }
   };
+  const formatCpf = (value) => {
+    value = value.replace(/\D/g, "");
+    if (value.length <= 3) return value;
+    if (value.length <= 6) return value.replace(/(\d{3})(\d{0,})/, "$1.$2");
+    if (value.length <= 9)
+      return value.replace(/(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3");
+    return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3-$4");
+  };
+  const handleCpfChange = (e) => {
+    setCpf(formatCpf(e.target.value));
+  };
   const handleCpfSubmit = () => {
     const cleanCpf = cpf.replace(/\D/g, "");
     if (cleanCpf.length !== 11) {
       alert("Por favor, insira um CPF válido.");
       return;
     }
-    localStorage.setItem("cpf", cleanCpf);
+    localStorage.setItem("cpf", cpf);
     setIsPopupActive(false);
-    fetchPedidos(cleanCpf);
+    window.location.reload();
   };
   return (
     <>
@@ -78,13 +89,13 @@ const Pedidos = () => {
                   name="cpf"
                   placeholder="Digite seu CPF"
                   value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
+                  onChange={handleCpfChange}
                   maxLength="14"
                 />
               </label>
               <div className="btn-area flex">
                 <button
-                  className="btn finish"
+                  className="btn full finish"
                   type="button"
                   onClick={handleCpfSubmit}
                 >

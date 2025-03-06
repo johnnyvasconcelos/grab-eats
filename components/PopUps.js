@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
 const PopUps = ({
   isPopupActive,
   setIsPopupActive,
@@ -11,53 +12,64 @@ const PopUps = ({
   const [nome, setNome] = useState("");
   const [mesa, setMesa] = useState("");
   const [isFinishPopupActive, setIsFinishPopupActive] = useState(false);
-  const [isFirstTime, setIsFirstTime] = useState(true);
+
+  // Função para buscar cliente na API com base no CPF
+  const fetchCliente = async (cpf) => {
+    try {
+      const response = await fetch(`/api/clientes?cpf=${cpf}`);
+      if (response.ok) {
+        const data = await response.json();
+        setNome(data.nome); // Preenche o nome automaticamente com o dado retornado
+      } else {
+        setNome(""); // Se não encontrar, limpa o campo de nome
+      }
+    } catch (error) {
+      console.error("Erro ao buscar cliente:", error);
+      setNome(""); // Em caso de erro, limpa o campo de nome
+    }
+  };
+
+  // Recuperar CPF do localStorage ao carregar a página
   useEffect(() => {
     const storedCpf = localStorage.getItem("cpf");
-    const storedNome = localStorage.getItem("nome");
-    if (storedCpf && storedNome) {
+    if (storedCpf) {
       setCpf(storedCpf);
-      setNome(storedNome);
-      setIsFirstTime(false);
+      fetchCliente(storedCpf); // Busca o cliente no banco quando o CPF já está armazenado
     }
   }, []);
-  const formatCpf = (value) => {
-    value = value.replace(/\D/g, "");
-    if (value.length <= 3) return value;
-    if (value.length <= 6) return value.replace(/(\d{3})(\d{0,})/, "$1.$2");
-    if (value.length <= 9)
-      return value.replace(/(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3");
-    return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3-$4");
-  };
+
   const handleCpfChange = (e) => {
-    setCpf(formatCpf(e.target.value));
+    const newCpf = e.target.value;
+    setCpf(newCpf);
+    localStorage.setItem("cpf", newCpf); // Salva o CPF no localStorage
+    fetchCliente(newCpf); // Busca o cliente no banco ao alterar o CPF
   };
+
+  const handleNomeChange = (e) => {
+    setNome(e.target.value); // Permite a edição do nome normalmente
+  };
+
   const handleFinish = () => {
-    if (
-      isFirstTime &&
-      (cpf.replace(/\D/g, "").length !== 11 || nome.trim() === "")
-    ) {
-      alert("Por favor, preencha Nome e CPF corretamente.");
+    if (nome.trim() === "" || cpf.trim() === "") {
+      alert("Por favor, preencha todos os campos.");
       return;
     }
-    if (isFirstTime) {
-      localStorage.setItem("cpf", cpf);
-      localStorage.setItem("nome", nome);
-      setIsFirstTime(false);
-    }
+    // Quando finalizar, salva o nome no localStorage
+    localStorage.setItem("nome", nome);
     setIsPopupActive(false);
     setIsFinishPopupActive(true);
-
     if (finalizarPedido) {
       finalizarPedido(nome, cpf, mesa);
     }
   };
+
   const handleCancel = () => {
     if (bagItems.length > 0) {
       setBagItems(bagItems.slice(0, -1));
     }
     setIsPopupActive(false);
   };
+
   return (
     <>
       <div className={isPopupActive ? "popup-wrapper active" : "popup-wrapper"}>
@@ -67,31 +79,30 @@ const PopUps = ({
               <h4>Quase lá!</h4>
               <p>Para finalizar o seu pedido, insira os dados abaixo.</p>
             </header>
-            {isFirstTime && (
-              <>
-                <label>
-                  <span>Seu nome</span>
-                  <input
-                    type="text"
-                    name="cliente"
-                    placeholder="Digite seu nome"
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
-                  />
-                </label>
-                <label>
-                  <span>Seu CPF</span>
-                  <input
-                    type="text"
-                    name="cpf-cliente"
-                    placeholder="Digite seu CPF"
-                    value={cpf}
-                    onChange={handleCpfChange}
-                    maxLength="14"
-                  />
-                </label>
-              </>
-            )}
+            {/* Campo de CPF */}
+            <label>
+              <span>Seu CPF</span>
+              <input
+                type="text"
+                name="cpf-cliente"
+                placeholder="Digite seu CPF"
+                value={cpf}
+                onChange={handleCpfChange}
+                maxLength="14"
+              />
+            </label>
+            {/* Campo de Nome */}
+            <label>
+              <span>Seu nome</span>
+              <input
+                type="text"
+                name="cliente"
+                placeholder="Digite seu nome"
+                value={nome}
+                onChange={handleNomeChange} // Nome pode ser editado normalmente
+              />
+            </label>
+            {/* Campo de Mesa */}
             <label>
               <span>Número da Mesa</span>
               <input
@@ -156,4 +167,5 @@ const PopUps = ({
     </>
   );
 };
+
 export default PopUps;

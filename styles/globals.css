@@ -498,7 +498,7 @@ ol {
   justify-content: space-between;
 }
 .offers.alt .price {
-  font-size: 12px;
+  font-size: 14px;
 }
 .offers.alt .add {
   font-weight: 600;
@@ -747,6 +747,9 @@ ol {
   border: none;
   font-weight: 600;
   padding: 14px 20px;
+}
+.popup .btn.full {
+  width: 100%;
 }
 .popup .cancel,
 .popup .continue {

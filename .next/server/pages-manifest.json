@@ -3,9 +3,13 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/cardapio": "pages/cardapio.js",
+  "/produto/[id]": "pages/produto/[id].js",
   "/pedidos": "pages/pedidos.js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
   "/api/restaurante": "pages/api/restaurante.js",
-  "/api/produtos": "pages/api/produtos.js"
+  "/cardapio": "pages/cardapio.js",
+  "/api/produtos": "pages/api/produtos.js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
+  "/api/pedidos": "pages/api/pedidos.js",
+  "/api/clientes": "pages/api/clientes.js",
+  "/api/finalizar": "pages/api/finalizar.js"
 }
