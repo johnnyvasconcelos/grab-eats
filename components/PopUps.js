@@ -1,75 +1,124 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
 const PopUps = ({
   isPopupActive,
   setIsPopupActive,
   setBagItems,
   bagItems,
   finalizarPedido,
+  nomeProduto,
+  totalPrice,
 }) => {
   const [cpf, setCpf] = useState("");
   const [nome, setNome] = useState("");
   const [mesa, setMesa] = useState("");
   const [isFinishPopupActive, setIsFinishPopupActive] = useState(false);
-
-  // Função para buscar cliente na API com base no CPF
   const fetchCliente = async (cpf) => {
     try {
       const response = await fetch(`/api/clientes?cpf=${cpf}`);
       if (response.ok) {
         const data = await response.json();
-        setNome(data.nome); // Preenche o nome automaticamente com o dado retornado
+        setNome(data.nome);
       } else {
-        setNome(""); // Se não encontrar, limpa o campo de nome
+        setNome("");
       }
     } catch (error) {
       console.error("Erro ao buscar cliente:", error);
-      setNome(""); // Em caso de erro, limpa o campo de nome
+      setNome("");
     }
   };
-
-  // Recuperar CPF do localStorage ao carregar a página
+  const handleClienteRegistro = async () => {
+    if (nome.trim() && cpf.trim()) {
+      try {
+        const response = await fetch(`/api/clientes-registro`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ nome, cpf }),
+        });
+        if (!response.ok) {
+          console.error("Erro ao registrar cliente.");
+        }
+      } catch (error) {
+        console.error("Erro ao registrar cliente:", error);
+      }
+    }
+  };
+  const handleLogPedido = async (
+    nome_produto,
+    nome_cliente,
+    cpf_cliente,
+    total
+  ) => {
+    try {
+      const response = await fetch(`/api/log-pedidos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome_produto,
+          nome_cliente,
+          cpf_cliente,
+          total,
+          pendente: "pendente",
+        }),
+      });
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error("Erro ao registrar o pedido no log:", errorMessage);
+      }
+    } catch (error) {
+      console.error("Erro ao registrar pedido no log:", error);
+    }
+  };
   useEffect(() => {
     const storedCpf = localStorage.getItem("cpf");
     if (storedCpf) {
       setCpf(storedCpf);
-      fetchCliente(storedCpf); // Busca o cliente no banco quando o CPF já está armazenado
+      fetchCliente(storedCpf);
     }
   }, []);
-
+  const formatCpf = (value) => {
+    value = value.replace(/\D/g, "");
+    if (value.length <= 3) return value;
+    if (value.length <= 6) return value.replace(/(\d{3})(\d{0,})/, "$1.$2");
+    if (value.length <= 9)
+      return value.replace(/(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3");
+    return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3-$4");
+  };
   const handleCpfChange = (e) => {
-    const newCpf = e.target.value;
-    setCpf(newCpf);
-    localStorage.setItem("cpf", newCpf); // Salva o CPF no localStorage
-    fetchCliente(newCpf); // Busca o cliente no banco ao alterar o CPF
+    const formattedCpf = formatCpf(e.target.value);
+    setCpf(formattedCpf);
+    localStorage.setItem("cpf", formattedCpf);
+    fetchCliente(formattedCpf);
   };
-
   const handleNomeChange = (e) => {
-    setNome(e.target.value); // Permite a edição do nome normalmente
+    setNome(e.target.value);
   };
-
   const handleFinish = () => {
     if (nome.trim() === "" || cpf.trim() === "") {
       alert("Por favor, preencha todos os campos.");
       return;
     }
-    // Quando finalizar, salva o nome no localStorage
     localStorage.setItem("nome", nome);
     setIsPopupActive(false);
     setIsFinishPopupActive(true);
+    handleClienteRegistro();
     if (finalizarPedido) {
       finalizarPedido(nome, cpf, mesa);
+      bagItems.forEach((item) => {
+        handleLogPedido(nomeProduto, nome, cpf, totalPrice);
+      });
     }
   };
-
   const handleCancel = () => {
     if (bagItems.length > 0) {
       setBagItems(bagItems.slice(0, -1));
     }
     setIsPopupActive(false);
   };
-
   return (
     <>
       <div className={isPopupActive ? "popup-wrapper active" : "popup-wrapper"}>
@@ -79,7 +128,6 @@ const PopUps = ({
               <h4>Quase lá!</h4>
               <p>Para finalizar o seu pedido, insira os dados abaixo.</p>
             </header>
-            {/* Campo de CPF */}
             <label>
               <span>Seu CPF</span>
               <input
@@ -91,7 +139,6 @@ const PopUps = ({
                 maxLength="14"
               />
             </label>
-            {/* Campo de Nome */}
             <label>
               <span>Seu nome</span>
               <input
@@ -99,10 +146,9 @@ const PopUps = ({
                 name="cliente"
                 placeholder="Digite seu nome"
                 value={nome}
-                onChange={handleNomeChange} // Nome pode ser editado normalmente
+                onChange={handleNomeChange}
               />
             </label>
-            {/* Campo de Mesa */}
             <label>
               <span>Número da Mesa</span>
               <input
@@ -167,5 +213,4 @@ const PopUps = ({
     </>
   );
 };
-
 export default PopUps;

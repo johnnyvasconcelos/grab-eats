@@ -127,10 +127,12 @@ const Bag = ({
       </aside>
       <PopUps
         isPopupActive={isPopupActive}
+        nomeProduto={nomeProduto}
         setIsPopupActive={setIsPopupActive}
         setBagItems={setBagItems}
         bagItems={bagItems}
         finalizarPedido={finalizarPedido}
+        totalPrice={totalPrice}
       />
     </>
   );
