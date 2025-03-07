@@ -1,11 +1,77 @@
 banco de dados chamado 'db_restaurante'
+
 primeira tabela é 'dados' com os itens: nome_restaurante var(char25)
 categoria varchar(15), abertura varchar(5), fechamento varchar(5), boas-vindas varchar(250)
+mysql> describe dados;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| nome_restaurante   | varchar(25)  | YES  |     | NULL    |       |
+| categoria          | varchar(15)  | YES  |     | NULL    |       |
+| abertura           | varchar(5)   | YES  |     | NULL    |       |
+| fechamento         | varchar(5)   | YES  |     | NULL    |       |
+| boas_vindas        | varchar(250) | YES  |     | NULL    |       |
+| dias_funcionamento | varchar(10)  | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
 
 a tabela 'pedidos' com os itens: id - autoincrement, nome - varchar(80), em_preparo - boolean (true ou false) ou numero comum para colocar 0 ou 1, preco - varchar(10) ou numero que possa ser separado por vírgula, mesa - numero normal, , para_levar (boolean), nome cliente, cpf
+mysql> describe pedidos;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| id           | int           | NO   | PRI | NULL    | auto_increment |
+| nome         | varchar(150)  | YES  |     | NULL    |                |
+| em_preparo   | tinyint(1)    | YES  |     | NULL    |                |
+| preco        | decimal(10,2) | YES  |     | NULL    |                |
+| mesa         | varchar(80)   | YES  |     | NULL    |                |
+| para_levar   | tinyint(1)    | YES  |     | NULL    |                |
+| nome_cliente | varchar(80)   | YES  |     | NULL    |                |
+| cpf          | varchar(16)   | YES  |     | NULL    |                |
+| quantidade   | int           | NO   |     | 1       |                |
++--------------+---------------+------+-----+---------+----------------+
 
 a tabela 'produtos' com os itens: id - autoincrement, foto - varchar(80), nome_produto - varchar(80), ingredientes - varchar(250) ou uma área para colocar lista de itens podendo ser até código html, preco - varchar(10) ou numero que possa ser separado por vírgula, categoria_produto varchar(10), descricao do produto
+mysql> describe produtos;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| id                | int          | NO   | PRI | NULL    | auto_increment |
+| foto              | varchar(80)  | YES  |     | NULL    |                |
+| nome_produto      | varchar(150) | YES  |     | NULL    |                |
+| ingredientes      | varchar(250) | YES  |     | NULL    |                |
+| preco             | varchar(10)  | YES  |     | NULL    |                |
+| categoria_produto | varchar(20)  | YES  |     | NULL    |                |
+| descricao_produto | text         | YES  |     | NULL    |                |
+| descricao         | text         | YES  |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
 
-a tabela de clientes com nome do cliente cpf e o valor total e cada item que ele pediu / consumiu, nome_cliente, cpf, 
+a tabela de clientes com nome do cliente cpf (vida util de 180 dias de cada dado)
+mysql> describe clientes;
++--------------+--------------+------+-----+-------------------+-------------------+
+| Field        | Type         | Null | Key | Default           | Extra             |
++--------------+--------------+------+-----+-------------------+-------------------+
+| id           | int          | NO   | PRI | NULL              | auto_increment    |
+| nome         | varchar(150) | YES  |     | NULL              |                   |
+| cpf          | varchar(16)  | YES  |     | NULL              |                   |
+| data_criacao | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++--------------+--------------+------+-----+-------------------+-------------------+
+
+a tabela de log_pedidos com pedido, preço, data, nome cliente, cpf, (vida util de 30 dias de cada dado)
+mysql> describe login;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| usuario | varchar(50) | YES  |     | NULL    |       |
+| senha   | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
 
 a tabela 'login' com usuario varchar(50), senha varchar(50)
+mysql> describe login;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| usuario | varchar(50) | YES  |     | NULL    |       |
+| senha   | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+comando para habilitar processo de exclusão de dados automatizado dentro do mysql SET GLOBAL event_scheduler = ON;

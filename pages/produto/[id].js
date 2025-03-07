@@ -17,15 +17,29 @@ const ProductItem = ({ product }) => {
   const formatPrice = (price) =>
     isNaN(price) ? "R$ 0,00" : price.toFixed(2).replace(".", ",");
   const addToBag = () => {
-    setBagItems([
-      ...bagItems,
-      {
-        id: Date.now(),
-        price: parseFloat(product.preco),
-        quantity,
-        paraLevar: para_levar,
-      },
-    ]);
+    setBagItems((prevItems) => {
+      const existingItemIndex = prevItems.findIndex(
+        (item) => item.nomeProduto === product.nome_produto
+      );
+      if (existingItemIndex !== -1) {
+        return prevItems.map((item, index) =>
+          index === existingItemIndex
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      } else {
+        return [
+          ...prevItems,
+          {
+            id: Date.now(),
+            nomeProduto: product.nome_produto,
+            price: parseFloat(product.preco),
+            quantity,
+            paraLevar: para_levar,
+          },
+        ];
+      }
+    });
     setOpenBag(true);
   };
   return (

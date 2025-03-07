@@ -70,6 +70,9 @@ ol {
   display: flex;
   align-items: center;
 }
+.flex.start {
+  align-items: flex-start;
+}
 .column {
   flex-direction: column;
   justify-content: center;

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-const Order = ({ pedido }) => {
+const Order = ({ pedido, setBagItems }) => {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
   useEffect(() => {
     const fetchRestauranteData = async () => {
       try {
@@ -21,6 +22,9 @@ const Order = ({ pedido }) => {
   }, []);
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
+  };
+  const handleAddToBag = () => {
+    setBagItems((prevItems) => [...prevItems, pedido]);
   };
   return (
     <>
@@ -42,6 +46,7 @@ const Order = ({ pedido }) => {
           <span className="price">R$ {pedido.preco.replace(".", ",")}</span>
           <span
             className={`add ${pedido.em_preparo == "1" ? "true" : "false"}`}
+            onClick={handleAddToBag}
           >
             Adicionar à Sacola
           </span>
@@ -50,5 +55,4 @@ const Order = ({ pedido }) => {
     </>
   );
 };
-
 export default Order;

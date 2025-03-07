@@ -2,14 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/cardapio": "pages/cardapio.js",
   "/produto/[id]": "pages/produto/[id].js",
-  "/api/clientes": "pages/api/clientes.js",
-  "/api/restaurante": "pages/api/restaurante.js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
-  "/api/produtos": "pages/api/produtos.js",
-  "/api/clientes-registro": "pages/api/clientes-registro.js",
-  "/api/finalizar": "pages/api/finalizar.js",
-  "/api/log-pedidos": "pages/api/log-pedidos.js"
+  "/pedidos": "pages/pedidos.js",
+  "/painel-admin": "pages/painel-admin.js",
+  "/api/restaurante": "pages/api/restaurante.js"
 }

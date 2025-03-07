@@ -1,0 +1,30 @@
+.mainAdmin {
+  background-color: #f8f8fa;
+}
+.containerAdmin {
+  display: flex;
+}
+.asideAdmin {
+  width: 20%;
+  max-width: 300px;
+  padding: 20px;
+  background: white;
+  height: 100svh;
+  float: left;
+  border-right: 1px solid #eaedf1;
+}
+.contentAdmin {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.headerAdmin {
+  height: 70px;
+  padding: 10px 20px;
+  background: white;
+  border-bottom: 1px solid #eaedf1;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+}
+.metrics {
+  padding: 20px;
+}

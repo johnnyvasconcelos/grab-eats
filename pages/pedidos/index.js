@@ -6,6 +6,7 @@ const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
   const [cpf, setCpf] = useState("");
   const [isPopupActive, setIsPopupActive] = useState(false);
+  const [bagItems, setBagItems] = useState([]);
   useEffect(() => {
     const storedCpf = localStorage.getItem("cpf");
     if (storedCpf) {
@@ -15,6 +16,32 @@ const Pedidos = () => {
       setIsPopupActive(true);
     }
   }, []);
+  const addToBag = () => {
+    setBagItems((prevItems) => {
+      const existingItemIndex = prevItems.findIndex(
+        (item) => item.nomeProduto === product.nome_produto
+      );
+      if (existingItemIndex !== -1) {
+        return prevItems.map((item, index) =>
+          index === existingItemIndex
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      } else {
+        return [
+          ...prevItems,
+          {
+            id: Date.now(),
+            nomeProduto: product.nome_produto,
+            price: parseFloat(product.preco),
+            quantity,
+            paraLevar: para_levar,
+          },
+        ];
+      }
+    });
+    setOpenBag(true);
+  };
   const fetchPedidos = async (cpfFilter) => {
     try {
       const response = await fetch("/api/pedidos");
@@ -65,7 +92,11 @@ const Pedidos = () => {
             <div className="orders flex column">
               {pedidos.length > 0 ? (
                 pedidos.map((pedido) => (
-                  <Order key={pedido.id} pedido={pedido} />
+                  <Order
+                    key={pedido.id}
+                    pedido={pedido}
+                    setBagItems={setBagItems}
+                  />
                 ))
               ) : (
                 <p className="nothing">Nenhum pedido encontrado.</p>
