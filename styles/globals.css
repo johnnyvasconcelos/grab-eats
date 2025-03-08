@@ -149,7 +149,8 @@ ol {
   font-weight: 600;
 }
 .choose .choose__header--logo {
-  width: 60px;
+  width: 100px;
+  border-radius: 12px;
 }
 .choose .choose__body {
   margin-top: 30px;

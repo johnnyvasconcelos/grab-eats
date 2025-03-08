@@ -11,7 +11,6 @@ function PainelAdmin() {
       .then((res) => res.json())
       .then((data) => {
         setNomeRestaurante(data.nome_restaurante);
-        setBoasVindas(data.boas_vindas);
       })
       .catch(() => setError("Erro ao fazer requisição"));
   }, []);

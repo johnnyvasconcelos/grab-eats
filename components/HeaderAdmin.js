@@ -9,8 +9,8 @@ const HeaderAdmin = () => {
             <img src="/images/search.svg" alt="search icon svg" />
           </form>
         </div>
-        - dark mode <img src="/images/moon.svg" alt="moon svg icon" />-
-        notificação com novos pedidos não vistos
+        <img src="/images/moon.svg" alt="moon svg icon" />
+        <img src="/images/bell.svg" alt="bell svg icon" />
       </header>
     </>
   );
