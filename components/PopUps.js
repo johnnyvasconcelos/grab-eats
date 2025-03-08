@@ -109,9 +109,11 @@ const PopUps = ({
     if (finalizarPedido) {
       finalizarPedido(nome, cpf, mesa);
       bagItems.forEach((item) => {
-        handleLogPedido(nomeProduto, nome, cpf, totalPrice);
+        handleLogPedido(item.nome, nome, cpf, totalPrice);
       });
     }
+    setBagItems([]);
+    localStorage.removeItem("bagItems");
   };
   const handleCancel = () => {
     if (bagItems.length > 0) {

@@ -15,7 +15,7 @@ mysql> describe dados;
 +--------------------+--------------+------+-----+---------+-------+
 
 a tabela 'pedidos' com os itens: id - autoincrement, nome - varchar(80), em_preparo - boolean (true ou false) ou numero comum para colocar 0 ou 1, preco - varchar(10) ou numero que possa ser separado por vírgula, mesa - numero normal, , para_levar (boolean), nome cliente, cpf, precisa ter também a foto do produto para passar para página pedidos
-mysql> describe pedidos;
+mysql> describe pedidos, data também (dia e hora do pedido) para exibição no painel admnistrativo.
 +--------------+---------------+------+-----+---------+----------------+
 | Field        | Type          | Null | Key | Default | Extra          |
 +--------------+---------------+------+-----+---------+----------------+

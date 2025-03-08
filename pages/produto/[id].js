@@ -12,8 +12,15 @@ const ProductItem = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(parseFloat(product.preco) || 0);
   useEffect(() => {
+    const savedBagItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+    setBagItems(savedBagItems);
+  }, []);
+  useEffect(() => {
     setPrice((parseFloat(product.preco) || 0) * quantity);
   }, [quantity, product.preco]);
+  useEffect(() => {
+    localStorage.setItem("bagItems", JSON.stringify(bagItems));
+  }, [bagItems]);
   const formatPrice = (price) =>
     isNaN(price) ? "R$ 0,00" : price.toFixed(2).replace(".", ",");
   const addToBag = () => {
@@ -24,7 +31,11 @@ const ProductItem = ({ product }) => {
       if (existingItemIndex !== -1) {
         return prevItems.map((item, index) =>
           index === existingItemIndex
-            ? { ...item, quantity: item.quantity + quantity }
+            ? {
+                ...item,
+                quantity: item.quantity + quantity,
+                price: parseFloat(product.preco) * (item.quantity + quantity),
+              }
             : item
         );
       } else {
@@ -33,9 +44,10 @@ const ProductItem = ({ product }) => {
           {
             id: Date.now(),
             nomeProduto: product.nome_produto,
-            price: parseFloat(product.preco),
+            price: parseFloat(product.preco) * quantity,
             quantity,
             paraLevar: para_levar,
+            foto: product.foto,
           },
         ];
       }

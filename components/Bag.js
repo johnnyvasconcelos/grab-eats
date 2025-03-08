@@ -51,11 +51,12 @@ const Bag = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           pedidos: bagItems.map((item) => ({
-            nome: nomeProduto || "Produto Desconhecido",
+            nome: item.nomeProduto,
             preco: parseFloat(item.price),
             em_preparo: true,
             para_levar: para_levar === "true",
             quantity: item.quantity || 1,
+            foto: item.foto,
           })),
           cliente: {
             nome_cliente: nome,
@@ -88,9 +89,9 @@ const Bag = ({
               <BagItem
                 key={item.id}
                 id={item.id}
-                nomeProduto={nomeProduto}
+                nomeProduto={item.nomeProduto}
                 price={item.price}
-                image={image}
+                image={item.foto}
                 quantity={item.quantity}
                 onRemove={handleRemove}
                 onIncrease={handleIncrease}

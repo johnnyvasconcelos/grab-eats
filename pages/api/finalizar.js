@@ -35,21 +35,23 @@ export default async function handler(req, res) {
           .status(400)
           .json({ success: false, message: "Item inválido no pedido." });
       }
-      const nomeItemNormalizado = normalizarTexto(item.nome);
-      const produto = produtos.find(
-        (p) => p.nome_produto && item.nome === p.nome_produto
+      const produtoEncontrado = produtos.find(
+        (p) =>
+          p.nome_produto &&
+          normalizarTexto(p.nome_produto) === normalizarTexto(item.nome)
       );
-      const fotoProduto = produto?.foto || "pedido.jpg";
+      const nomeProdutoFinal = item.nome;
+      const fotoProdutoFinal = item.foto || "pedido.jpg";
       const values = [
-        item.nome || "Produto Desconhecido",
+        nomeProdutoFinal,
         cliente.cpf,
-        parseFloat(item.preco) * (item.quantity || 1),
+        parseFloat(item.preco),
         item.quantity || 1,
         1,
         item.para_levar ? 1 : 0,
         cliente.nome_cliente || "Nome não informado",
         cliente.mesa || "Mesa não informada",
-        fotoProduto,
+        fotoProdutoFinal,
       ];
       await queryDb(query, values);
     }
