@@ -13,7 +13,21 @@ export default async function handler(req, res) {
     });
   }
   try {
-    const query = `INSERT INTO pedidos (nome, cpf, preco, quantidade, em_preparo, para_levar, nome_cliente, mesa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const produtosResponse = await fetch("http://localhost:3000/api/produtos");
+    const produtos = await produtosResponse.json();
+    if (!Array.isArray(produtos)) {
+      throw new Error("Resposta inesperada da API de produtos");
+    }
+    const normalizarTexto = (texto) => {
+      return texto
+        ? texto
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim()
+            .toLowerCase()
+        : "";
+    };
+    const query = `INSERT INTO pedidos (nome, cpf, preco, quantidade, em_preparo, para_levar, nome_cliente, mesa, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     for (const item of pedidos) {
       if (!item.nome || item.preco === undefined) {
         console.error("Item inválido:", item);
@@ -21,6 +35,11 @@ export default async function handler(req, res) {
           .status(400)
           .json({ success: false, message: "Item inválido no pedido." });
       }
+      const nomeItemNormalizado = normalizarTexto(item.nome);
+      const produto = produtos.find(
+        (p) => p.nome_produto && item.nome === p.nome_produto
+      );
+      const fotoProduto = produto?.foto || "pedido.jpg";
       const values = [
         item.nome || "Produto Desconhecido",
         cliente.cpf,
@@ -30,6 +49,7 @@ export default async function handler(req, res) {
         item.para_levar ? 1 : 0,
         cliente.nome_cliente || "Nome não informado",
         cliente.mesa || "Mesa não informada",
+        fotoProduto,
       ];
       await queryDb(query, values);
     }

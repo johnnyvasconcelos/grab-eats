@@ -3,7 +3,15 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/cardapio": "pages/cardapio.js",
-  "/painel-admin": "pages/painel-admin.js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
+  "/pedidos": "pages/pedidos.js",
   "/api/restaurante": "pages/api/restaurante.js",
-  "/pedidos": "pages/pedidos.js"
+  "/api/produtos": "pages/api/produtos.js",
+  "/produto/[id]": "pages/produto/[id].js",
+  "/api/clientes": "pages/api/clientes.js",
+  "/api/finalizar": "pages/api/finalizar.js",
+  "/api/clientes-registro": "pages/api/clientes-registro.js",
+  "/api/log-pedidos": "pages/api/log-pedidos.js",
+  "/api/pedidos": "pages/api/pedidos.js",
+  "/": "pages/index.js"
 }

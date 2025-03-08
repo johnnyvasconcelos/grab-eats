@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const Header = ({ background, pedidos }) => {
+  const router = useRouter();
+  const { para_levar } = router.query;
   const [quantidadePedidos, setQuantidadePedidos] = useState(0);
   useEffect(() => {
     const cpf = localStorage.getItem("cpf");
@@ -37,7 +40,10 @@ const Header = ({ background, pedidos }) => {
         >
           <img src="/images/prev.svg" alt="prev icon svg." />
         </Link>
-        <Link href="/pedidos/" className="main__header--btn btn-2 flex">
+        <Link
+          href={`/pedidos/?para_levar=${para_levar}`}
+          className="main__header--btn btn-2 flex"
+        >
           <img src="/images/orders.svg" alt="market icon svg" />
           {quantidadePedidos > 0 && (
             <span className="count flex">{quantidadePedidos}</span>
