@@ -253,6 +253,10 @@ ol {
   height: 50px;
   border-radius: 10px;
 }
+.offers .offers__header .container .offers__header--info .small-logo {
+  width: 20px;
+  height: 20px;
+}
 .offers .offers__header .offers__header--title {
   padding-left: 12px;
 }
@@ -511,6 +515,10 @@ ol {
 }
 .offers.alt .add.true {
   color: var(--color-3-light);
+  cursor: not-allowed;
+}
+.offers.alt .add.false {
+  cursor: pointer;
 }
 /* bag */
 .bag {

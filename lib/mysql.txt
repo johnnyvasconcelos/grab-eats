@@ -14,7 +14,7 @@ mysql> describe dados;
 | dias_funcionamento | varchar(10)  | YES  |     | NULL    |       |
 +--------------------+--------------+------+-----+---------+-------+
 
-a tabela 'pedidos' com os itens: id - autoincrement, nome - varchar(80), em_preparo - boolean (true ou false) ou numero comum para colocar 0 ou 1, preco - varchar(10) ou numero que possa ser separado por vírgula, mesa - numero normal, , para_levar (boolean), nome cliente, cpf
+a tabela 'pedidos' com os itens: id - autoincrement, nome - varchar(80), em_preparo - boolean (true ou false) ou numero comum para colocar 0 ou 1, preco - varchar(10) ou numero que possa ser separado por vírgula, mesa - numero normal, , para_levar (boolean), nome cliente, cpf, precisa ter também a foto do produto para passar para página pedidos
 mysql> describe pedidos;
 +--------------+---------------+------+-----+---------+----------------+
 | Field        | Type          | Null | Key | Default | Extra          |

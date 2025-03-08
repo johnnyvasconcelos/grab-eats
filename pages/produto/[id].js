@@ -55,7 +55,7 @@ const ProductItem = ({ product }) => {
               <div className="offers__header--title">
                 <p className="offers__description flex">
                   <img
-                    src="/images/logo-square.png"
+                    src="/images/small-logo.png"
                     alt="logo"
                     className="small-logo"
                   />

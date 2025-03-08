@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         cliente.cpf,
         parseFloat(item.preco) * (item.quantity || 1),
         item.quantity || 1,
-        item.em_preparo ? 1 : 0,
+        1,
         item.para_levar ? 1 : 0,
         cliente.nome_cliente || "Nome não informado",
         cliente.mesa || "Mesa não informada",
