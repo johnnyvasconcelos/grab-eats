@@ -11,6 +11,7 @@ const HeaderAdmin = () => {
         </div>
         <img src="/images/moon.svg" alt="moon svg icon" />
         <img src="/images/bell.svg" alt="bell svg icon" />
+        <p>Bem-vindo(a), Fonseca!</p>
       </header>
     </>
   );

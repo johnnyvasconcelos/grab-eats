@@ -2,10 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/produto/[id]": "pages/produto/[id].js",
-  "/cardapio": "pages/cardapio.js",
-  "/": "pages/index.js",
+  "/painel-admin": "pages/painel-admin.js",
   "/api/restaurante": "pages/api/restaurante.js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
-  "/api/produtos": "pages/api/produtos.js"
+  "/painel-admin/pratos": "pages/painel-admin/pratos.js",
+  "/painel-admin/configuracoes-gerais": "pages/painel-admin/configuracoes-gerais.js"
 }
