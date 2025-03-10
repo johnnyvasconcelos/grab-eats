@@ -25,7 +25,9 @@ export default function Home() {
           name="keywords"
           content="delivery de entrega, software de entrega para restaurantes"
         />
-        <title>{nomeRestaurante} - Selecione Seu Pedido!</title>
+        <title>{`${
+          nomeRestaurante || "Restaurante"
+        } - Selecione Seu Pedido!`}</title>
       </Head>
       <section className="choose container">
         <header className="choose__header flex column">

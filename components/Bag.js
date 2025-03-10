@@ -19,20 +19,29 @@ const Bag = ({
     0
   );
   const handleIncrease = (id) => {
-    setBagItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: (item.quantity || 1) + 1 } : item
-      )
-    );
+    setBagItems((prevItems) => {
+      const updatedItems = prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      if (!updatedItems.some((item) => item.id === id)) {
+        const itemToAdd = prevItems.find((item) => item.id === id);
+        updatedItems.push({
+          ...itemToAdd,
+          quantity: (itemToAdd.quantity || 1) + 1,
+        });
+      }
+      return updatedItems;
+    });
   };
   const handleDecrease = (id) => {
-    setBagItems((prevItems) =>
-      prevItems.map((item) =>
+    setBagItems((prevItems) => {
+      const updatedItems = prevItems.map((item) =>
         item.id === id && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
-      )
-    );
+      );
+      return updatedItems;
+    });
   };
   const handleRemove = (id) => {
     setBagItems((prevItems) => prevItems.filter((item) => item.id !== id));

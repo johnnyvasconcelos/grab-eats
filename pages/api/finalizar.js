@@ -5,54 +5,29 @@ export default async function handler(req, res) {
       .status(405)
       .json({ success: false, message: "Método não permitido." });
   }
-  const { pedidos, cliente } = req.body;
-  if (!pedidos || pedidos.length === 0 || !cliente || !cliente.cpf) {
-    return res.status(400).json({
-      success: false,
-      message: "Dados inválidos ou cliente não encontrado.",
-    });
+  const { pedidos, debug } = req.body;
+  if (!Array.isArray(pedidos) || pedidos.length === 0) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Pedido inválido." });
   }
   try {
-    const produtosResponse = await fetch("http://localhost:3000/api/produtos");
-    const produtos = await produtosResponse.json();
-    if (!Array.isArray(produtos)) {
-      throw new Error("Resposta inesperada da API de produtos");
-    }
-    const normalizarTexto = (texto) => {
-      return texto
-        ? texto
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .trim()
-            .toLowerCase()
-        : "";
-    };
-    const query = `INSERT INTO pedidos (nome, cpf, preco, quantidade, em_preparo, para_levar, nome_cliente, mesa, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO pedidos (nome, cpf, preco, quantidade, mesa, para_levar, nome_cliente, foto, status, em_preparo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     for (const item of pedidos) {
-      if (!item.nome || item.preco === undefined) {
-        console.error("Item inválido:", item);
-        return res
-          .status(400)
-          .json({ success: false, message: "Item inválido no pedido." });
-      }
-      const produtoEncontrado = produtos.find(
-        (p) =>
-          p.nome_produto &&
-          normalizarTexto(p.nome_produto) === normalizarTexto(item.nome)
-      );
-      const nomeProdutoFinal = item.nome;
-      const fotoProdutoFinal = item.foto || "pedido.jpg";
       const values = [
-        nomeProdutoFinal,
-        cliente.cpf,
-        parseFloat(item.preco),
-        item.quantity || 1,
-        1,
+        item.nome || "Produto sem nome",
+        item.cpf || "cpf do cliente não informado",
+        parseFloat(item.preco) || 0,
+        item.quantidade || 1,
+        item.mesa || "Mesa não informada",
         item.para_levar ? 1 : 0,
-        cliente.nome_cliente || "Nome não informado",
-        cliente.mesa || "Mesa não informada",
-        fotoProdutoFinal,
+        item.nome_cliente || "Nome do cliente não informado",
+        item.foto || "pedido.jpg",
+        item.status || "pendente",
+        item.em_preparo || 1,
       ];
+      console.log("SQL Query:", query);
+      console.log("Valores sendo enviados:", values);
       await queryDb(query, values);
     }
     return res

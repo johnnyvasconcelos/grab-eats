@@ -1,125 +1,92 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 const PopUps = ({
   isPopupActive,
   setIsPopupActive,
-  setBagItems,
   bagItems,
-  finalizarPedido,
-  nomeProduto,
+  setBagItems,
   totalPrice,
 }) => {
   const [cpf, setCpf] = useState("");
   const [nome, setNome] = useState("");
   const [mesa, setMesa] = useState("");
   const [isFinishPopupActive, setIsFinishPopupActive] = useState(false);
-  const fetchCliente = async (cpf) => {
-    try {
-      const response = await fetch(`/api/clientes?cpf=${cpf}`);
-      if (response.ok) {
-        const data = await response.json();
-        setNome(data.nome);
-      } else {
-        setNome("");
-      }
-    } catch (error) {
-      console.error("Erro ao buscar cliente:", error);
-      setNome("");
-    }
-  };
-  const handleClienteRegistro = async () => {
-    if (nome.trim() && cpf.trim()) {
-      try {
-        const response = await fetch(`/api/clientes-registro`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ nome, cpf }),
-        });
-        if (!response.ok) {
-          console.error("Erro ao registrar cliente.");
-        }
-      } catch (error) {
-        console.error("Erro ao registrar cliente:", error);
-      }
-    }
-  };
-  const handleLogPedido = async (
-    nome_produto,
-    nome_cliente,
-    cpf_cliente,
-    total
-  ) => {
-    try {
-      const response = await fetch(`/api/log-pedidos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nome_produto,
-          nome_cliente,
-          cpf_cliente,
-          total,
-          pendente: "pendente",
-        }),
-      });
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        console.error("Erro ao registrar o pedido no log:", errorMessage);
-      }
-    } catch (error) {
-      console.error("Erro ao registrar pedido no log:", error);
-    }
-  };
+  const [paraLevar, setParaLevar] = useState(false);
+  const router = useRouter();
+  const { query } = router;
   useEffect(() => {
     const storedCpf = localStorage.getItem("cpf");
     if (storedCpf) {
       setCpf(storedCpf);
-      fetchCliente(storedCpf);
+      const storedNome = localStorage.getItem("nome");
+      if (storedNome) {
+        setNome(storedNome);
+      } else {
+        fetchNomeByCpf(storedCpf);
+      }
     }
-  }, []);
-  const formatCpf = (value) => {
-    value = value.replace(/\D/g, "");
-    if (value.length <= 3) return value;
-    if (value.length <= 6) return value.replace(/(\d{3})(\d{0,})/, "$1.$2");
-    if (value.length <= 9)
-      return value.replace(/(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3");
-    return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3-$4");
+    if (query.para_levar === "true") {
+      setParaLevar(true);
+    } else if (query.para_levar === "false") {
+      setParaLevar(false);
+    }
+  }, [query]);
+  const fetchNomeByCpf = async (cpf) => {
+    try {
+      const response = await fetch(`/api/buscarNome?cpf=${cpf}`);
+      if (!response.ok) throw new Error("Erro ao buscar nome.");
+      const data = await response.json();
+      if (data && data.nome) {
+        setNome(data.nome);
+        localStorage.setItem("nome", data.nome);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar nome:", error);
+    }
   };
   const handleCpfChange = (e) => {
-    const formattedCpf = formatCpf(e.target.value);
+    const formattedCpf = e.target.value.replace(/\D/g, "").slice(0, 14);
     setCpf(formattedCpf);
     localStorage.setItem("cpf", formattedCpf);
-    fetchCliente(formattedCpf);
   };
-  const handleNomeChange = (e) => {
-    setNome(e.target.value);
-  };
-  const handleFinish = () => {
-    if (nome.trim() === "" || cpf.trim() === "") {
-      alert("Por favor, preencha todos os campos.");
+  const handleNomeChange = (e) => setNome(e.target.value);
+  const handleFinish = async () => {
+    if (!nome.trim() || !cpf.trim() || bagItems.length === 0) {
+      alert("Preencha todos os campos antes de finalizar o pedido.");
       return;
     }
     localStorage.setItem("nome", nome);
-    setIsPopupActive(false);
-    setIsFinishPopupActive(true);
-    handleClienteRegistro();
-    if (finalizarPedido) {
-      finalizarPedido(nome, cpf, mesa);
-      bagItems.forEach((item) => {
-        handleLogPedido(item.nome, nome, cpf, totalPrice);
+    const pedidoPayload = bagItems.map((item) => ({
+      nome: item.nomeProduto || "Nome não informado",
+      preco: item.price || 0,
+      quantidade: item.quantity || 1,
+      mesa: mesa || "Sem mesa",
+      para_levar: paraLevar ? 1 : 0,
+      nome_cliente: nome || "Nome não informado",
+      cpf: cpf || "cpf não informado",
+      foto: item.foto || "pedido.jpg",
+      status: "pendente",
+      em_preparo: 1,
+    }));
+    const requestBody = {
+      pedidos: pedidoPayload,
+      debug: true,
+    };
+    try {
+      const response = await fetch("/api/finalizar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
       });
+      if (!response.ok) throw new Error("Erro ao enviar pedido.");
+      setIsPopupActive(false);
+      setIsFinishPopupActive(true);
+      setBagItems([]);
+      localStorage.removeItem("bagItems");
+    } catch (error) {
+      console.error("Erro ao finalizar pedido:", error);
     }
-    setBagItems([]);
-    localStorage.removeItem("bagItems");
-  };
-  const handleCancel = () => {
-    if (bagItems.length > 0) {
-      setBagItems(bagItems.slice(0, -1));
-    }
-    setIsPopupActive(false);
   };
   return (
     <>
@@ -138,7 +105,6 @@ const PopUps = ({
                 placeholder="Digite seu CPF"
                 value={cpf}
                 onChange={handleCpfChange}
-                maxLength="14"
               />
             </label>
             <label>
@@ -158,19 +124,14 @@ const PopUps = ({
                 name="mesa-cliente"
                 placeholder="Digite o número da mesa"
                 value={mesa}
-                inputMode="numeric"
-                onChange={(e) => {
-                  if (e.target.value.length <= 3) {
-                    setMesa(e.target.value);
-                  }
-                }}
+                onChange={(e) => setMesa(e.target.value)}
               />
             </label>
             <div className="btn-area flex">
               <button
                 className="btn cancel"
                 type="button"
-                onClick={handleCancel}
+                onClick={() => setIsPopupActive(false)}
               >
                 Cancelar
               </button>
@@ -185,33 +146,31 @@ const PopUps = ({
           </div>
         </form>
       </div>
-      <div
-        className={
-          isFinishPopupActive ? "popup-wrapper active" : "popup-wrapper"
-        }
-      >
-        <section className="popup popup-finish">
-          <div className="popup-container">
-            <header>
-              <img src="/images/popup-check.svg" alt="check icon svg" />
-              <h4>Pedido Efetuado!</h4>
-              <p>Seu pedido foi realizado com sucesso!</p>
-            </header>
-            <div className="btn-area flex">
-              <button className="btn see-orders" type="button">
-                <Link href="/pedidos">Ver pedidos</Link>
-              </button>
-              <button
-                className="btn continue"
-                type="button"
-                onClick={() => setIsFinishPopupActive(false)}
-              >
-                Continuar
-              </button>
+      {isFinishPopupActive && (
+        <div className="popup-wrapper active">
+          <section className="popup popup-finish">
+            <div className="popup-container">
+              <header>
+                <img src="/images/popup-check.svg" alt="check icon svg" />
+                <h4>Pedido Efetuado!</h4>
+                <p>Seu pedido foi realizado com sucesso!</p>
+              </header>
+              <div className="btn-area flex">
+                <button className="btn see-orders" type="button">
+                  <Link href="/pedidos">Ver pedidos</Link>
+                </button>
+                <button
+                  className="btn continue"
+                  type="button"
+                  onClick={() => setIsFinishPopupActive(false)}
+                >
+                  Continuar
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      )}
     </>
   );
 };

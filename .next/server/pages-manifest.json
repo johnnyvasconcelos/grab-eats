@@ -4,14 +4,8 @@
   "/_document": "pages/_document.js",
   "/produto/[id]": "pages/produto/[id].js",
   "/cardapio": "pages/cardapio.js",
-  "/pedidos": "pages/pedidos.js",
-  "/api/restaurante": "pages/api/restaurante.js",
-  "/api/clientes": "pages/api/clientes.js",
   "/": "pages/index.js",
-  "/api/produtos": "pages/api/produtos.js",
-  "/api/clientes-registro": "pages/api/clientes-registro.js",
-  "/api/finalizar": "pages/api/finalizar.js",
-  "/api/log-pedidos": "pages/api/log-pedidos.js",
-  "/api/pedidos": "pages/api/pedidos.js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js"
+  "/api/restaurante": "pages/api/restaurante.js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
+  "/api/produtos": "pages/api/produtos.js"
 }

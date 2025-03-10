@@ -46,8 +46,9 @@ const ProductItem = ({ product }) => {
             nomeProduto: product.nome_produto,
             price: parseFloat(product.preco) * quantity,
             quantity,
-            paraLevar: para_levar,
+            para_levar: para_levar,
             foto: product.foto,
+            status: "pendente",
           },
         ];
       }
