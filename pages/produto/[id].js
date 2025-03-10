@@ -12,10 +12,6 @@ const ProductItem = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(parseFloat(product.preco) || 0);
   useEffect(() => {
-    const savedBagItems = JSON.parse(localStorage.getItem("bagItems")) || [];
-    setBagItems(savedBagItems);
-  }, []);
-  useEffect(() => {
     setPrice((parseFloat(product.preco) || 0) * quantity);
   }, [quantity, product.preco]);
   useEffect(() => {
@@ -23,38 +19,47 @@ const ProductItem = ({ product }) => {
   }, [bagItems]);
   const formatPrice = (price) =>
     isNaN(price) ? "R$ 0,00" : price.toFixed(2).replace(".", ",");
+  useEffect(() => {
+    const savedBagItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+    setBagItems(savedBagItems);
+  }, []);
+  useEffect(() => {
+    if (bagItems.length > 0) {
+      localStorage.setItem("bagItems", JSON.stringify(bagItems));
+    }
+  }, [bagItems]);
   const addToBag = () => {
     setBagItems((prevItems) => {
-      const existingItemIndex = prevItems.findIndex(
+      let updatedItems = [...prevItems];
+      const existingItemIndex = updatedItems.findIndex(
         (item) => item.nomeProduto === product.nome_produto
       );
       if (existingItemIndex !== -1) {
-        return prevItems.map((item, index) =>
-          index === existingItemIndex
-            ? {
-                ...item,
-                quantity: item.quantity + quantity,
-                price: parseFloat(product.preco) * (item.quantity + quantity),
-              }
-            : item
-        );
+        updatedItems[existingItemIndex].quantity += 1;
       } else {
-        return [
-          ...prevItems,
-          {
-            id: Date.now(),
-            nomeProduto: product.nome_produto,
-            price: parseFloat(product.preco) * quantity,
-            quantity,
-            para_levar: para_levar,
-            foto: product.foto,
-            status: "pendente",
-          },
-        ];
+        updatedItems.push({
+          id: Date.now(),
+          nomeProduto: product.nome_produto,
+          price: parseFloat(product.preco),
+          quantity: 1,
+          para_levar: para_levar,
+          foto: product.foto,
+          status: "pendente",
+          preco: product.preco,
+        });
       }
+
+      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
+      return updatedItems;
     });
     setOpenBag(true);
   };
+  useEffect(() => {
+    const storedBagItems = JSON.parse(localStorage.getItem("bagItems"));
+    if (storedBagItems) {
+      setBagItems(storedBagItems);
+    }
+  }, []);
   return (
     <>
       <Head>

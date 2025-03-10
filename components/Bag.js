@@ -14,22 +14,13 @@ const Bag = ({
   const router = useRouter();
   const { para_levar } = router.query;
   const [isPopupActive, setIsPopupActive] = useState(false);
-  const totalPrice = bagItems.reduce(
-    (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
-    0
-  );
+  const totalPrice = bagItems.reduce((acc, item) => acc + (item.price || 0), 0);
   const handleIncrease = (id) => {
     setBagItems((prevItems) => {
       const updatedItems = prevItems.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       );
-      if (!updatedItems.some((item) => item.id === id)) {
-        const itemToAdd = prevItems.find((item) => item.id === id);
-        updatedItems.push({
-          ...itemToAdd,
-          quantity: (itemToAdd.quantity || 1) + 1,
-        });
-      }
+      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   };
@@ -40,6 +31,7 @@ const Bag = ({
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
+      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   };

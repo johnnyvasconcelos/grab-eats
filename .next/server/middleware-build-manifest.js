@@ -10,6 +10,11 @@ self.__BUILD_MANIFEST = {
   "rootMainFiles": [],
   "rootMainFilesTree": {},
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -20,20 +25,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/painel-admin": [
+    "/cardapio": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/painel-admin.js"
+      "static/chunks/pages/cardapio.js"
     ],
-    "/painel-admin/configuracoes-gerais": [
+    "/produto/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/configuracoes-gerais.js"
-    ],
-    "/painel-admin/pratos": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/pratos.js"
+      "static/chunks/pages/produto/[id].js"
     ]
   },
   "ampFirstPages": []
