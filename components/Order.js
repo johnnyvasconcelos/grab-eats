@@ -5,34 +5,44 @@ const Order = ({ pedido }) => {
   const [error, setError] = useState(null);
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
-  const handleAddToBag = () => {
-    if (pedido.em_preparo == "0") {
-      setBagItems((prevItems) => {
-        const existingItemIndex = prevItems.findIndex(
+  const addToBag = () => {
+    try {
+      if (pedido.em_preparo == "0") {
+        let storedItems = JSON.parse(localStorage.getItem("bagItems") || "[]");
+
+        if (!Array.isArray(storedItems)) {
+          storedItems = []; // Corrige caso o localStorage esteja corrompido
+        }
+
+        const existingItemIndex = storedItems.findIndex(
           (item) => item.nomeProduto === pedido.nome
         );
+
         if (existingItemIndex !== -1) {
-          return prevItems.map((item, index) =>
-            index === existingItemIndex
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          );
+          storedItems[existingItemIndex].quantity += 1;
         } else {
-          return [
-            ...prevItems,
-            {
-              id: Date.now(),
-              nomeProduto: pedido.nome,
-              image: pedido.foto,
-              price: parseFloat(pedido.preco),
-              quantity: 1,
-            },
-          ];
+          storedItems.push({
+            id: pedido.id || Date.now(),
+            nomeProduto: pedido.nome,
+            foto: pedido.foto,
+            price: parseFloat(pedido.preco) || 0,
+            quantity: 1,
+          });
         }
-      });
-      setOpenBag(true);
+
+        localStorage.setItem("bagItems", JSON.stringify(storedItems));
+        window.dispatchEvent(new Event("storage")); // Atualiza a Bag globalmente
+        setOpenBag(true); // Abre a sacola
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar à sacola:", error);
     }
   };
+
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+    setBagItems(storedItems);
+  }, []);
   useEffect(() => {
     const fetchRestauranteData = async () => {
       try {
@@ -45,7 +55,7 @@ const Order = ({ pedido }) => {
           console.error("Erro ao buscar dados:", data.error);
         }
       } catch (error) {
-        setError("Erro ao fazer requisição");
+        setError("Erro ao buscar dados");
       }
     };
     fetchRestauranteData();
@@ -69,7 +79,7 @@ const Order = ({ pedido }) => {
           <span className="price">R$ {pedido.preco.replace(".", ",")}</span>
           <span
             className={`add ${pedido.em_preparo == "1" ? "true" : "false"}`}
-            onClick={handleAddToBag}
+            onClick={addToBag}
           >
             Adicionar à Sacola
           </span>

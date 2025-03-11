@@ -33,6 +33,15 @@ const ProductItem = ({ product }) => {
     localStorage.setItem("bagItems", JSON.stringify(storedItems));
     window.dispatchEvent(new Event("storage"));
   };
+  const [bagItems, setBagItems] = useState([]);
+  useEffect(() => {
+    const updateBag = () => {
+      const storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+      setBagItems(storedItems);
+    };
+    window.addEventListener("storage", updateBag);
+    return () => window.removeEventListener("storage", updateBag);
+  }, []);
   return (
     <>
       <Head>
