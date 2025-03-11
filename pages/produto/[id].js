@@ -48,11 +48,11 @@ const ProductItem = ({ product }) => {
         <title>{product.nome_produto}</title>
       </Head>
       <Header background={`/images/${product.foto}`} />
-      <main className="offers alt">
+      <main className="offers offers--alt">
         <header className="offers__header">
           <div className="container">
             <div className="flex offers__header--info">
-              <div className="offers__header--title">
+              <div className="offers__title--alt">
                 <p className="offers__description flex">
                   <img
                     src="/images/small-logo.png"
@@ -61,7 +61,9 @@ const ProductItem = ({ product }) => {
                   />
                   {product.categoria_produto}
                 </p>
-                <h1 className="offers__title">{product.nome_produto}</h1>
+                <h1 className="offers__h1 offers__h1--alt">
+                  {product.nome_produto}
+                </h1>
               </div>
             </div>
             <div className="flex price-info">
@@ -84,10 +86,26 @@ const ProductItem = ({ product }) => {
             </div>
           </div>
         </header>
-        <section className="offers__products offers__products--description">
+        <section className="offers__products offers__description--text">
           <div className="container">
             <h2>Descrição</h2>
             <p>{product.descricao}</p>
+          </div>
+        </section>
+        <section className="offers__products offers__description--list">
+          <div className="container">
+            <h2>
+              <img src="/images/chef.svg" alt="chef hat" /> Ingredientes
+            </h2>
+            <ul>
+              {product.ingredientes ? (
+                product.ingredientes
+                  .split(",")
+                  .map((ing, i) => <li key={i}>{ing.trim()}</li>)
+              ) : (
+                <p>Ingredientes não disponíveis ainda... :/</p>
+              )}
+            </ul>
           </div>
         </section>
         <div className="footer-area">

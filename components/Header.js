@@ -29,20 +29,20 @@ const Header = ({ background, pedidos }) => {
           : { background: "var(--light)" }
       }
     >
-      <div className="main__header--buttons flex container">
+      <div className="main__buttons flex container">
         <Link
           onClick={(e) => {
             e.preventDefault();
             window.history.back();
           }}
-          className="main__header--btn btn-1 flex"
+          className="main__btn main__btn--btn-1 flex"
           href="#"
         >
           <img src="/images/prev.svg" alt="prev icon svg." />
         </Link>
         <Link
           href={`/pedidos/?para_levar=${para_levar}`}
-          className="main__header--btn btn-2 flex"
+          className="main__btn main__btn--btn-2 flex"
         >
           <img src="/images/orders.svg" alt="market icon svg" />
           {quantidadePedidos > 0 && (

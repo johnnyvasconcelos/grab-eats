@@ -9,15 +9,12 @@ const Order = ({ pedido }) => {
     try {
       if (pedido.em_preparo == "0") {
         let storedItems = JSON.parse(localStorage.getItem("bagItems") || "[]");
-
         if (!Array.isArray(storedItems)) {
-          storedItems = []; // Corrige caso o localStorage esteja corrompido
+          storedItems = [];
         }
-
         const existingItemIndex = storedItems.findIndex(
           (item) => item.nomeProduto === pedido.nome
         );
-
         if (existingItemIndex !== -1) {
           storedItems[existingItemIndex].quantity += 1;
         } else {
@@ -29,16 +26,15 @@ const Order = ({ pedido }) => {
             quantity: 1,
           });
         }
-
         localStorage.setItem("bagItems", JSON.stringify(storedItems));
-        window.dispatchEvent(new Event("storage")); // Atualiza a Bag globalmente
-        setOpenBag(true); // Abre a sacola
+        setBagItems([...storedItems]);
+        window.dispatchEvent(new Event("storage"));
+        setOpenBag(true);
       }
     } catch (error) {
       console.error("Erro ao adicionar à sacola:", error);
     }
   };
-
   useEffect(() => {
     const storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
     setBagItems(storedItems);

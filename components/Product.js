@@ -8,21 +8,21 @@ const Product = ({ product, paraLevar }) => {
     return numericPrice.toFixed(2).replace(".", ",");
   };
   return (
-    <article className="product">
+    <article className="offers__product">
       <Link
         href={`/produto/${product.id}?para_levar=${paraLevar}`}
         className="container flex"
       >
-        <div className="product__text">
-          <h3 className="product__title">{product.nome_produto}</h3>
-          <p className="product__description product__ingredients">
+        <div className="offers__text">
+          <h3 className="offers__h3">{product.nome_produto}</h3>
+          <p className="offers__description--alt offer__ingredients">
             {product.descricao}
           </p>
-          <div className="price">
+          <div className="offers__price">
             R$ <span>{formatPrice(product.preco)}</span>
           </div>
         </div>
-        <div className="product__image">
+        <div className="offers__image">
           <img
             src={`/images/${product.foto}`}
             alt={`Imagem de ${product.nome_produto}`}

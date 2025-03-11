@@ -32,11 +32,11 @@ export default function Home() {
       <section className="choose container">
         <header className="choose__header flex column">
           <img
-            className="choose__header--logo"
+            className="choose__logo"
             src="/images/logo.png"
             alt="Logo Icon PNG."
           />
-          <h1 className="choose__header--title">{nomeRestaurante}</h1>
+          <h1 className="choose__h1">{nomeRestaurante}</h1>
         </header>
         <div className="choose__body">
           <p className="none choose__title">Seja bem-vindo!</p>
@@ -48,14 +48,14 @@ export default function Home() {
               className="choose__item flex column"
             >
               <img src="/images/group 1.png" alt="Hamburguer Icon PNG." />
-              <p className="choose__item--button btn">Para comer aqui</p>
+              <p className="choose__button btn">Para comer aqui</p>
             </Link>
             <Link
               href={{ pathname: "/cardapio", query: { para_levar: "true" } }}
               className="choose__item flex column"
             >
               <img src="/images/group 2.png" alt="Bag Icon PNG." />
-              <p className="choose__item--button btn">Para levar</p>
+              <p className="choose__button btn">Para levar</p>
             </Link>
           </nav>
         </div>

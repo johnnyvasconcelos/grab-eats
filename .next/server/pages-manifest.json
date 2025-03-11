@@ -4,10 +4,8 @@
   "/_document": "pages/_document.js",
   "/cardapio": "pages/cardapio.js",
   "/produto/[id]": "pages/produto/[id].js",
-  "/pedidos": "pages/pedidos.js",
   "/": "pages/index.js",
   "/api/contar-pedidos": "pages/api/contar-pedidos.js",
-  "/api/pedidos": "pages/api/pedidos.js",
   "/api/restaurante": "pages/api/restaurante.js",
   "/api/produtos": "pages/api/produtos.js"
 }

@@ -66,10 +66,10 @@ export default function Cardapio() {
       <Header background="/images/banner.jpg" />
       <main className="offers">
         <header className="offers__header">
-          <div className="container flex">
-            <div className="flex offers__header--info">
+          <div className="container flex between">
+            <div className="flex offers__info">
               <img src="/images/logo-square.png" alt="Logo do restaurante" />
-              <div className="offers__header--title">
+              <div className="offers__title">
                 <h1 className="offers__title">{nomeRestaurante}</h1>
                 <p className="offers__description">{categoria}</p>
               </div>
@@ -79,18 +79,18 @@ export default function Cardapio() {
               5.0
             </div>
           </div>
-          <div className="flex time container open">
+          <div className="flex time container time--open">
             <img src="/images/clock-green.svg" alt="Ícone de horário" />
             <span>Aberto</span>
           </div>
         </header>
         <div className="offers__categories no-scroll">
-          <div className="container flex">
+          <div className="container offers__categories--container flex">
             {categoriasDisponiveis.map((category) => (
               <span
                 key={category}
-                className={`category btn-min ${
-                  selectedCategory === category ? "check" : ""
+                className={`offer__category btn-min ${
+                  selectedCategory === category ? "offers__category--check" : ""
                 }`}
                 onClick={() => setSelectedCategory(category)}
               >
@@ -100,7 +100,7 @@ export default function Cardapio() {
           </div>
         </div>
         <section className="offers__products">
-          <div className="container">
+          <div className="offers__container container">
             <h2>{selectedCategory}</h2>
           </div>
           {filteredProducts.map((product) => (
