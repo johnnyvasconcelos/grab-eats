@@ -26,8 +26,6 @@ export default async function handler(req, res) {
         item.status || "pendente",
         item.em_preparo || 1,
       ];
-      console.log("SQL Query:", query);
-      console.log("Valores sendo enviados:", values);
       await queryDb(query, values);
     }
     return res

@@ -1,79 +1,66 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import BagItem from "./BagItem";
 import PopUps from "./PopUps";
-const Bag = ({
-  openBag,
-  setOpenBag,
-  bagItems,
-  setBagItems,
-  nomeProduto,
-  image,
-  paralevar,
-}) => {
-  const router = useRouter();
-  const { para_levar } = router.query;
+const Bag = ({ openBag, setOpenBag, addToBag }) => {
+  const [bagItems, setBagItems] = useState([]);
   const [isPopupActive, setIsPopupActive] = useState(false);
-  const totalPrice = bagItems.reduce((acc, item) => acc + (item.price || 0), 0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    const loadBagItems = () => {
+      const savedBagItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+      setBagItems(savedBagItems);
+    };
+    loadBagItems();
+    window.addEventListener("storage", loadBagItems);
+    return () => window.removeEventListener("storage", loadBagItems);
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("bagItems", JSON.stringify(bagItems));
+    const total = bagItems.reduce(
+      (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
+      0
+    );
+    setTotalPrice(total);
+  }, [bagItems]);
   const handleIncrease = (id) => {
-    setBagItems((prevItems) => {
-      const updatedItems = prevItems.map((item) =>
+    setBagItems((prevItems) =>
+      prevItems.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
-      return updatedItems;
-    });
+      )
+    );
   };
   const handleDecrease = (id) => {
-    setBagItems((prevItems) => {
-      const updatedItems = prevItems.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      );
-      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
-      return updatedItems;
-    });
+    setBagItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === id && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
   };
   const handleRemove = (id) => {
     setBagItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
   const handleFinalizeOrder = () => {
-    if (bagItems.length === 0) {
-      return;
-    }
+    if (bagItems.length === 0) return;
     setIsPopupActive(true);
     setOpenBag(false);
   };
-  const finalizarPedido = async (nome, cpf, mesa) => {
-    try {
-      const response = await fetch("/api/finalizar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          pedidos: bagItems.map((item) => ({
-            nome: item.nomeProduto,
-            preco: parseFloat(item.price),
-            em_preparo: true,
-            para_levar: para_levar === "true",
-            quantity: item.quantity || 1,
-            foto: item.foto,
-          })),
-          cliente: {
-            nome_cliente: nome,
-            cpf: cpf,
-            mesa: mesa,
-          },
-        }),
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.message || "Erro ao finalizar pedido");
+  const handleAddToBag = (newItem) => {
+    setBagItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === newItem.id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.id === newItem.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevItems, { ...newItem, quantity: 1 }];
       }
-    } catch (error) {
-      console.error("Erro ao enviar pedido:", error.message);
-      alert("Erro ao finalizar pedido: " + error.message);
-    }
+    });
   };
   return (
     <>
@@ -129,11 +116,9 @@ const Bag = ({
       </aside>
       <PopUps
         isPopupActive={isPopupActive}
-        nomeProduto={nomeProduto}
         setIsPopupActive={setIsPopupActive}
         setBagItems={setBagItems}
         bagItems={bagItems}
-        finalizarPedido={finalizarPedido}
         totalPrice={totalPrice}
       />
     </>

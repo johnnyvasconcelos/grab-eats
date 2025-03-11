@@ -1,65 +1,38 @@
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Head from "next/head";
 import Bag from "../../components/Bag";
 import { connectDb } from "../../lib/db";
 const ProductItem = ({ product }) => {
-  const router = useRouter();
-  const { para_levar, id } = router.query;
   const [openBag, setOpenBag] = useState(false);
-  const [bagItems, setBagItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(parseFloat(product.preco) || 0);
   useEffect(() => {
     setPrice((parseFloat(product.preco) || 0) * quantity);
   }, [quantity, product.preco]);
-  useEffect(() => {
-    localStorage.setItem("bagItems", JSON.stringify(bagItems));
-  }, [bagItems]);
   const formatPrice = (price) =>
     isNaN(price) ? "R$ 0,00" : price.toFixed(2).replace(".", ",");
-  useEffect(() => {
-    const savedBagItems = JSON.parse(localStorage.getItem("bagItems")) || [];
-    setBagItems(savedBagItems);
-  }, []);
-  useEffect(() => {
-    if (bagItems.length > 0) {
-      localStorage.setItem("bagItems", JSON.stringify(bagItems));
-    }
-  }, [bagItems]);
   const addToBag = () => {
-    setBagItems((prevItems) => {
-      let updatedItems = [...prevItems];
-      const existingItemIndex = updatedItems.findIndex(
-        (item) => item.nomeProduto === product.nome_produto
-      );
-      if (existingItemIndex !== -1) {
-        updatedItems[existingItemIndex].quantity += 1;
-      } else {
-        updatedItems.push({
-          id: Date.now(),
-          nomeProduto: product.nome_produto,
-          price: parseFloat(product.preco),
-          quantity: 1,
-          para_levar: para_levar,
-          foto: product.foto,
-          status: "pendente",
-          preco: product.preco,
-        });
-      }
-
-      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
-      return updatedItems;
-    });
     setOpenBag(true);
-  };
-  useEffect(() => {
-    const storedBagItems = JSON.parse(localStorage.getItem("bagItems"));
-    if (storedBagItems) {
-      setBagItems(storedBagItems);
+    const newItem = {
+      id: product.id,
+      nomeProduto: product.nome_produto,
+      price: parseFloat(product.preco),
+      foto: product.foto,
+      quantity: quantity,
+    };
+    const storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+    const existingItemIndex = storedItems.findIndex(
+      (item) => item.id === newItem.id
+    );
+    if (existingItemIndex !== -1) {
+      storedItems[existingItemIndex].quantity += quantity;
+    } else {
+      storedItems.push(newItem);
     }
-  }, []);
+    localStorage.setItem("bagItems", JSON.stringify(storedItems));
+    window.dispatchEvent(new Event("storage"));
+  };
   return (
     <>
       <Head>
@@ -108,22 +81,6 @@ const ProductItem = ({ product }) => {
             <p>{product.descricao}</p>
           </div>
         </section>
-        <section className="offers__products offers__products--description">
-          <div className="container">
-            <h2>
-              <img src="/images/chef.svg" alt="chef hat" /> Ingredientes
-            </h2>
-            <ul>
-              {product.ingredientes ? (
-                product.ingredientes
-                  .split(",")
-                  .map((ing, i) => <li key={i}>{ing.trim()}</li>)
-              ) : (
-                <p>Ingredientes não disponíveis ainda... :/</p>
-              )}
-            </ul>
-          </div>
-        </section>
         <div className="footer-area">
           <div className="container">
             <button className="add btn" onClick={addToBag}>
@@ -132,15 +89,7 @@ const ProductItem = ({ product }) => {
           </div>
         </div>
       </main>
-      <Bag
-        openBag={openBag}
-        setOpenBag={setOpenBag}
-        bagItems={bagItems}
-        setBagItems={setBagItems}
-        nomeProduto={product.nome_produto}
-        paralevar={para_levar}
-        image={product.foto}
-      />
+      <Bag openBag={openBag} setOpenBag={setOpenBag} />
     </>
   );
 };

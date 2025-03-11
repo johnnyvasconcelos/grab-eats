@@ -2,10 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
   "/cardapio": "pages/cardapio.js",
   "/produto/[id]": "pages/produto/[id].js",
-  "/api/restaurante": "pages/api/restaurante.js",
+  "/": "pages/index.js",
   "/api/contar-pedidos": "pages/api/contar-pedidos.js",
-  "/api/produtos": "pages/api/produtos.js"
+  "/api/restaurante": "pages/api/restaurante.js",
+  "/api/produtos": "pages/api/produtos.js",
+  "/api/finalizar": "pages/api/finalizar.js"
 }
