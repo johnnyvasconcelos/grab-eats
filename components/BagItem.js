@@ -15,7 +15,7 @@ const BagItem = ({
         alt="produto item-sacola"
         className="img__item"
       />
-      <div className="bag__item--info">
+      <div className="info">
         <h5>{nomeProduto}</h5>
         <strong className="bag__price">
           R$ {(price * quantity).toFixed(2)}

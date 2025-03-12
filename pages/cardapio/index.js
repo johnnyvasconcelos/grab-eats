@@ -70,7 +70,7 @@ export default function Cardapio() {
             <div className="flex offers__info">
               <img src="/images/logo-square.png" alt="Logo do restaurante" />
               <div className="offers__title">
-                <h1 className="offers__title">{nomeRestaurante}</h1>
+                <h1>{nomeRestaurante}</h1>
                 <p className="offers__description">{categoria}</p>
               </div>
             </div>

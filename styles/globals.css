@@ -254,7 +254,10 @@ ol {
 .offers__title {
   padding-left: 12px;
 }
-.offers__title--alt {
+.offers__title h1 {
+  font-size: 18px;
+}
+.offers--alt {
   padding-left: 0px;
 }
 .small-logo {
@@ -272,7 +275,7 @@ ol {
 }
 .offers__description {
   color: var(--light-gray-hover);
-  font-size: 14px;
+  font-size: 12px;
   text-transform: capitalize;
 }
 .offers--alt {
@@ -339,7 +342,8 @@ ol {
 }
 .offers__h3 {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
+  margin-bottom: 8px;
 }
 .offers__ingredients {
   font-size: 14px;
@@ -392,9 +396,6 @@ ol {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.selector .btn img {
-  width: 8px;
 }
 .offers__description--list li {
   text-transform: capitalize;
@@ -451,31 +452,30 @@ ol {
   margin-bottom: 15px;
   display: inline-block;
 }
-
-.preparing.true {
+.preparing-true {
   background-color: var(--color-1-light);
   color: var(--color-1);
 }
-.offers.alt .preparing.false {
+.preparing-false {
   background-color: var(--color-2);
   color: var(--light);
 }
-.offers.alt .order__logo {
+.order__logo {
   font-weight: 600;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--light-gray);
 }
-.offers.alt .order__logo img {
+.order__logo img {
   width: 15px;
   display: inline-block;
   margin-right: 6px;
 }
-.offers.alt .order__name {
+.order__name {
   gap: 6px;
   border-bottom: 1px solid var(--light-gray);
   padding: 15px 0;
 }
-.offers.alt .quantity {
+.offers--alt .quantity {
   font-size: 12px;
   border-radius: 50%;
   background-color: var(--dark-gray);
@@ -487,7 +487,7 @@ ol {
   min-width: 16px;
   min-height: 16px;
 }
-.offers.alt .name {
+.offers--alt .name {
   font-weight: 400;
   font-size: 14px;
   max-width: 100%;
@@ -496,23 +496,23 @@ ol {
   text-overflow: ellipsis;
   max-width: 120ch;
 }
-.offers.alt .order__price {
+.order__price {
   padding-top: 15px;
   justify-content: space-between;
 }
-.offers.alt .price {
+.offers--alt .price {
   font-size: 14px;
 }
-.offers.alt .add {
+.offers--alt .add {
   font-weight: 600;
   font-size: 12px;
   color: var(--color-3);
 }
-.offers.alt .add.true {
+.offers--alt .add.true {
   color: var(--color-3-light);
   cursor: not-allowed;
 }
-.offers.alt .add.false {
+.offers--alt .add.false {
   cursor: pointer;
 }
 /* bag */
@@ -530,7 +530,7 @@ ol {
   right: -105svw;
   transition: 0.5s all ease-in-out;
 }
-.bag.active {
+.bag--active {
   right: 0;
 }
 .bag::before {
@@ -546,7 +546,7 @@ ol {
   right: -105svw;
   transition: 0.5s all ease-in-out;
 }
-.bag.active::before {
+.bag--active::before {
   right: 0;
 }
 .bag::after {
@@ -560,10 +560,10 @@ ol {
   left: 105svw;
   transition: 0.5s all ease-in-out;
 }
-.bag.active::after {
+.bag--active::after {
   left: 0;
 }
-.bag .container__bag {
+.container__bag {
   overflow: hidden;
   padding: 0 20px;
   height: 100%;
@@ -572,10 +572,10 @@ ol {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.bag .container__bag::-webkit-scrollbar {
+.container__bag::-webkit-scrollbar {
   display: none;
 }
-.bag .bag__title {
+.bag__title {
   justify-content: space-between;
 }
 .bag .close-icon {
@@ -584,27 +584,27 @@ ol {
 .bag .close-icon img {
   width: 15px;
 }
-.bag .bag__items {
+.bag__items {
   margin-top: 30px;
   padding-bottom: 100px;
   width: 100%;
 }
-.bag .bag__item {
+.bag__item {
   position: relative;
   gap: 10px;
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--light-gray);
 }
-.bag .bag__item img {
+.bag__item img {
   width: 30%;
   max-width: 150px;
   border-radius: 10px;
 }
-.bag .bag__item--info {
+.bag__item .info {
   width: 70%;
 }
-.bag .bag__item--info h5 {
+.bag__item h5 {
   font-weight: 500;
   max-width: 19%;
   white-space: nowrap;
@@ -612,12 +612,12 @@ ol {
   text-overflow: ellipsis;
   max-width: calc(1ch * 19);
 }
-.bag .bag__price {
+.bag__price {
   font-size: 14px;
   display: block;
   margin-bottom: 5px;
 }
-.bag .bag__item .remove {
+.bag__item .remove {
   position: absolute;
   right: 0;
   top: 50%;
@@ -633,14 +633,14 @@ ol {
 .bag .remove img {
   width: 12px;
 }
-.bag .bag__footer {
+.bag__footer {
   z-index: 100;
   width: 100%;
   height: auto;
   bottom: 20px;
   left: 0;
 }
-.bag .bag__info {
+.bag__info {
   border-radius: 10px;
   border: 1px solid var(--light-gray);
   padding: 15px 20px;
@@ -664,7 +664,7 @@ ol {
 .bag tbody tr td strong {
   color: var(--dark);
 }
-.bag .bag__footer .btn {
+.bag__footer .order-btn {
   width: 100%;
   background-color: var(--color-1);
   border: 1px solid var(--color-1);
@@ -672,9 +672,28 @@ ol {
   font-weight: 600;
   margin-top: 30px;
 }
-.bag .bag__footer .btn:hover {
+.bag__footer .order-btn:hover {
   background-color: var(--color-1-dark);
   border: 1px solid var(--color-1-dark);
+}
+.selector {
+  gap: 8px;
+}
+.selector .btn {
+  border: 1px solid var(--light-gray);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0;
+}
+.selector .btn img {
+  width: 8px;
 }
 /* popups */
 .popup-wrapper {
@@ -801,6 +820,9 @@ ol {
     background-position: center center;
     background-repeat: no-repear;
   }
+  .main__header--order {
+    height: 140px;
+  }
   .choose__options {
     justify-content: center;
     gap: 10px;
@@ -813,13 +835,16 @@ ol {
   .main__header {
     height: 450px;
   }
+  .main__header--order {
+    height: 120px;
+  }
   .offers__title {
     font-size: 22px;
   }
   .offers__description,
   .offers__header .time,
   .offers__category {
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
   }
   .price {
@@ -882,13 +907,24 @@ ol {
   .popup h4 {
     font-size: 20px;
   }
-  .offers__title,
-  .order__logo {
+  .offers__title h1 {
+    font-size: 22px;
+  }
+  .offers__title--alt h1 {
+    font-size: 18px;
+  }
+  .offers__title--alt h1 {
+    font-size: 16px;
+  }
+  .offers__h3 {
     font-size: 18px;
   }
 }
 @media (min-width: 990px) {
   .main__header {
     height: 95svh;
+  }
+  .main__header--order {
+    height: 120px;
   }
 }

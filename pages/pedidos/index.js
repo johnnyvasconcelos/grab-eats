@@ -82,7 +82,7 @@ const Pedidos = () => {
         <title>Meus Pedidos</title>
       </Head>
       <Header pedidos="main__header--order" />
-      <main className="offers alt">
+      <main className="offers offers--alt">
         <section className="offers__products offers__products--description">
           <div className="container">
             <h2>

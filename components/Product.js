@@ -15,7 +15,7 @@ const Product = ({ product, paraLevar }) => {
       >
         <div className="offers__text">
           <h3 className="offers__h3">{product.nome_produto}</h3>
-          <p className="offers__description--alt offer__ingredients">
+          <p className="offers__description--alt offers__ingredients">
             {product.descricao}
           </p>
           <div className="offers__price">

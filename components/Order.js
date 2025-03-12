@@ -60,7 +60,9 @@ const Order = ({ pedido }) => {
     <>
       <article className="order">
         <span
-          className={`preparing ${pedido.em_preparo == "1" ? "true" : "false"}`}
+          className={`preparing ${
+            pedido.em_preparo == "1" ? "preparing-true" : "preparing-false"
+          }`}
         >
           {pedido.em_preparo == "1" ? "Em Preparo" : "Finalizado"}
         </span>

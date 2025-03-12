@@ -64,7 +64,7 @@ const Bag = ({ openBag, setOpenBag, addToBag }) => {
   };
   return (
     <>
-      <aside className={openBag ? "bag active" : "bag"}>
+      <aside className={openBag ? "bag bag--active" : "bag"}>
         <div className="container__bag">
           <div className="bag__title flex">
             <h4>Sacola</h4>
