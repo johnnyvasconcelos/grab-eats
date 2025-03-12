@@ -5,26 +5,36 @@ const Order = ({ pedido }) => {
   const [error, setError] = useState(null);
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
-  const addToBag = () => {
+  const addToBag = async () => {
     try {
       if (pedido.em_preparo == "0") {
         let storedItems = JSON.parse(localStorage.getItem("bagItems") || "[]");
         if (!Array.isArray(storedItems)) {
           storedItems = [];
         }
+        const response = await fetch("/api/produtos");
+        const produtos = await response.json();
+        const produtoEncontrado = produtos.find(
+          (produto) => produto.nome_produto === pedido.nome
+        );
+        if (!produtoEncontrado) {
+          console.error("Produto não encontrado na API");
+          return;
+        }
+        const newItem = {
+          id: produtoEncontrado.id,
+          nomeProduto: pedido.nome,
+          foto: pedido.foto,
+          price: parseFloat(pedido.preco),
+          quantity: 1,
+        };
         const existingItemIndex = storedItems.findIndex(
-          (item) => item.nomeProduto === pedido.nome
+          (item) => item.id === newItem.id
         );
         if (existingItemIndex !== -1) {
           storedItems[existingItemIndex].quantity += 1;
         } else {
-          storedItems.push({
-            id: pedido.id || Date.now(),
-            nomeProduto: pedido.nome,
-            foto: pedido.foto,
-            price: parseFloat(pedido.preco) || 0,
-            quantity: 1,
-          });
+          storedItems.push(newItem);
         }
         localStorage.setItem("bagItems", JSON.stringify(storedItems));
         setBagItems([...storedItems]);
@@ -39,6 +49,7 @@ const Order = ({ pedido }) => {
     const storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
     setBagItems(storedItems);
   }, []);
+
   useEffect(() => {
     const fetchRestauranteData = async () => {
       try {
@@ -56,6 +67,7 @@ const Order = ({ pedido }) => {
     };
     fetchRestauranteData();
   }, []);
+
   return (
     <>
       <article className="order">
@@ -94,4 +106,5 @@ const Order = ({ pedido }) => {
     </>
   );
 };
+
 export default Order;

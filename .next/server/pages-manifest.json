@@ -3,10 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/pedidos": "pages/pedidos.js",
-  "/cardapio": "pages/cardapio.js",
-  "/produto/[id]": "pages/produto/[id].js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
   "/api/pedidos": "pages/api/pedidos.js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
+  "/produto/[id]": "pages/produto/[id].js",
+  "/cardapio": "pages/cardapio.js",
   "/api/restaurante": "pages/api/restaurante.js",
   "/api/produtos": "pages/api/produtos.js"
 }
