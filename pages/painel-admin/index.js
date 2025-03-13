@@ -26,8 +26,46 @@ function PainelAdmin() {
           <div className={styles.contentAdmin}>
             <HeaderAdmin />
             <section className={styles.metrics}>
-              Métricas e Gráficos: Quantidade de Pedidos; clientes novos; Lucro,
-              Performance (Dias da Semana, Mensal)
+              <h2>Métricas</h2>
+              <div class={styles.charts}>
+                <article className={styles.chart}>
+                  <div className={`${styles.chartContainer} flex`}>
+                    <img src="/images/eye.svg" alt="svg ic" />
+                    <div class={styles.chartInfo}>
+                      <span>Pedidos</span>
+                      <h3>123</h3>
+                    </div>
+                  </div>
+                </article>
+                <article className={styles.chart}>
+                  <div className={`${styles.chartContainer} flex`}>
+                    <img src="/images/eye.svg" alt="svg ic" />
+                    <div class={styles.chartInfo}>
+                      <span>Clientes Novos</span>
+                      <h3>123</h3>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div className={styles.charts}>
+                <article className={`${styles.chart} ${styles.bigChart}`}>
+                  <h3>Lucro</h3>
+                  <div className={styles.moneyChart}></div>
+                  <div className={styles.moneyInfo}>
+                    <div className={styles.data}>
+                      <span>Semana Passada</span>
+                      <h4>R$ 768,00</h4>
+                    </div>
+                    <div className={styles.data}>
+                      <span>Esta semana</span>
+                      <h4>R$ 328,50</h4>
+                    </div>
+                  </div>
+                </article>
+                <article className={`${styles.chart} ${styles.bigChart}`}>
+                  Performance (Dias da Semana, Mensal)
+                </article>
+              </div>
             </section>
           </div>
         </div>

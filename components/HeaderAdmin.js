@@ -9,9 +9,9 @@ const HeaderAdmin = () => {
             <img src="/images/search.svg" alt="search icon svg" />
           </form>
         </div>
+        <p>Bem-vindo(a), Fonseca!</p>
         <img src="/images/moon.svg" alt="moon svg icon" />
         <img src="/images/bell.svg" alt="bell svg icon" />
-        <p>Bem-vindo(a), Fonseca!</p>
       </header>
     </>
   );
