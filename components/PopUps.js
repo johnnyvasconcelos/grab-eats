@@ -45,13 +45,13 @@ const PopUps = ({
       console.error("Erro ao buscar nome:", error);
     }
   };
-  const handleCpfChange = (e) => {
+  const cpfChange = (e) => {
     const formattedCpf = e.target.value.replace(/\D/g, "").slice(0, 14);
     setCpf(formattedCpf);
     localStorage.setItem("cpf", formattedCpf);
   };
-  const handleNomeChange = (e) => setNome(e.target.value);
-  const handleFinish = async () => {
+  const nomeChange = (e) => setNome(e.target.value);
+  const finish = async () => {
     if (!nome.trim() || !cpf.trim() || bagItems.length === 0) {
       alert("Preencha todos os campos antes de finalizar o pedido.");
       return;
@@ -59,7 +59,7 @@ const PopUps = ({
     localStorage.setItem("nome", nome);
     const pedidoPayload = bagItems.map((item) => ({
       nome: item.nomeProduto || "Nome não informado",
-      preco: item.price || 0,
+      preco: totalPrice,
       quantidade: item.quantity || 1,
       mesa: mesa || "Sem mesa",
       para_levar: paraLevar ? 1 : 0,
@@ -104,7 +104,7 @@ const PopUps = ({
                 name="cpf-cliente"
                 placeholder="Digite seu CPF"
                 value={cpf}
-                onChange={handleCpfChange}
+                onChange={cpfChange}
               />
             </label>
             <label>
@@ -114,7 +114,7 @@ const PopUps = ({
                 name="cliente"
                 placeholder="Digite seu nome"
                 value={nome}
-                onChange={handleNomeChange}
+                onChange={nomeChange}
               />
             </label>
             <label>
@@ -135,11 +135,7 @@ const PopUps = ({
               >
                 Cancelar
               </button>
-              <button
-                className="btn finish"
-                type="button"
-                onClick={handleFinish}
-              >
+              <button className="btn finish" type="button" onClick={finish}>
                 Finalizar
               </button>
             </div>

@@ -1,5 +1,5 @@
 import { connectDb, queryDb } from "../../lib/db";
-export default async function handler(req, res) {
+export default async function dados(req, res) {
   try {
     await connectDb();
     const query = "SELECT * FROM dados LIMIT 1";

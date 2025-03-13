@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import BagItem from "./BagItem";
 import PopUps from "./PopUps";
-const Bag = ({ openBag, setOpenBag, addToBag }) => {
+const Bag = ({ openBag, setOpenBag }) => {
   const [bagItems, setBagItems] = useState([]);
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -15,21 +15,20 @@ const Bag = ({ openBag, setOpenBag, addToBag }) => {
     return () => window.removeEventListener("storage", loadBagItems);
   }, []);
   useEffect(() => {
-    localStorage.setItem("bagItems", JSON.stringify(bagItems));
     const total = bagItems.reduce(
       (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
       0
     );
     setTotalPrice(total);
   }, [bagItems]);
-  const handleIncrease = (id) => {
+  const increase = (id) => {
     setBagItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   };
-  const handleDecrease = (id) => {
+  const decrease = (id) => {
     setBagItems((prevItems) =>
       prevItems
         .map((item) =>
@@ -40,27 +39,18 @@ const Bag = ({ openBag, setOpenBag, addToBag }) => {
         .filter((item) => item.quantity > 0)
     );
   };
-  const handleRemove = (id) => {
-    setBagItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  const remove = (id) => {
+    setBagItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item.id !== id);
+      localStorage.setItem("bagItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
   };
-  const handleFinalizeOrder = () => {
+
+  const finalizeOrder = () => {
     if (bagItems.length === 0) return;
     setIsPopupActive(true);
     setOpenBag(false);
-  };
-  const handleAddToBag = (newItem) => {
-    setBagItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === newItem.id);
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.id === newItem.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevItems, { ...newItem, quantity: 1 }];
-      }
-    });
   };
   return (
     <>
@@ -81,9 +71,9 @@ const Bag = ({ openBag, setOpenBag, addToBag }) => {
                 price={item.price}
                 image={item.foto}
                 quantity={item.quantity}
-                onRemove={handleRemove}
-                onIncrease={handleIncrease}
-                onDecrease={handleDecrease}
+                onRemove={remove}
+                onIncrease={increase}
+                onDecrease={decrease}
               />
             ))}
           </div>
@@ -108,7 +98,7 @@ const Bag = ({ openBag, setOpenBag, addToBag }) => {
                 </tr>
               </tbody>
             </table>
-            <button className="btn order-btn" onClick={handleFinalizeOrder}>
+            <button className="btn order-btn" onClick={finalizeOrder}>
               Finalizar Pedido
             </button>
           </div>

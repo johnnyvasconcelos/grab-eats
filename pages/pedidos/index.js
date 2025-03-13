@@ -63,10 +63,10 @@ const Pedidos = () => {
       return value.replace(/(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3");
     return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, "$1.$2.$3-$4");
   };
-  const handleCpfChange = (e) => {
+  const cpfChange = (e) => {
     setCpf(formatCpf(e.target.value));
   };
-  const handleCpfSubmit = () => {
+  const cpfSubmit = () => {
     const cleanCpf = cpf.replace(/\D/g, "");
     if (cleanCpf.length !== 11) {
       alert("Por favor, insira um CPF válido.");
@@ -120,7 +120,7 @@ const Pedidos = () => {
                   name="cpf"
                   placeholder="Digite seu CPF"
                   value={cpf}
-                  onChange={handleCpfChange}
+                  onChange={cpfChange}
                   maxLength="14"
                 />
               </label>
@@ -128,7 +128,7 @@ const Pedidos = () => {
                 <button
                   className="btn full finish"
                   type="button"
-                  onClick={handleCpfSubmit}
+                  onClick={cpfSubmit}
                 >
                   Confirmar
                 </button>

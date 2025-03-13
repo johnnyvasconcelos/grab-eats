@@ -1,5 +1,5 @@
 import { queryDb } from "../../lib/db";
-export default async function handler(req, res) {
+export default async function pedidos(req, res) {
   try {
     const pedidos = await queryDb("SELECT * FROM pedidos");
     if (pedidos.length > 0) {

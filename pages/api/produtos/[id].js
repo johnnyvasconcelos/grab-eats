@@ -1,5 +1,5 @@
 import { queryDb } from "../../../lib/db";
-export default async function handler(req, res) {
+export default async function produtos(req, res) {
   const { id } = req.query;
   if (!id) {
     return res.status(400).json({ error: "ID não fornecido" });

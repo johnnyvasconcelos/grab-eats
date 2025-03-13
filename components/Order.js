@@ -5,51 +5,6 @@ const Order = ({ pedido }) => {
   const [error, setError] = useState(null);
   const [openBag, setOpenBag] = useState(false);
   const [bagItems, setBagItems] = useState([]);
-  const addToBag = async () => {
-    try {
-      if (pedido.em_preparo == "0") {
-        let storedItems = JSON.parse(localStorage.getItem("bagItems") || "[]");
-        if (!Array.isArray(storedItems)) {
-          storedItems = [];
-        }
-        const response = await fetch("/api/produtos");
-        const produtos = await response.json();
-        const produtoEncontrado = produtos.find(
-          (produto) => produto.nome_produto === pedido.nome
-        );
-        if (!produtoEncontrado) {
-          console.error("Produto não encontrado na API");
-          return;
-        }
-        const newItem = {
-          id: produtoEncontrado.id,
-          nomeProduto: pedido.nome,
-          foto: pedido.foto,
-          price: parseFloat(pedido.preco),
-          quantity: 1,
-        };
-        const existingItemIndex = storedItems.findIndex(
-          (item) => item.id === newItem.id
-        );
-        if (existingItemIndex !== -1) {
-          storedItems[existingItemIndex].quantity += 1;
-        } else {
-          storedItems.push(newItem);
-        }
-        localStorage.setItem("bagItems", JSON.stringify(storedItems));
-        setBagItems([...storedItems]);
-        window.dispatchEvent(new Event("storage"));
-        setOpenBag(true);
-      }
-    } catch (error) {
-      console.error("Erro ao adicionar à sacola:", error);
-    }
-  };
-  useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
-    setBagItems(storedItems);
-  }, []);
-
   useEffect(() => {
     const fetchRestauranteData = async () => {
       try {
@@ -67,7 +22,39 @@ const Order = ({ pedido }) => {
     };
     fetchRestauranteData();
   }, []);
-
+  const addToBag = async () => {
+    try {
+      const res = await fetch("/api/produtos");
+      const produtos = await res.json();
+      if (!res.ok) throw new Error("Erro ao buscar produtos");
+      const produtoEncontrado = produtos.find(
+        (produto) => produto.nome_produto === pedido.nome
+      );
+      if (!produtoEncontrado) throw new Error("Produto não encontrado");
+      let storedItems = JSON.parse(localStorage.getItem("bagItems")) || [];
+      const newItem = {
+        id: produtoEncontrado.id, // ID correto do produto
+        nomeProduto: pedido.nome,
+        foto: pedido.foto,
+        price: parseFloat(pedido.preco),
+        quantity: 1,
+      };
+      const existingItemIndex = storedItems.findIndex(
+        (item) => item.id === newItem.id
+      );
+      if (existingItemIndex !== -1) {
+        storedItems[existingItemIndex].quantity += 1;
+      } else {
+        storedItems.push(newItem);
+      }
+      localStorage.setItem("bagItems", JSON.stringify(storedItems));
+      setBagItems([...storedItems]);
+      window.dispatchEvent(new Event("storage"));
+      setOpenBag(true);
+    } catch (error) {
+      console.error("Erro ao adicionar à sacola:", error);
+    }
+  };
   return (
     <>
       <article className="order">
@@ -100,11 +87,8 @@ const Order = ({ pedido }) => {
         setOpenBag={setOpenBag}
         bagItems={bagItems}
         setBagItems={setBagItems}
-        image={pedido.foto}
-        nomeProduto={pedido.nome}
       />
     </>
   );
 };
-
 export default Order;

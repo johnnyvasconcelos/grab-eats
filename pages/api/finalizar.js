@@ -1,5 +1,5 @@
 import { queryDb } from "../../lib/db";
-export default async function handler(req, res) {
+export default async function finalizar(req, res) {
   if (req.method !== "POST") {
     return res
       .status(405)

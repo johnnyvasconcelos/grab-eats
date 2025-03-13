@@ -5,8 +5,8 @@ const BagItem = ({
   quantity,
   onRemove,
   nomeProduto,
-  onIncrease,
-  onDecrease,
+  increase,
+  decrease,
 }) => {
   return (
     <article className="bag__item flex">
@@ -24,11 +24,11 @@ const BagItem = ({
           <img src="/images/trash.svg" alt="remove icon svg" />
         </span>
         <div className="selector flex">
-          <span className="btn minus" onClick={() => onDecrease(id)}>
+          <span className="btn minus" onClick={() => decrease(id)}>
             <img src="/images/minus.svg" alt="minus svg icon" />
           </span>
           <span>{quantity}</span>
-          <span className="btn plus" onClick={() => onIncrease(id)}>
+          <span className="btn plus" onClick={() => increase(id)}>
             <img src="/images/plus.svg" alt="plus svg icon" />
           </span>
         </div>
