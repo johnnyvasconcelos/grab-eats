@@ -3,6 +3,8 @@
 }
 .containerAdmin {
   display: flex;
+  max-height: 100svh;
+  overflow: hidden;
 }
 .asideAdmin {
   position: relative;
@@ -99,18 +101,174 @@
   color: #9092b0;
   width: 100%;
 }
+.headerImages {
+  gap: 15px;
+}
+.headerImages img {
+  width: 20px;
+  cursor: pointer;
+}
 .contentAdmin {
   width: 81%;
   display: flex;
   flex-direction: column;
+  color: #6c6e8b;
 }
 .headerAdmin {
   height: 70px;
   padding: 10px 20px;
-  background: white;
+  background-color: white;
   border-bottom: 1px solid #eaedf1;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  justify-content: space-between;
+}
+.headerAdminContainer {
+  gap: 20px;
+}
+.headerAdminContainer p {
+  margin-left: 20px;
+}
+.headerAdminContainer form {
+  display: flex;
+  align-items: center;
+  background-color: #eaedf1;
+  border: 1px solid#9495ad;
+  padding: 0 15px;
+  border-radius: 10px;
+  height: 40px;
+}
+.headerAdminContainer form input {
+  border: none;
+  background-color: transparent;
+}
+.headerAdminContainer form input:focus {
+  outline: none;
+}
+.headerAdminContainer form img {
+  width: 20px;
 }
 .metrics {
   padding: 20px;
+  margin-top: 20px;
+}
+.charts {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+.bigCharts {
+  margin-top: 15px;
+}
+.bigChart,
+.chart {
+  background-color: white;
+  padding: 25px;
+  border: 1px solid #f4f2fa;
+  border-radius: 15px;
+}
+.minChart {
+  width: 50%;
+}
+.minChart .chartContainer {
+  justify-content: space-between;
+}
+.minChart .chartContainer img {
+  width: 45px;
+}
+.chartInfo {
+  text-align: right;
+}
+.chartInfo h3 {
+  font-size: 30px;
+}
+.bigChart h3 {
+  margin-bottom: 20px;
+}
+.moneyChart {
+  width: 37%;
+}
+.performanceChart {
+  width: 63%;
+}
+@media (max-width: 1200px) {
+  .charts .moneyChart {
+    width: 45%;
+    height: auto;
+  }
+  .charts .performanceChart {
+    width: 55%;
+  }
+}
+@media (max-width: 1100px) {
+  .charts .moneyChart {
+    width: 50%;
+    height: auto;
+  }
+  .charts .performanceChart {
+    width: 50%;
+  }
+  .asideAdmin {
+    width: 70px;
+    min-width: 45px;
+  }
+  .contentAdmin {
+    width: auto;
+    flex-grow: 1;
+  }
+  .asideAdmin span,
+  .asideAdmin h2,
+  .asideAdmin .asideFooter {
+    display: none;
+  }
+  .asideAdmin nav ul:nth-of-type(2) {
+    margin-top: -1px;
+  }
+  .asideAdmin nav ul li {
+    height: 50px;
+  }
+  .asideAdmin nav ul li a {
+    padding: 10px 0;
+  }
+  .asideAdmin nav ul li a img {
+    margin: 0 auto;
+    display: block;
+    width: 18px;
+  }
+  .asideAdmin header {
+    padding: 25px 0;
+  }
+  .asideAdmin header img {
+    margin: 0 auto;
+    display: block;
+    width: 30px;
+  }
+  .bigCharts {
+    flex-direction: column;
+  }
+  .charts .bigChart {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .asideAdmin {
+    width: 50px;
+    min-width: 45px;
+  }
+  .asideAdmin nav ul li {
+    height: 42px;
+  }
+  .asideAdmin header img {
+    width: 25px;
+  }
+  .asideAdmin nav ul li a img {
+    width: 15px;
+  }
+}
+@media (max-width: 560px) {
+  .charts {
+    flex-direction: column;
+  }
+  .minChart {
+    width: 100%;
+  }
 }

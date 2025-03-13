@@ -21,7 +21,7 @@ export default function PerformanceChart() {
         setData(
           data.map((d) => ({
             day: d.date,
-            pedidos: d.orders, // Correção aqui!
+            pedidos: d.orders,
             revenue: d.revenue,
           }))
         );
@@ -32,13 +32,11 @@ export default function PerformanceChart() {
         setLoading(false);
       });
   }, []);
-
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <p>Carregando Gráfico...</p>;
   if (error) return <p>{error}</p>;
-
   return (
-    <article className={styles.bigChart}>
-      <h3>Quantidade de Pedidos por Dia</h3>
+    <article className={`${styles.performanceChart} ${styles.bigChart}`}>
+      <h3>Performance (Dias da Semana)</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -53,9 +51,14 @@ export default function PerformanceChart() {
               });
             }}
           />
-          <YAxis />
+          <YAxis tickFormatter={(tick) => `R$ ${tick}`} />
           <Tooltip
-            formatter={(value, name) => [value, name]}
+            formatter={(value, name) => {
+              if (name === "Lucro") {
+                return [`R$ ${value}`, name];
+              }
+              return [value, name];
+            }}
             labelFormatter={(label) => {
               const date = new Date(label);
               return date.toLocaleDateString("pt-BR", {

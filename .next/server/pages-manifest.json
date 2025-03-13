@@ -3,7 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin": "pages/painel-admin.js",
-  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
-  "/api/restaurante": "pages/api/restaurante.js",
+  "/cardapio": "pages/cardapio.js",
   "/": "pages/index.js"
 }
