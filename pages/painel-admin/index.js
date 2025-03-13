@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/admin.module.css";
 import AsideAdmin from "../../components/AsideAdmin";
 import HeaderAdmin from "../../components/HeaderAdmin";
+import PerformanceChart from "../../components/PerformanceChart";
 import Head from "next/head";
 function PainelAdmin() {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
@@ -48,7 +49,7 @@ function PainelAdmin() {
                 </article>
               </div>
               <div className={styles.charts}>
-                <article className={`${styles.chart} ${styles.bigChart}`}>
+                <article className={styles.bigChart}>
                   <h3>Lucro</h3>
                   <div className={styles.moneyChart}></div>
                   <div className={styles.moneyInfo}>
@@ -62,8 +63,9 @@ function PainelAdmin() {
                     </div>
                   </div>
                 </article>
-                <article className={`${styles.chart} ${styles.bigChart}`}>
+                <article className={styles.bigChart}>
                   Performance (Dias da Semana, Mensal)
+                  <PerformanceChart />
                 </article>
               </div>
             </section>

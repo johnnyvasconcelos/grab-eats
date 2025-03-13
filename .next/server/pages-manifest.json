@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin": "pages/painel-admin.js",
-  "/painel-admin/pedidos": "pages/painel-admin/pedidos.js",
-  "/painel-admin/log-de-pedidos": "pages/painel-admin/log-de-pedidos.js",
-  "/api/restaurante": "pages/api/restaurante.js"
+  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
+  "/api/restaurante": "pages/api/restaurante.js",
+  "/": "pages/index.js"
 }
