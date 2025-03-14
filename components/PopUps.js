@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-const PopUps = ({
-  isPopupActive,
-  setIsPopupActive,
-  bagItems,
-  setBagItems,
-  totalPrice,
-}) => {
+const PopUps = ({ isPopupActive, setIsPopupActive, bagItems, setBagItems }) => {
   const [cpf, setCpf] = useState("");
   const [nome, setNome] = useState("");
   const [mesa, setMesa] = useState("");
@@ -46,7 +40,11 @@ const PopUps = ({
     }
   };
   const cpfChange = (e) => {
-    const formattedCpf = e.target.value.replace(/\D/g, "").slice(0, 14);
+    let value = e.target.value.replace(/\D/g, "").slice(0, 11);
+    let formattedCpf = value
+      .replace(/^(\d{3})(\d)/, "$1.$2")
+      .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+      .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
     setCpf(formattedCpf);
     localStorage.setItem("cpf", formattedCpf);
   };
@@ -59,7 +57,7 @@ const PopUps = ({
     localStorage.setItem("nome", nome);
     const pedidoPayload = bagItems.map((item) => ({
       nome: item.nomeProduto || "Nome não informado",
-      preco: totalPrice,
+      preco: item.price * item.quantity,
       quantidade: item.quantity || 1,
       mesa: mesa || "Sem mesa",
       para_levar: paraLevar ? 1 : 0,

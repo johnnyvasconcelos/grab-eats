@@ -17,7 +17,7 @@ export default async function finalizar(req, res) {
       const values = [
         item.nome || "Produto sem nome",
         item.cpf || "cpf do cliente não informado",
-        parseFloat(item.preco) || 0,
+        item.preco || 0,
         item.quantidade || 1,
         item.mesa || "Mesa não informada",
         item.para_levar ? 1 : 0,

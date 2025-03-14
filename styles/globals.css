@@ -749,7 +749,7 @@ ol {
   padding: 12px 20px;
   border-radius: 30px;
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
 }
 .popup input::placeholder {
   color: var(--light-gray-hover);

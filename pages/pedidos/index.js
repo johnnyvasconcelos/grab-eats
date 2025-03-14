@@ -33,7 +33,7 @@ const Pedidos = () => {
           {
             id: Date.now(),
             nomeProduto: product.nome_produto,
-            price: parseFloat(product.preco),
+            price: product.preco,
             quantity,
             paraLevar: para_levar,
           },

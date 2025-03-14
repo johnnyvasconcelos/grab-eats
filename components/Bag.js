@@ -72,8 +72,8 @@ const Bag = ({ openBag, setOpenBag }) => {
                 image={item.foto}
                 quantity={item.quantity}
                 onRemove={remove}
-                onIncrease={increase}
-                onDecrease={decrease}
+                increase={increase}
+                decrease={decrease}
               />
             ))}
           </div>
@@ -109,7 +109,6 @@ const Bag = ({ openBag, setOpenBag }) => {
         setIsPopupActive={setIsPopupActive}
         setBagItems={setBagItems}
         bagItems={bagItems}
-        totalPrice={totalPrice}
       />
     </>
   );

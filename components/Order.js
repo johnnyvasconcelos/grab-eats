@@ -36,7 +36,7 @@ const Order = ({ pedido }) => {
         id: produtoEncontrado.id, // ID correto do produto
         nomeProduto: pedido.nome,
         foto: pedido.foto,
-        price: parseFloat(pedido.preco),
+        price: pedido.preco,
         quantity: 1,
       };
       const existingItemIndex = storedItems.findIndex(
@@ -70,6 +70,7 @@ const Order = ({ pedido }) => {
           {nomeRestaurante}
         </div>
         <div className="order__name flex">
+          <span className="quantity">{pedido.quantidade}</span>
           <h3 className="name">{pedido.nome}</h3>
         </div>
         <div className="order__price flex">
