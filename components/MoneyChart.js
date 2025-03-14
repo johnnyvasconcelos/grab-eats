@@ -2,12 +2,10 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/admin.module.css";
 import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer } from "recharts";
-const COLORS = ["#dbb377", "#77cedb", "#dbdb77", "#e3849a"];
-
+const COLORS = ["#ef4444", "#22c55e", "#eab308", "#358ffc"];
 export default function MoneyChart() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -34,13 +32,10 @@ export default function MoneyChart() {
         console.error("Erro ao buscar dados de lucro:", error);
       }
     }
-
     fetchData();
   }, []);
-
   return (
     <article className={`${styles.moneyChart} ${styles.bigChart}`}>
-      <h3>Lucro nos Últimos 30 Dias</h3>
       {data.length > 0 ? (
         <>
           <ResponsiveContainer width="100%" height={300}>
@@ -52,7 +47,7 @@ export default function MoneyChart() {
                 cx="50%"
                 cy="50%"
                 outerRadius={100}
-                fill="#8884d8"
+                fill="#a855f7"
                 label={({ value }) => `R$ ${value.toFixed(2)}`}
               >
                 {data.map((entry, index) => (
@@ -63,7 +58,8 @@ export default function MoneyChart() {
             </PieChart>
           </ResponsiveContainer>
           <p>
-            <strong>Total dos Pedidos: R$ {total.toFixed(2)}</strong>
+            <h3>Lucro nos Últimos 30 Dias</h3>
+            <span>Total dos Pedidos: R$ {total.toFixed(2)}</span>
           </p>
         </>
       ) : (

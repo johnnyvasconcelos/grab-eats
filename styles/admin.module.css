@@ -3,17 +3,31 @@
 }
 .containerAdmin {
   display: flex;
-  max-height: 100svh;
+  width: 100%;
+  height: 100svh;
   overflow: hidden;
 }
+.title {
+  color: #283448;
+  font-size: 20px;
+}
 .asideAdmin {
-  position: relative;
   width: 17%;
   max-width: 250px;
-  background: white;
+  background: #1e293b;
   height: 100svh;
-  float: left;
   border-right: 1px solid #eaedf1;
+  position: relative;
+}
+.contentAdmin {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.contentAdmin::-webkit-scrollbar {
+  display: none;
 }
 .asideAdmin header {
   padding: 25px 25px 10px 25px;
@@ -47,11 +61,12 @@
 .asideAdmin header span {
   font-size: 14px;
   font-weight: 600;
+  color: rgba(234, 237, 241, 0.7);
 }
 .asideAdmin nav h2 {
   text-transform: uppercase;
   font-size: 10px;
-  color: #9092b0;
+  color: #b9bad0;
   font-weight: 500;
   letter-spacing: 1px;
   margin: 25px 25px 5px 25px;
@@ -71,21 +86,24 @@
   background: transparent;
 }
 .asideAdmin nav ul li:nth-of-type(1) {
-  border-top: 1px solid #f4f2fa;
+  border-top: 1px solid #324159;
 }
 .asideAdmin nav ul li a {
   padding: 10px 25px;
-  color: #9092b0;
+  color: #e0e1eb;
   display: flex;
   height: 100%;
   font-size: 15px;
-  border-bottom: 1px solid #f4f2fa;
+  border-bottom: 1px solid #324159;
 }
-.asideAdmin nav ul li:hover::before {
+.asideAdmin nav ul li:hover::before,
+.asideAdmin nav ul .active::before {
   background: #ffd700;
 }
-.asideAdmin nav ul li:hover a {
+.asideAdmin nav ul li:hover a,
+.asideAdmin nav ul .active a {
   background-image: linear-gradient(to right, #f4f2fa, #fefefe);
+  color: #1e293b;
 }
 .asideAdmin nav ul li img {
   width: 15px;
@@ -132,6 +150,13 @@
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   justify-content: space-between;
 }
+.headerAdmin .logout {
+  padding: 8px 20px;
+  background-color: transparent;
+  border: 1px solid #aab5c4;
+  font-size: 16px;
+  margin-left: 20px;
+}
 .headerAdminContainer {
   gap: 22px;
   width: 62%;
@@ -149,7 +174,6 @@
   padding: 0 15px;
   border-radius: 5px;
   height: 40px;
-  margin-left: 20px;
 }
 .headerAdminContainer form input {
   border: none;
@@ -163,15 +187,16 @@
 }
 .metrics {
   padding: 20px;
-  margin-top: 20px;
+}
+.metrics h2 {
+  font-size: 22px;
 }
 .charts {
   display: flex;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 .bigCharts {
-  margin-top: 15px;
   gap: 0px;
 }
 .bigChart,
@@ -184,6 +209,9 @@
 .minChart {
   width: 50%;
 }
+.largeChart {
+  width: 100%;
+}
 .moneyChart {
   border-radius: 15px 0 0 15px;
 }
@@ -194,24 +222,103 @@
   justify-content: space-between;
 }
 .minChart .chartContainer img {
-  width: 45px;
+  width: 30px;
+}
+.largeChart {
+  padding: 0;
+}
+.largeChart .chartContainer {
+  justify-content: space-between;
+}
+.chartContainer .image {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+  background-image: linear-gradient(to right, white, transparent),
+    url("/images/waves.png");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  padding: 25px;
+  position: relative;
+  height: 100%;
+}
+.textArea {
+  padding: 0 25px;
+  height: 260px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 60%;
+}
+.textArea span {
+  color: #6b7280;
+}
+.textArea h3 {
+  color: #283448;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chartMetrics {
+  display: flex;
+  margin-top: 60px;
+  gap: 35px;
+}
+.chartMetric:nth-of-type(2) {
+  padding-left: 30px;
+  border-left: 1px solid #eaedf1;
+}
+.chartMetric img {
+  width: 15px;
+}
+.chartContainer .image img {
+  width: 220px;
+  right: 0;
+  top: 0;
 }
 .chartInfo {
   text-align: right;
 }
 .chartInfo h3 {
-  font-size: 30px;
-  font-weight: 400;
-  color: #262738;
+  font-size: 20px;
+  font-weight: 600;
+  color: #283448;
+}
+.chartInfo span {
+  color: #6b7280;
 }
 .bigChart h3 {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #283448;
+}
+.bigChart span {
+  color: #6b7280;
 }
 .moneyChart {
   width: 37%;
 }
 .performanceChart {
   width: 63%;
+}
+.icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid#eceaf3;
+  border-radius: 15px;
+}
+.clientPlus {
+  background-color: #e1f8e9;
+}
+.mostRequested {
+  background-color: #fbf5e4;
 }
 @media (max-width: 1200px) {
   .charts .moneyChart {

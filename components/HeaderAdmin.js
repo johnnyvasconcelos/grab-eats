@@ -17,6 +17,7 @@ const HeaderAdmin = () => {
             <img src="/images/bell.svg" alt="bell svg icon" />
           </div>
           <img src="/images/cog.svg" alt="bell svg icon" />
+          <button class={`btn ${styles.logout}`}>sair</button>
         </div>
       </header>
     </>

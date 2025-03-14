@@ -2,5 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/painel-admin": "pages/painel-admin.js"
+  "/painel-admin": "pages/painel-admin.js",
+  "/": "pages/index.js",
+  "/api/grafico-lucros": "pages/api/grafico-lucros.js",
+  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
+  "/api/restaurante": "pages/api/restaurante.js"
 }

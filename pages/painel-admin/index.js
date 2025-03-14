@@ -30,21 +30,33 @@ function PainelAdmin() {
             <section className={styles.metrics}>
               <h2>Métricas</h2>
               <div className={styles.charts}>
-                <article className={`${styles.chart} ${styles.minChart}`}>
+                <article className={`${styles.chart} ${styles.largeChart}`}>
                   <div className={`${styles.chartContainer} flex`}>
-                    <img src="/images/chart.svg" alt="svg ic" />
-                    <div className={styles.chartInfo}>
-                      <span>Pedidos (Hoje)</span>
-                      <h3>123</h3>
+                    <div className={styles.textArea}>
+                      <h2 className={styles.title}>Bem-vindo(a), Fonseca!</h2>
+                      <span>
+                        O restaurante lucrou 49% a mais que no mês passado.
+                        Parabéns!
+                      </span>
+                      <div className={styles.chartMetrics}>
+                        <div className={styles.chartMetric}>
+                          <h3>
+                            22
+                            <img src="/images/chartUp.svg" alt="sv ic" />
+                          </h3>
+                          <span>Pedidos de Hoje</span>
+                        </div>
+                        <div className={styles.chartMetric}>
+                          <h3>
+                            $4878
+                            <img src="/images/chartUp.svg" alt="sv ic" />
+                          </h3>
+                          <span>Lucro</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </article>
-                <article className={`${styles.chart} ${styles.minChart}`}>
-                  <div className={`${styles.chartContainer} flex`}>
-                    <img src="/images/cancellations.svg" alt="svg ic" />
-                    <div className={styles.chartInfo}>
-                      <span>Cancelamentos</span>
-                      <h3>123</h3>
+                    <div className={styles.image}>
+                      <img src="/images/woman-market.webp" alt="ic svg" />
                     </div>
                   </div>
                 </article>
@@ -52,7 +64,9 @@ function PainelAdmin() {
               <div className={styles.charts}>
                 <article className={`${styles.chart} ${styles.minChart}`}>
                   <div className={`${styles.chartContainer} flex`}>
-                    <img src="/images/client-plus.svg" alt="svg ic" />
+                    <div className={`${styles.icon} ${styles.clientPlus}`}>
+                      <img src="/images/client-plus.svg" alt="svg ic" />
+                    </div>
                     <div className={styles.chartInfo}>
                       <span>Novos Clientes</span>
                       <h3>123</h3>
@@ -61,7 +75,9 @@ function PainelAdmin() {
                 </article>
                 <article className={`${styles.chart} ${styles.minChart}`}>
                   <div className={`${styles.chartContainer} flex`}>
-                    <img src="/images/most-requested.svg" alt="svg ic" />
+                    <div className={`${styles.icon} ${styles.mostRequested}`}>
+                      <img src="/images/most-requested.svg" alt="svg ic" />
+                    </div>
                     <div className={`${styles.chartInfo} ${styles.longTitle}`}>
                       <span>Mais Pedido</span>
                       <h3>X Queijo</h3>

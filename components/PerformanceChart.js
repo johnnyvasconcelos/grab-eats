@@ -36,7 +36,6 @@ export default function PerformanceChart() {
   if (error) return <p>{error}</p>;
   return (
     <article className={`${styles.performanceChart} ${styles.bigChart}`}>
-      <h3>Performance (Dias da Semana)</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -69,10 +68,11 @@ export default function PerformanceChart() {
             }}
           />
 
-          <Bar dataKey="pedidos" fill="#8884d8" name="Pedidos" />
-          <Bar dataKey="revenue" fill="#82ca9d" name="Lucro" />
+          <Bar dataKey="pedidos" fill="#358ffc" name="Pedidos" />
+          <Bar dataKey="revenue" fill="#a855f7" name="Lucro" />
         </BarChart>
       </ResponsiveContainer>
+      <h3>Performance (Dias da Semana)</h3>
     </article>
   );
 }

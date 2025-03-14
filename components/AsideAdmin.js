@@ -6,14 +6,11 @@ function AsideAdmin() {
       <header className="flex">
         <img src="/images/small-logo.png" alt="logo svg" />
         <span>Restaurante</span>
-        <button>
-          <img src="/images/back.svg" alt="back icon svg" />
-        </button>
       </header>
       <nav>
         <h2>Restaurante</h2>
         <ul>
-          <li>
+          <li className={styles.active}>
             <Link href="/painel-admin/">
               <img src="/images/house.svg" alt="house icon svg" />
               <span>Início</span>
