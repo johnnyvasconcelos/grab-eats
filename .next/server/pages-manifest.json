@@ -2,13 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/produto/[id]": "pages/produto/[id].js",
-  "/pedidos": "pages/pedidos.js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
-  "/api/restaurante": "pages/api/restaurante.js",
-  "/api/finalizar": "pages/api/finalizar.js",
-  "/api/pedidos": "pages/api/pedidos.js",
-  "/painel-admin": "pages/painel-admin.js",
-  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
-  "/api/grafico-lucros": "pages/api/grafico-lucros.js"
+  "/painel-admin": "pages/painel-admin.js"
 }

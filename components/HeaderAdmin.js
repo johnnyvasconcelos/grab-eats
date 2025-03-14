@@ -4,15 +4,19 @@ const HeaderAdmin = () => {
     <>
       <header className={`flex ${styles.headerAdmin}`}>
         <div className={`flex ${styles.headerAdminContainer}`}>
-          <p>Bem-vindo(a), Fonseca!</p>
           <form className={styles.searchBar}>
             <input type="text" placeholder="Pesquisa..." />
             <img src="/images/search.svg" alt="search icon svg" />
           </form>
+          <p>Bem-vindo(a), Fonseca!</p>
         </div>
         <div className={`flex ${styles.headerImages}`}>
           <img src="/images/moon.svg" alt="moon svg icon" />
-          <img src="/images/bell.svg" alt="bell svg icon" />
+          <div className={styles.countArea}>
+            <span className={`count flex ${styles.count}`}>1</span>
+            <img src="/images/bell.svg" alt="bell svg icon" />
+          </div>
+          <img src="/images/cog.svg" alt="bell svg icon" />
         </div>
       </header>
     </>

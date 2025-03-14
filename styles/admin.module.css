@@ -8,7 +8,7 @@
 }
 .asideAdmin {
   position: relative;
-  width: 19%;
+  width: 17%;
   max-width: 250px;
   background: white;
   height: 100svh;
@@ -102,14 +102,24 @@
   width: 100%;
 }
 .headerImages {
-  gap: 15px;
+  gap: 18px;
 }
 .headerImages img {
-  width: 20px;
+  width: 18px;
   cursor: pointer;
 }
+.countArea {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.countArea .count {
+  top: -7px;
+  left: -5px;
+}
 .contentAdmin {
-  width: 81%;
+  width: 83%;
   display: flex;
   flex-direction: column;
   color: #6c6e8b;
@@ -123,19 +133,23 @@
   justify-content: space-between;
 }
 .headerAdminContainer {
-  gap: 20px;
+  gap: 22px;
+  width: 62%;
+  justify-content: space-between;
 }
 .headerAdminContainer p {
-  margin-left: 20px;
+  text-align: center;
+  font-weight: 600;
 }
 .headerAdminContainer form {
   display: flex;
   align-items: center;
   background-color: #eaedf1;
-  border: 1px solid#9495ad;
+  border: 1px solid #eaedf1;
   padding: 0 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 40px;
+  margin-left: 20px;
 }
 .headerAdminContainer form input {
   border: none;
@@ -158,16 +172,23 @@
 }
 .bigCharts {
   margin-top: 15px;
+  gap: 0px;
 }
 .bigChart,
 .chart {
   background-color: white;
   padding: 25px;
-  border: 1px solid #f4f2fa;
+  border: 1px solid#eceaf3;
   border-radius: 15px;
 }
 .minChart {
   width: 50%;
+}
+.moneyChart {
+  border-radius: 15px 0 0 15px;
+}
+.performanceChart {
+  border-radius: 0 15px 15px 0;
 }
 .minChart .chartContainer {
   justify-content: space-between;
@@ -180,6 +201,8 @@
 }
 .chartInfo h3 {
   font-size: 30px;
+  font-weight: 400;
+  color: #262738;
 }
 .bigChart h3 {
   margin-bottom: 20px;

@@ -41,10 +41,30 @@ function PainelAdmin() {
                 </article>
                 <article className={`${styles.chart} ${styles.minChart}`}>
                   <div className={`${styles.chartContainer} flex`}>
+                    <img src="/images/cancellations.svg" alt="svg ic" />
+                    <div className={styles.chartInfo}>
+                      <span>Cancelamentos</span>
+                      <h3>123</h3>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div className={styles.charts}>
+                <article className={`${styles.chart} ${styles.minChart}`}>
+                  <div className={`${styles.chartContainer} flex`}>
                     <img src="/images/client-plus.svg" alt="svg ic" />
                     <div className={styles.chartInfo}>
-                      <span>Clientes Novos</span>
+                      <span>Novos Clientes</span>
                       <h3>123</h3>
+                    </div>
+                  </div>
+                </article>
+                <article className={`${styles.chart} ${styles.minChart}`}>
+                  <div className={`${styles.chartContainer} flex`}>
+                    <img src="/images/most-requested.svg" alt="svg ic" />
+                    <div className={`${styles.chartInfo} ${styles.longTitle}`}>
+                      <span>Mais Pedido</span>
+                      <h3>X Queijo</h3>
                     </div>
                   </div>
                 </article>
