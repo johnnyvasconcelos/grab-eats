@@ -57,7 +57,7 @@ export default function MoneyChart() {
             </PieChart>
           </ResponsiveContainer>
           <p>
-            <h3>Lucro nos Últimos 30 Dias</h3>
+            <h3>Lucro nos Últimos 14 Dias</h3>
             <span>Lucro Total: R$ {total.toFixed(2)}</span>
           </p>
         </>

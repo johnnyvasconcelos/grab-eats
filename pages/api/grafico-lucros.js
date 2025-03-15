@@ -6,7 +6,7 @@ export default async function graficoLucro(req, res) {
         DATE(data_pedido) AS data_pedido, 
         SUM(preco * quantidade) AS preco 
         FROM pedidos 
-        WHERE data_pedido >= CURDATE() - INTERVAL 30 DAY 
+        WHERE data_pedido >= CURDATE() - INTERVAL 14 DAY 
         GROUP BY DATE(data_pedido) 
         ORDER BY data_pedido ASC
       `);

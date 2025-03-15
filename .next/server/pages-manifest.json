@@ -2,7 +2,13 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/pedidos": "pages/pedidos.js",
   "/produto/[id]": "pages/produto/[id].js",
-  "/painel-admin": "pages/painel-admin.js"
+  "/painel-admin": "pages/painel-admin.js",
+  "/api/restaurante": "pages/api/restaurante.js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
+  "/pedidos": "pages/pedidos.js",
+  "/api/pedidos": "pages/api/pedidos.js",
+  "/api/grafico-lucros": "pages/api/grafico-lucros.js",
+  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
+  "/api/pedidos-semana-passada": "pages/api/pedidos-semana-passada.js"
 }

@@ -89,10 +89,10 @@ export default function PerformanceChart() {
           <Bar
             yAxisId="right"
             dataKey="pedidos"
-            fill="#ef4444"
+            fill="#358ffc"
             name="Pedidos"
           />
-          <Bar yAxisId="left" dataKey="revenue" fill="#358ffc" name="Lucro" />
+          <Bar yAxisId="left" dataKey="revenue" fill="#22c55e" name="Lucro" />
         </BarChart>
       </ResponsiveContainer>
       <h3>Performance na Última Semana</h3>
