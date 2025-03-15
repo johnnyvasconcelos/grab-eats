@@ -98,6 +98,44 @@ function PainelAdmin() {
               <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <PerformanceChart />
               </div>
+              <div className={styles.charts}>
+                <div className={styles.largeChart}>
+                  <div className={`${styles.chart} ${styles.tableChart}`}>
+                    <h2>Usuários Cadastrados</h2>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>image</th>
+                          <th>nome</th>
+                          <th>nome de usuário</th>
+                          <th>último login</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>#1</td>
+                          <td>
+                            <img src="/images/user.jpg" alt="img user" />
+                          </td>
+                          <td>Rodrigo</td>
+                          <td>rodrigo01</td>
+                          <td>10-11-24</td>
+                        </tr>
+                        <tr>
+                          <td>#2</td>
+                          <td>
+                            <img src="/images/user.jpg" alt="img user" />
+                          </td>
+                          <td>Vitória</td>
+                          <td>votoria_silva</td>
+                          <td>10-10-24</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </section>
           </div>
         </div>

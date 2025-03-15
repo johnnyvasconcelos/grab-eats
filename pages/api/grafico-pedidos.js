@@ -7,7 +7,7 @@ export default async function graficoPedidos(req, res) {
           COUNT(id) AS orders, 
           SUM(preco * quantidade) AS revenue 
         FROM pedidos 
-        WHERE data_pedido >= CURDATE() - INTERVAL 7 DAY 
+        WHERE data_pedido >= CURDATE() - INTERVAL 6 DAY 
         GROUP BY DATE(data_pedido) 
         ORDER BY date ASC
       `);

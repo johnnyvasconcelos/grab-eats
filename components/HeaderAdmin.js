@@ -11,17 +11,26 @@ const HeaderAdmin = () => {
         </div>
         <div className={`flex ${styles.headerImages}`}>
           <img src="/images/moon.svg" alt="moon svg icon" />
-          <div className={styles.countArea}>
+          <a href="/painel-admin/pedidos" className={styles.countArea}>
             <span className={`count flex ${styles.count}`}>1</span>
             <img src="/images/bell.svg" alt="bell svg icon" />
-          </div>
-          <img src="/images/cog.svg" alt="cog svg icon" />
-          <img src="/images/log.svg" alt="log svg icon" />
+          </a>
+          <a href="/painel-admin/configuracoes-gerais">
+            <img src="/images/cog.svg" alt="cog svg icon" />
+          </a>
+          <a href="/painel-admin/log-de-pedidos">
+            <img src="/images/log.svg" alt="log svg icon" />
+          </a>
           <button class={`btn ${styles.logout}`}>sair</button>
-          <div className={styles.imageUser} title="User">
+          <a
+            href="/painel-admin/usuarios"
+            className={styles.imageUser}
+            title="User"
+          >
             <img src="/images/user.jpg" alt="img user" />
-          </div>
+          </a>
         </div>
+        9
       </header>
     </>
   );

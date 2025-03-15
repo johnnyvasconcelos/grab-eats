@@ -10,12 +10,14 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+
 export default function PerformanceChart() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [resumoSemanaPassada, setResumoSemanaPassada] = useState(null);
   const [loadingResumo, setLoadingResumo] = useState(true);
+  const [screenWidth, setScreenWidth] = useState(0);
   useEffect(() => {
     fetch("/api/grafico-pedidos")
       .then((res) => res.json())
@@ -44,13 +46,20 @@ export default function PerformanceChart() {
         setLoadingResumo(false);
       });
   }, []);
+  useEffect(() => {
+    const updateScreenWidth = () => setScreenWidth(window.innerWidth);
+    updateScreenWidth();
+    window.addEventListener("resize", updateScreenWidth);
+    return () => window.removeEventListener("resize", updateScreenWidth);
+  }, []);
+  const hideYAxes = screenWidth <= 620;
   if (loading) return <p>Carregando Gráfico...</p>;
   if (error) return <p>{error}</p>;
   return (
     <article
       className={`${styles.largeChart} ${styles.bigChart} ${styles.performanceChart}`}
     >
-      <ResponsiveContainer height={300}>
+      <ResponsiveContainer width="99%" height={300}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
@@ -64,12 +73,16 @@ export default function PerformanceChart() {
               });
             }}
           />
-          <YAxis
-            yAxisId="left"
-            tickFormatter={(tick) => `${tick}`}
-            stroke="#22c55e"
-          />
-          <YAxis yAxisId="right" orientation="right" stroke="#eab308" />
+          {!hideYAxes && (
+            <YAxis
+              yAxisId="left"
+              tickFormatter={(tick) => `${tick}`}
+              stroke="#22c55e"
+            />
+          )}
+          {!hideYAxes && (
+            <YAxis yAxisId="right" orientation="right" stroke="#eab308" />
+          )}
           <Tooltip
             formatter={(value, name) => {
               if (name === "Lucro") {

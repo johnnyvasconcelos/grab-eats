@@ -13,6 +13,7 @@ import {
 export default function OrderChart() {
   const [data, setData] = useState([]);
   const [totalPedidos, setTotalPedidos] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(0);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -37,15 +38,22 @@ export default function OrderChart() {
     }
     fetchData();
   }, []);
+  useEffect(() => {
+    const updateScreenWidth = () => setScreenWidth(window.innerWidth);
+    updateScreenWidth();
+    window.addEventListener("resize", updateScreenWidth);
+    return () => window.removeEventListener("resize", updateScreenWidth);
+  }, []);
+  const hideYAxis = screenWidth <= 620;
   return (
     <article className={`${styles.orderChart} ${styles.bigChart}`}>
       {data.length > 0 ? (
         <>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="99%" height={300}>
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
-              <YAxis />
+              {!hideYAxis && <YAxis />}
               <Tooltip formatter={(value) => value} />
               <Line
                 type="monotone"
