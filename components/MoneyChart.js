@@ -19,7 +19,6 @@ export default function MoneyChart() {
             0
           );
           setTotal(totalValue);
-
           setData(
             result.map((item, index) => ({
               name: new Date(item.data_pedido).toLocaleDateString("pt-BR"),
@@ -59,7 +58,7 @@ export default function MoneyChart() {
           </ResponsiveContainer>
           <p>
             <h3>Lucro nos Últimos 30 Dias</h3>
-            <span>Total dos Pedidos: R$ {total.toFixed(2)}</span>
+            <span>Lucro Total: R$ {total.toFixed(2)}</span>
           </p>
         </>
       ) : (

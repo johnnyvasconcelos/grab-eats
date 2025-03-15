@@ -1,5 +1,4 @@
 import styles from "../styles/admin.module.css";
-import Link from "next/link";
 function AsideAdmin() {
   return (
     <aside className={styles.asideAdmin}>
@@ -11,43 +10,43 @@ function AsideAdmin() {
         <h2>Restaurante</h2>
         <ul>
           <li className={styles.active}>
-            <Link href="/painel-admin/">
+            <a href="/painel-admin/">
               <img src="/images/house.svg" alt="house icon svg" />
               <span>Início</span>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="/painel-admin/pratos">
+            <a href="/painel-admin/pratos">
               <img src="/images/dish.svg" alt="dish icon svg" />
               <span>Pratos</span>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="/painel-admin/pedidos">
+            <a href="/painel-admin/pedidos">
               <img src="/images/order.svg" alt="order icon svg" />
               <span>Pedidos</span>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="/painel-admin/log-de-pedidos">
+            <a href="/painel-admin/log-de-pedidos">
               <img src="/images/log.svg" alt="log icon svg" />
               <span>Log de Pedidos</span>
-            </Link>
+            </a>
           </li>
         </ul>
         <h2>Configurações</h2>
         <ul>
           <li>
-            <Link href="/painel-admin/usuarios">
+            <a href="/painel-admin/usuarios">
               <img src="/images/user.svg" alt="user icon svg" />
               <span>Usuários</span>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="/painel-admin/configuracoes-gerais">
+            <a href="/painel-admin/configuracoes-gerais">
               <img src="/images/restaurant.svg" alt="restaurant icon svg" />
               <span>Gerais</span>
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>

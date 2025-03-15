@@ -12,9 +12,9 @@
   font-size: 20px;
 }
 .asideAdmin {
-  width: 17%;
+  width: 19%;
   max-width: 250px;
-  background: #1e293b;
+  background: #121a28;
   height: 100svh;
   border-right: 1px solid #eaedf1;
   position: relative;
@@ -25,6 +25,10 @@
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 81%;
+  display: flex;
+  flex-direction: column;
+  color: #6c6e8b;
 }
 .contentAdmin::-webkit-scrollbar {
   display: none;
@@ -59,13 +63,13 @@
   width: 60%;
 }
 .asideAdmin header span {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: rgba(234, 237, 241, 0.7);
 }
 .asideAdmin nav h2 {
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 12px;
   color: #b9bad0;
   font-weight: 500;
   letter-spacing: 1px;
@@ -89,11 +93,11 @@
   border-top: 1px solid #324159;
 }
 .asideAdmin nav ul li a {
-  padding: 10px 25px;
+  padding: 14px 25px;
   color: #e0e1eb;
   display: flex;
   height: 100%;
-  font-size: 15px;
+  font-size: 17px;
   border-bottom: 1px solid #324159;
 }
 .asideAdmin nav ul li:hover::before,
@@ -136,12 +140,6 @@
   top: -7px;
   left: -5px;
 }
-.contentAdmin {
-  width: 83%;
-  display: flex;
-  flex-direction: column;
-  color: #6c6e8b;
-}
 .headerAdmin {
   height: 70px;
   padding: 10px 20px;
@@ -150,12 +148,26 @@
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   justify-content: space-between;
 }
+.headerAdmin .imageUser {
+  width: 45px;
+  height: 45px;
+}
+.headerAdmin .imageUser img {
+  width: 100%;
+  border-radius: 50%;
+}
 .headerAdmin .logout {
-  padding: 8px 20px;
+  padding: 8px 25px;
   background-color: transparent;
-  border: 1px solid #aab5c4;
+  border: 1px solid #eab308;
+  background-color: #eab308;
+  color: white;
   font-size: 16px;
+  font-weight: 600;
   margin-left: 20px;
+}
+.headerAdmin .logout:hover {
+  background-color: #cd9a02;
 }
 .headerAdminContainer {
   gap: 22px;
@@ -190,6 +202,13 @@
 }
 .metrics h2 {
   font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.pageInfo {
+  font-weight: 400;
+  font-size: 18px;
 }
 .charts {
   display: flex;
@@ -205,6 +224,7 @@
   padding: 25px;
   border: 1px solid#eceaf3;
   border-radius: 15px;
+  width: 50%;
 }
 .minChart {
   width: 50%;
@@ -212,10 +232,10 @@
 .largeChart {
   width: 100%;
 }
-.moneyChart {
+.bigChart:nth-of-type(1) {
   border-radius: 15px 0 0 15px;
 }
-.performanceChart {
+.bigChart:nth-of-type(2) {
   border-radius: 0 15px 15px 0;
 }
 .minChart .chartContainer {
@@ -226,6 +246,9 @@
 }
 .largeChart {
   padding: 0;
+}
+.performanceChart {
+  padding: 25px;
 }
 .largeChart .chartContainer {
   justify-content: space-between;
@@ -299,14 +322,9 @@
 .bigChart span {
   color: #6b7280;
 }
-.moneyChart {
-  width: 37%;
-}
-.performanceChart {
-  width: 63%;
-}
 .icon {
   width: 70px;
+  min-width: 70px;
   height: 70px;
   display: flex;
   align-items: center;
@@ -320,23 +338,7 @@
 .mostRequested {
   background-color: #fbf5e4;
 }
-@media (max-width: 1200px) {
-  .charts .moneyChart {
-    width: 45%;
-    height: auto;
-  }
-  .charts .performanceChart {
-    width: 55%;
-  }
-}
 @media (max-width: 1100px) {
-  .charts .moneyChart {
-    width: 50%;
-    height: auto;
-  }
-  .charts .performanceChart {
-    width: 50%;
-  }
   .asideAdmin {
     width: 70px;
     min-width: 45px;
@@ -374,31 +376,76 @@
   }
   .bigCharts {
     flex-direction: column;
+    gap: 15px;
   }
   .charts .bigChart {
     width: 100%;
   }
+  .bigChart:nth-of-type(1),
+  .bigChart:nth-of-type(2) {
+    border-radius: 15px;
+  }
+  .textArea h3 {
+    font-size: 18px;
+  }
 }
 @media (max-width: 767px) {
   .asideAdmin {
-    width: 50px;
-    min-width: 45px;
+    width: 55px;
+    min-width: 55px;
   }
-  .asideAdmin nav ul li {
-    height: 42px;
+  .bigChart,
+  .chart {
+    padding: 20px;
   }
-  .asideAdmin header img {
-    width: 25px;
+  .largeChart .chartContainer {
+    flex-direction: column;
   }
-  .asideAdmin nav ul li a img {
-    width: 15px;
+  .largeChart .chartContainer .textArea {
+    height: auto;
+  }
+  .largeChart .chartContainer .textArea,
+  .largeChart .chartContainer .image {
+    width: 100%;
+    padding: 0;
+  }
+  .largeChart .chartContainer .image {
+    justify-content: center;
+  }
+}
+@media (max-width: 670px) {
+  .headerImages {
+    display: none;
+  }
+  .headerAdminContainer {
+    width: 100%;
+  }
+  .headerAdminContainer form,
+  .headerAdminContainer form input {
+    width: 100%;
+  }
+  .metrics h2 {
+    font-size: 20px;
+  }
+  .metrics .textArea h2 {
+    font-size: 18px;
   }
 }
 @media (max-width: 560px) {
+  .pageInfo {
+    display: none;
+  }
   .charts {
     flex-direction: column;
   }
   .minChart {
     width: 100%;
+  }
+  .chartMetrics {
+    margin-top: 40px;
+    gap: 15px;
+  }
+  .chartMetric:nth-of-type(2) {
+    padding-left: 15px;
   }
 }

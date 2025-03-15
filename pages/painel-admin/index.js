@@ -4,6 +4,7 @@ import AsideAdmin from "../../components/AsideAdmin";
 import HeaderAdmin from "../../components/HeaderAdmin";
 import PerformanceChart from "../../components/PerformanceChart";
 import MoneyChart from "../../components/MoneyChart";
+import OrderChart from "../../components/OrderChart";
 import Head from "next/head";
 function PainelAdmin() {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
@@ -28,7 +29,12 @@ function PainelAdmin() {
           <div className={styles.contentAdmin}>
             <HeaderAdmin />
             <section className={styles.metrics}>
-              <h2>Métricas</h2>
+              <h2>
+                <span>Métricas</span>
+                <span className={styles.pageInfo}>
+                  Dashboard &nbsp;&gt;&nbsp; Início
+                </span>
+              </h2>
               <div className={styles.charts}>
                 <article className={`${styles.chart} ${styles.largeChart}`}>
                   <div className={`${styles.chartContainer} flex`}>
@@ -80,13 +86,16 @@ function PainelAdmin() {
                     </div>
                     <div className={`${styles.chartInfo} ${styles.longTitle}`}>
                       <span>Mais Pedido</span>
-                      <h3>X Queijo</h3>
+                      <h3>X Queijo Catupiry</h3>
                     </div>
                   </div>
                 </article>
               </div>
               <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <MoneyChart />
+                <OrderChart />
+              </div>
+              <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <PerformanceChart />
               </div>
             </section>

@@ -14,6 +14,8 @@ export default function PerformanceChart() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resumoSemanaPassada, setResumoSemanaPassada] = useState(null);
+  const [loadingResumo, setLoadingResumo] = useState(true);
   useEffect(() => {
     fetch("/api/grafico-pedidos")
       .then((res) => res.json())
@@ -31,12 +33,24 @@ export default function PerformanceChart() {
         setError("Erro ao carregar os dados");
         setLoading(false);
       });
+    fetch("/api/pedidos-semana-passada")
+      .then((res) => res.json())
+      .then((resumo) => {
+        setResumoSemanaPassada(resumo);
+        setLoadingResumo(false);
+      })
+      .catch(() => {
+        setResumoSemanaPassada(null);
+        setLoadingResumo(false);
+      });
   }, []);
   if (loading) return <p>Carregando Gráfico...</p>;
   if (error) return <p>{error}</p>;
   return (
-    <article className={`${styles.performanceChart} ${styles.bigChart}`}>
-      <ResponsiveContainer width="100%" height={300}>
+    <article
+      className={`${styles.largeChart} ${styles.bigChart} ${styles.performanceChart}`}
+    >
+      <ResponsiveContainer height={300}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
@@ -50,7 +64,12 @@ export default function PerformanceChart() {
               });
             }}
           />
-          <YAxis tickFormatter={(tick) => `R$ ${tick}`} />
+          <YAxis
+            yAxisId="left"
+            tickFormatter={(tick) => `${tick}`}
+            stroke="#22c55e"
+          />
+          <YAxis yAxisId="right" orientation="right" stroke="#eab308" />
           <Tooltip
             formatter={(value, name) => {
               if (name === "Lucro") {
@@ -67,12 +86,27 @@ export default function PerformanceChart() {
               });
             }}
           />
-
-          <Bar dataKey="pedidos" fill="#358ffc" name="Pedidos" />
-          <Bar dataKey="revenue" fill="#a855f7" name="Lucro" />
+          <Bar
+            yAxisId="right"
+            dataKey="pedidos"
+            fill="#ef4444"
+            name="Pedidos"
+          />
+          <Bar yAxisId="left" dataKey="revenue" fill="#358ffc" name="Lucro" />
         </BarChart>
       </ResponsiveContainer>
-      <h3>Performance (Dias da Semana)</h3>
+      <h3>Performance na Última Semana</h3>
+      {loadingResumo ? (
+        <p>Carregando dados da semana passada...</p>
+      ) : resumoSemanaPassada ? (
+        <span>
+          Pedidos Semana Passada: <strong>{resumoSemanaPassada.orders}</strong>{" "}
+          &nbsp;|&nbsp; Lucro Semana Passada:{" "}
+          <strong>R$ {resumoSemanaPassada.revenue}</strong>
+        </span>
+      ) : (
+        <p>Não há dados da semana passada.</p>
+      )}
     </article>
   );
 }

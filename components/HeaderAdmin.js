@@ -8,7 +8,6 @@ const HeaderAdmin = () => {
             <input type="text" placeholder="Pesquisa..." />
             <img src="/images/search.svg" alt="search icon svg" />
           </form>
-          <p>Bem-vindo(a), Fonseca!</p>
         </div>
         <div className={`flex ${styles.headerImages}`}>
           <img src="/images/moon.svg" alt="moon svg icon" />
@@ -16,8 +15,12 @@ const HeaderAdmin = () => {
             <span className={`count flex ${styles.count}`}>1</span>
             <img src="/images/bell.svg" alt="bell svg icon" />
           </div>
-          <img src="/images/cog.svg" alt="bell svg icon" />
+          <img src="/images/cog.svg" alt="cog svg icon" />
+          <img src="/images/log.svg" alt="log svg icon" />
           <button class={`btn ${styles.logout}`}>sair</button>
+          <div className={styles.imageUser} title="User">
+            <img src="/images/user.jpg" alt="img user" />
+          </div>
         </div>
       </header>
     </>
