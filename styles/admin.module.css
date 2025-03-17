@@ -168,6 +168,7 @@
 .headerAdminContainer form input {
   border: none;
   background-color: transparent;
+  font-size: 18px;
 }
 .headerAdminContainer form input:focus {
   outline: none;
@@ -480,6 +481,9 @@
   }
 }
 @media (max-width: 560px) {
+  .headedrAdmin {
+    min-height: 74px;
+  }
   .pageInfo,
   .recharts-layer {
     display: none;

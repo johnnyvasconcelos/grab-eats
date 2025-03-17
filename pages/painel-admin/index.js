@@ -20,7 +20,9 @@ function PainelAdmin() {
   return (
     <>
       <Head>
-        <title>Painel Administrativo - {nomeRestaurante}</title>
+        <title>
+          Painel Administrativo - {nomeRestaurante || "Restaurante"}
+        </title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main className={styles.mainAdmin}>

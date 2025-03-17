@@ -4,7 +4,10 @@
   "/_document": "pages/_document.js",
   "/painel-admin": "pages/painel-admin.js",
   "/api/grafico-lucros": "pages/api/grafico-lucros.js",
-  "/api/pedidos-semana-passada": "pages/api/pedidos-semana-passada.js",
   "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
-  "/api/restaurante": "pages/api/restaurante.js"
+  "/api/pedidos-semana-passada": "pages/api/pedidos-semana-passada.js",
+  "/api/restaurante": "pages/api/restaurante.js",
+  "/painel-admin/pratos": "pages/painel-admin/pratos.js",
+  "/painel-admin/pedidos": "pages/painel-admin/pedidos.js",
+  "/painel-admin/configuracoes-gerais": "pages/painel-admin/configuracoes-gerais.js"
 }
