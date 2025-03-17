@@ -21,7 +21,7 @@ const HeaderAdmin = () => {
           <a href="/painel-admin/log-de-pedidos">
             <img src="/images/log.svg" alt="log svg icon" />
           </a>
-          <button class={`btn ${styles.logout}`}>sair</button>
+          <button className={`btn ${styles.logout}`}>sair</button>
           <a
             href="/painel-admin/usuarios"
             className={styles.imageUser}
@@ -30,7 +30,6 @@ const HeaderAdmin = () => {
             <img src="/images/user.jpg" alt="img user" />
           </a>
         </div>
-        9
       </header>
     </>
   );

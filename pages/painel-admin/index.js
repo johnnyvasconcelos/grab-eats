@@ -54,7 +54,7 @@ function PainelAdmin() {
                         </div>
                         <div className={styles.chartMetric}>
                           <h3>
-                            $4878
+                            R$4878
                             <img src="/images/chartUp.svg" alt="sv ic" />
                           </h3>
                           <span>Lucro</span>
@@ -105,31 +105,31 @@ function PainelAdmin() {
                     <table>
                       <thead>
                         <tr>
-                          <th>id</th>
-                          <th>image</th>
+                          <th className={styles.noneMobile}>id</th>
+                          <th className={styles.noneMobile}>image</th>
                           <th>nome</th>
-                          <th>nome de usuário</th>
+                          <th className={styles.noneMobile}>usuário</th>
                           <th>último login</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>#1</td>
-                          <td>
+                          <td className={styles.noneMobile}>#1</td>
+                          <td className={styles.noneMobile}>
                             <img src="/images/user.jpg" alt="img user" />
                           </td>
                           <td>Rodrigo</td>
-                          <td>rodrigo01</td>
+                          <td className={styles.noneMobile}>rodrigo01</td>
                           <td>10-11-24</td>
                         </tr>
                         <tr>
-                          <td>#2</td>
-                          <td>
+                          <td className={styles.noneMobile}>#1</td>
+                          <td className={styles.noneMobile}>
                             <img src="/images/user.jpg" alt="img user" />
                           </td>
-                          <td>Vitória</td>
-                          <td>votoria_silva</td>
-                          <td>10-10-24</td>
+                          <td>Rodrigo</td>
+                          <td className={styles.noneMobile}>rodrigo01</td>
+                          <td>10-11-24</td>
                         </tr>
                       </tbody>
                     </table>

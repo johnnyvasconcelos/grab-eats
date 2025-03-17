@@ -19,7 +19,6 @@ export default function OrderChart() {
       try {
         const response = await fetch("/api/grafico-pedidos");
         const result = await response.json();
-        console.log("Dados recebidos:", result);
         if (Array.isArray(result)) {
           const formattedData = result.map((item) => ({
             name: new Date(item.date).toLocaleDateString("pt-BR"),

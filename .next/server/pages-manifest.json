@@ -3,6 +3,16 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin": "pages/painel-admin.js",
+  "/": "pages/index.js",
+  "/api/grafico-lucros": "pages/api/grafico-lucros.js",
+  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
+  "/api/pedidos-semana-passada": "pages/api/pedidos-semana-passada.js",
+  "/api/restaurante": "pages/api/restaurante.js",
   "/cardapio": "pages/cardapio.js",
-  "/produto/[id]": "pages/produto/[id].js"
+  "/api/produtos": "pages/api/produtos.js",
+  "/produto/[id]": "pages/produto/[id].js",
+  "/api/finalizar": "pages/api/finalizar.js",
+  "/pedidos": "pages/pedidos.js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js",
+  "/api/pedidos": "pages/api/pedidos.js"
 }

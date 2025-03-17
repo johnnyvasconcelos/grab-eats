@@ -7,45 +7,49 @@ function AsideAdmin() {
         <span>Restaurante</span>
       </header>
       <nav>
-        <h2>Restaurante</h2>
         <ul>
-          <li className={styles.active}>
+          <h2>Restaurante</h2>
+          <li className={`${styles.noneMobile} ${styles.active}`}>
             <a href="/painel-admin/">
               <img src="/images/house.svg" alt="house icon svg" />
               <span>Início</span>
             </a>
           </li>
-          <li>
+          <li className={styles.firstItem}>
             <a href="/painel-admin/pratos">
               <img src="/images/dish.svg" alt="dish icon svg" />
-              <span>Pratos</span>
+              <span>Cardápio</span>
             </a>
           </li>
-          <li>
+          <li className={styles.orders}>
             <a href="/painel-admin/pedidos">
-              <img src="/images/order.svg" alt="order icon svg" />
+              <img src="/images/orders.svg" alt="order icon svg" />
               <span>Pedidos</span>
             </a>
           </li>
-          <li>
-            <a href="/painel-admin/log-de-pedidos">
-              <img src="/images/log.svg" alt="log icon svg" />
-              <span>Log de Pedidos</span>
+          <li className={styles.sales}>
+            <a href="/painel-admin/vendas">
+              <img src="/images/sales.svg" alt="sale icon svg" />
+              <span>Vendas</span>
             </a>
           </li>
-        </ul>
-        <h2>Configurações</h2>
-        <ul>
-          <li>
+          <h2>Configurações</h2>
+          <li className={styles.noneMobile}>
             <a href="/painel-admin/usuarios">
               <img src="/images/user.svg" alt="user icon svg" />
               <span>Usuários</span>
             </a>
           </li>
-          <li>
+          <li className={styles.noneMobile}>
             <a href="/painel-admin/configuracoes-gerais">
               <img src="/images/restaurant.svg" alt="restaurant icon svg" />
               <span>Gerais</span>
+            </a>
+          </li>
+          <li>
+            <a href="/painel-admin/configuracoes-gerais">
+              <img src="/images/menu.svg" alt="restaurant icon svg" />
+              <span>Mais</span>
             </a>
           </li>
         </ul>
