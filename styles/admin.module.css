@@ -1,5 +1,5 @@
 .mainAdmin {
-  background-color: #f8f8fa;
+  background-color: var(--lightAdmin);
 }
 .containerAdmin {
   display: flex;
@@ -8,15 +8,15 @@
   overflow: hidden;
 }
 .title {
-  color: #283448;
+  color: var(--darkAdmin);
   font-size: 20px;
 }
 .asideAdmin {
   width: 19%;
   max-width: 250px;
-  background: #f8f8fa;
+  background: white;
   height: 100svh;
-  border-right: 1px solid rgba(152, 167, 202, 0.41);
+  border-right: 1px var(--lightGrayAdmin);
   position: relative;
 }
 .contentAdmin {
@@ -28,7 +28,7 @@
   width: 81%;
   display: flex;
   flex-direction: column;
-  color: #6c6e8b;
+  color: var(--textAdmin);
 }
 .contentAdmin::-webkit-scrollbar {
   display: none;
@@ -41,31 +41,10 @@
   border-radius: 5px;
   width: 25px;
 }
-.asideAdmin header button {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 10px;
-  right: -25px;
-  background-color: transparent;
-  border: 3px solid #9092b0;
-  border-radius: 5px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-}
-.asideAdmin header button:hover {
-  background-color: #eaedf1;
-}
-.asideAdmin header button img {
-  width: 60%;
-}
 .asideAdmin header span {
   font-size: 16px;
   font-weight: 600;
-  color: #888d93;
+  color: var(--grayAdmin);
 }
 .asideAdmin nav h2 {
   text-transform: uppercase;
@@ -83,7 +62,7 @@
 }
 .asideAdmin nav ul li:hover,
 .asideAdmin nav ul .active {
-  background-color: #eaedf1;
+  background-color: var(--lightGrayAdmin);
 }
 .asideAdmin nav ul li::before {
   position: absolute;
@@ -94,15 +73,15 @@
   background: transparent;
 }
 .asideAdmin nav ul li:nth-of-type(1) {
-  border-top: 1px solid rgba(152, 167, 202, 0.41);
+  border-top: 1px solid var(--lightGrayAdmin);
 }
 .asideAdmin nav ul li a {
   padding: 14px 25px;
-  color: #6c6e8b;
+  color: var(--grayAdmin);
   display: flex;
   height: 100%;
   font-size: 17px;
-  border-bottom: 1px solid rgba(152, 167, 202, 0.41);
+  border-bottom: 1px solid var(--lightGrayAdmin);
 }
 .asideAdmin nav ul li img {
   width: 15px;
@@ -115,11 +94,15 @@
   padding: 20px;
   text-align: center;
   font-size: 12px;
-  color: #9092b0;
+  color: var(--grayAdmin);
   width: 100%;
 }
 .headerImages {
   gap: 18px;
+}
+.headerImages a {
+  align-items: center;
+  display: flex;
 }
 .headerImages img {
   width: 18px;
@@ -139,7 +122,7 @@
   height: 70px;
   padding: 10px 20px;
   background-color: white;
-  border-bottom: 1px solid #eaedf1;
+  border-bottom: 1px solid var(--lightGrayAdmin);
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   justify-content: space-between;
 }
@@ -154,8 +137,8 @@
 .headerAdmin .logout {
   padding: 8px 25px;
   background-color: transparent;
-  border: 1px solid #eab308;
-  background-color: #eab308;
+  border: 1px solid var(--yellowAdmin);
+  background-color: var(--yellowAdmin);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -176,8 +159,8 @@
 .headerAdminContainer form {
   display: flex;
   align-items: center;
-  background-color: #eaedf1;
-  border: 1px solid #eaedf1;
+  background-color: var(--lightGrayAdmin);
+  border: 1px solid var(--lightGrayAdmin);
   padding: 0 15px;
   border-radius: 5px;
   height: 40px;
@@ -217,7 +200,7 @@
 .chart {
   background-color: white;
   padding: 25px;
-  border: 1px solid#eceaf3;
+  border: 1px solid var(--lightGrayAdmin);
   border-radius: 15px;
   width: 50%;
 }
@@ -271,10 +254,10 @@
   width: 60%;
 }
 .textArea span {
-  color: #6b7280;
+  color: var(--grayAdmin);
 }
 .textArea h3 {
-  color: #283448;
+  color: var(--darkAdmin);
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -287,7 +270,7 @@
 }
 .chartMetric:nth-of-type(2) {
   padding-left: 30px;
-  border-left: 1px solid #eaedf1;
+  border-left: 1px solid var(--lightGrayAdmin);
 }
 .chartMetric img {
   width: 15px;
@@ -303,19 +286,19 @@
 .chartInfo h3 {
   font-size: 20px;
   font-weight: 600;
-  color: #283448;
+  color: var(--darkAdmin);
 }
 .chartInfo span {
-  color: #6b7280;
+  color: var(--grayAdmin);
 }
 .bigChart h3 {
   margin-top: 20px;
   font-size: 20px;
   font-weight: 600;
-  color: #283448;
+  color: var(--darkAdmin);
 }
 .bigChart span {
-  color: #6b7280;
+  color: var(--grayAdmin);
 }
 .icon {
   width: 70px;
@@ -324,14 +307,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid#eceaf3;
+  border: 1px solid var(--lightGrayAdmin);
   border-radius: 15px;
 }
 .clientPlus {
-  background-color: #e1f8e9;
+  background-color: var(--lightGrayAdmin);
 }
 .mostRequested {
-  background-color: #fbf5e4;
+  background-color: var(--lightAdmin);
 }
 .tableChart {
   width: 100%;
@@ -342,17 +325,20 @@
   overflow: hidden;
 }
 .tableChart table thead {
-  background-color: #eaedf1;
+  background-color: var(--lightGrayAdmin);
   height: 60px;
   text-transform: capitalize;
 }
 .tableChart table tbody td {
-  border: 1px solid #eaedf1;
+  border: 1px solid var(--lightGrayAdmin);
   text-align: center;
 }
 .tableChart table tbody td img {
   width: 45px;
   border-radius: 50%;
+}
+.noneScreen {
+  display: none;
 }
 @media (max-width: 1100px) {
   .asideAdmin {
@@ -364,14 +350,19 @@
     height: 75px;
     max-width: 100svw;
     border-right: none;
-    border-top: 1px solid rgba(152, 167, 202, 0.41);
+    border-top: 1px solid var(--grayAdminAlt);
+    background-color: var(--lightAdmin);
   }
   .asideAdmin > header,
   .asideAdmin nav h2,
   .asideAdmin h2,
   .asideAdmin .asideFooter,
-  .noneMobile {
+  .noneMobile,
+  .asideAdmin nav ul li a .noneMobile {
     display: none;
+  }
+  .noneScreen {
+    display: block;
   }
   .asideAdmin nav {
     width: 100%;
@@ -408,7 +399,7 @@
     align-items: center;
     gap: 5px;
     justify-content: flex-end;
-    border-left: 1px solid rgba(152, 167, 202, 0.41);
+    border-left: 1px solid var(--grayAdminAlt);
   }
   .asideAdmin nav ul .firstItem a {
     border-left: none;

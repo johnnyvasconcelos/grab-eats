@@ -17,19 +17,46 @@ function AsideAdmin() {
           </li>
           <li className={styles.firstItem}>
             <a href="/painel-admin/pratos">
-              <img src="/images/dish.svg" alt="dish icon svg" />
+              <img
+                src="/images/food.svg"
+                alt="dish icon svg"
+                className={styles.noneScreen}
+              />
+              <img
+                src="/images/dish.svg"
+                alt="dish icon svg"
+                className={styles.noneMobile}
+              />
               <span>Cardápio</span>
             </a>
           </li>
           <li className={styles.orders}>
             <a href="/painel-admin/pedidos">
-              <img src="/images/orders.svg" alt="order icon svg" />
+              <img
+                src="/images/orders.svg"
+                alt="order icon svg"
+                className={styles.noneScreen}
+              />
+              <img
+                src="/images/order.svg"
+                alt="order icon svg"
+                className={styles.noneMobile}
+              />
               <span>Pedidos</span>
             </a>
           </li>
           <li className={styles.sales}>
             <a href="/painel-admin/vendas">
-              <img src="/images/sales.svg" alt="sale icon svg" />
+              <img
+                src="/images/sale.svg"
+                alt="sale icon svg"
+                className={styles.noneScreen}
+              />
+              <img
+                src="/images/sales.svg"
+                alt="sales icon svg"
+                className={styles.noneMobile}
+              />
               <span>Vendas</span>
             </a>
           </li>
