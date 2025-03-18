@@ -25,20 +25,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/painel-admin.js"
     ],
-    "/painel-admin/configuracoes-gerais": [
+    "/produto/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/configuracoes-gerais.js"
-    ],
-    "/painel-admin/pedidos": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/pedidos.js"
-    ],
-    "/painel-admin/pratos": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/pratos.js"
+      "static/chunks/pages/produto/[id].js"
     ]
   },
   "ampFirstPages": []

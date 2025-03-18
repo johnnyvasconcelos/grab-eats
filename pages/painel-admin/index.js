@@ -8,6 +8,8 @@ import OrderChart from "../../components/OrderChart";
 import Head from "next/head";
 function PainelAdmin() {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
+  const [lucroDiario, setLucroDiario] = useState("");
+  const [pedidosHoje, setPedidosHoje] = useState("");
   const [error, setError] = useState(null);
   useEffect(() => {
     fetch("/api/restaurante")
@@ -16,6 +18,31 @@ function PainelAdmin() {
         setNomeRestaurante(data.nome_restaurante);
       })
       .catch(() => setError("Erro ao fazer requisição"));
+  }, []);
+  useEffect(() => {
+    fetch("/api/lucro-hoje")
+      .then((res) => res.json())
+      .then((data) => {
+        setLucroDiario(data.preco);
+      })
+      .catch(() => setError("Erro ao buscar lucro diário"));
+  }, []);
+  useEffect(() => {
+    fetch("/api/pedidos-hoje")
+      .then((res) => res.json())
+      .then((data) => {
+        setPedidosHoje(data);
+      })
+      .catch(() => setError("Erro ao buscar pedidos diários"));
+  }, []);
+  const [percentualCrescimento, setPercentualCrescimento] = useState(null);
+  useEffect(() => {
+    fetch("/api/lucro-comparacao")
+      .then((res) => res.json())
+      .then((data) => {
+        setPercentualCrescimento(data.percentual);
+      })
+      .catch(() => setError("Erro ao buscar comparação de lucro"));
   }, []);
   return (
     <>
@@ -43,20 +70,25 @@ function PainelAdmin() {
                     <div className={styles.textArea}>
                       <h2 className={styles.title}>Bem-vindo(a), Fonseca!</h2>
                       <span>
-                        O restaurante lucrou 49% a mais que no mês passado.
-                        Parabéns!
+                        {percentualCrescimento > 0
+                          ? `O restaurante lucrou ${percentualCrescimento}% a mais que no mês passado. Parabéns!`
+                          : percentualCrescimento < 0
+                          ? `O restaurante teve uma queda de ${Math.abs(
+                              percentualCrescimento
+                            )}% em relação ao mês passado!`
+                          : `O lucro permaneceu o mesmo em relação ao mês passado!`}
                       </span>
                       <div className={styles.chartMetrics}>
                         <div className={styles.chartMetric}>
                           <h3>
-                            22
+                            {pedidosHoje}
                             <img src="/images/chartUp.svg" alt="sv ic" />
                           </h3>
                           <span>Pedidos de Hoje</span>
                         </div>
                         <div className={styles.chartMetric}>
                           <h3>
-                            R$4878
+                            R$ {lucroDiario}
                             <img src="/images/chartUp.svg" alt="sv ic" />
                           </h3>
                           <span>Lucro</span>

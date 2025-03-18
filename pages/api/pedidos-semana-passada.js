@@ -17,6 +17,5 @@ export default async function pedidosSemanaPassada(req, res) {
     }
   } catch (error) {
     console.error("Erro ao buscar resumo da semana passada:", error);
-    res.status(500).json({ error: "Erro ao buscar resumo" });
   }
 }

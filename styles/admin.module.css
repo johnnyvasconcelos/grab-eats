@@ -16,7 +16,7 @@
   max-width: 250px;
   background: white;
   height: 100svh;
-  border-right: 1px var(--lightGrayAdmin);
+  border-right: 1px solid var(--lightGrayAdmin);
   position: relative;
 }
 .contentAdmin {
@@ -140,12 +140,14 @@
   border: 1px solid var(--yellowAdmin);
   background-color: var(--yellowAdmin);
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   margin-left: 20px;
+  text-transform: uppercase;
 }
 .headerAdmin .logout:hover {
   background-color: #cd9a02;
+  border: 1px solid #cd9a02;
 }
 .headerAdminContainer {
   gap: 22px;

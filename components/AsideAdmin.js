@@ -73,7 +73,7 @@ function AsideAdmin() {
               <span>Gerais</span>
             </a>
           </li>
-          <li>
+          <li className={styles.noneScreen}>
             <a href="/painel-admin/configuracoes-gerais">
               <img src="/images/menu.svg" alt="restaurant icon svg" />
               <span>Mais</span>

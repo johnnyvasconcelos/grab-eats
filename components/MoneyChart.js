@@ -67,10 +67,8 @@ export default function MoneyChart() {
               />
             </LineChart>
           </ResponsiveContainer>
-          <p>
-            <h3>Lucro nos Últimos 14 Dias</h3>
-            <span>Lucro Total: R$ {total.toFixed(2)}</span>
-          </p>
+          <h3>Lucro nos Últimos 14 Dias</h3>
+          <span>Lucro Total: R$ {total.toFixed(2)}</span>
         </>
       ) : (
         <p>Carregando Gráfico...</p>

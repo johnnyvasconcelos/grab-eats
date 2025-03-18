@@ -62,10 +62,8 @@ export default function OrderChart() {
               />
             </LineChart>
           </ResponsiveContainer>
-          <p>
-            <h3>Pedidos na Última Semana</h3>
-            <span>Total de Pedidos: {totalPedidos}</span>
-          </p>
+          <h3>Pedidos na Última Semana</h3>
+          <span>Total de Pedidos: {totalPedidos}</span>
         </>
       ) : (
         <p>Carregando Gráfico...</p>
