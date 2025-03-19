@@ -23,7 +23,7 @@ function PainelAdmin() {
     fetch("/api/lucro-hoje")
       .then((res) => res.json())
       .then((data) => {
-        setLucroDiario(data.preco);
+        setLucroDiario(Math.floor(data.preco));
       })
       .catch(() => setError("Erro ao buscar lucro diário"));
   }, []);
@@ -43,6 +43,24 @@ function PainelAdmin() {
         setPercentualCrescimento(data.percentual);
       })
       .catch(() => setError("Erro ao buscar comparação de lucro"));
+  }, []);
+  const [novosClientes, setNovosClientes] = useState(0);
+  useEffect(() => {
+    fetch("/api/clientes-novos")
+      .then((res) => res.json())
+      .then((data) => {
+        setNovosClientes(data.novosClientes);
+      })
+      .catch(() => setError("Erro ao buscar novos clientes"));
+  }, []);
+  const [maisPedido, setMaisPedido] = useState("");
+  useEffect(() => {
+    fetch("/api/mais-pedido")
+      .then((res) => res.json())
+      .then((data) => {
+        setMaisPedido(data.nome_pedido);
+      })
+      .catch(() => setError("Erro ao buscar o pedido mais solicitado"));
   }, []);
   return (
     <>
@@ -109,7 +127,7 @@ function PainelAdmin() {
                     </div>
                     <div className={styles.chartInfo}>
                       <span>Novos Clientes</span>
-                      <h3>123</h3>
+                      <h3>{novosClientes}</h3>
                     </div>
                   </div>
                 </article>
@@ -120,7 +138,7 @@ function PainelAdmin() {
                     </div>
                     <div className={`${styles.chartInfo} ${styles.longTitle}`}>
                       <span>Mais Pedido</span>
-                      <h3>X Queijo Catupiry</h3>
+                      <h3>{maisPedido}</h3>
                     </div>
                   </div>
                 </article>
@@ -132,10 +150,10 @@ function PainelAdmin() {
               <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <PerformanceChart />
               </div>
-              <div className={styles.charts}>
+              <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <div className={styles.largeChart}>
                   <div className={`${styles.chart} ${styles.tableChart}`}>
-                    <h2>Usuários Cadastrados</h2>
+                    <h3>Usuários Cadastrados</h3>
                     <table>
                       <thead>
                         <tr>

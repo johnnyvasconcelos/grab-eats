@@ -10,7 +10,6 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-
 export default function PerformanceChart() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,7 +58,10 @@ export default function PerformanceChart() {
     <article
       className={`${styles.largeChart} ${styles.bigChart} ${styles.performanceChart}`}
     >
-      <ResponsiveContainer width="99%" height={300}>
+      <ResponsiveContainer
+        width={screenWidth <= 620 ? "100%" : "103%"}
+        height={300}
+      >
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
@@ -108,18 +110,6 @@ export default function PerformanceChart() {
           <Bar yAxisId="left" dataKey="revenue" fill="#22c55e" name="Lucro" />
         </BarChart>
       </ResponsiveContainer>
-      <h3>Performance na Última Semana</h3>
-      {loadingResumo ? (
-        <p>Carregando dados da semana passada...</p>
-      ) : resumoSemanaPassada ? (
-        <span>
-          Pedidos Semana Passada: <strong>{resumoSemanaPassada.orders}</strong>{" "}
-          &nbsp;|&nbsp; Lucro Semana Passada:{" "}
-          <strong>R$ {resumoSemanaPassada.revenue}</strong>
-        </span>
-      ) : (
-        <p>Não há dados da semana passada.</p>
-      )}
     </article>
   );
 }

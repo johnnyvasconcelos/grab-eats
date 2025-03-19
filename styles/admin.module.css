@@ -322,6 +322,12 @@
 .tableChart {
   width: 100%;
 }
+.tableChart h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--darkAdmin);
+  margin-bottom: 20px;
+}
 .tableChart table {
   width: 100%;
   border-radius: 15px;
@@ -363,6 +369,9 @@
   .noneMobile,
   .asideAdmin nav ul li a .noneMobile {
     display: none;
+  }
+  .tableChart table tbody td {
+    padding: 15px;
   }
   .noneScreen {
     display: block;
