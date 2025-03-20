@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/admin.module.css";
 import AsideAdmin from "../../components/AsideAdmin";
 import HeaderAdmin from "../../components/HeaderAdmin";
-import PerformanceChart from "../../components/PerformanceChart";
 import MoneyChart from "../../components/MoneyChart";
 import OrderChart from "../../components/OrderChart";
 import Head from "next/head";
@@ -72,7 +71,7 @@ function PainelAdmin() {
       </Head>
       <main className={styles.mainAdmin}>
         <div className={styles.containerAdmin}>
-          <AsideAdmin />
+          <AsideAdmin activePage="inicio" />
           <div className={styles.contentAdmin}>
             <HeaderAdmin />
             <section className={styles.metrics}>
@@ -146,9 +145,6 @@ function PainelAdmin() {
               <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <MoneyChart />
                 <OrderChart />
-              </div>
-              <div className={`${styles.charts} ${styles.bigCharts}`}>
-                <PerformanceChart />
               </div>
               <div className={`${styles.charts} ${styles.bigCharts}`}>
                 <div className={styles.largeChart}>

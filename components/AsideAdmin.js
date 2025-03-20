@@ -1,5 +1,6 @@
 import styles from "../styles/admin.module.css";
-function AsideAdmin() {
+
+function AsideAdmin({ activePage }) {
   return (
     <aside className={styles.asideAdmin}>
       <header className="flex">
@@ -9,14 +10,22 @@ function AsideAdmin() {
       <nav>
         <ul>
           <h2>Restaurante</h2>
-          <li className={`${styles.noneMobile} ${styles.active}`}>
+          <li
+            className={`${styles.noneMobile} ${
+              activePage === "inicio" ? styles.active : ""
+            }`}
+          >
             <a href="/painel-admin/">
               <img src="/images/house.svg" alt="house icon svg" />
               <span>Início</span>
             </a>
           </li>
-          <li className={styles.firstItem}>
-            <a href="/painel-admin/pratos">
+          <li
+            className={`${styles.firstItem} ${
+              activePage === "cardapio" ? styles.active : ""
+            }`}
+          >
+            <a href="/painel-admin/cardapio">
               <img
                 src="/images/food.svg"
                 alt="dish icon svg"
@@ -30,7 +39,11 @@ function AsideAdmin() {
               <span>Cardápio</span>
             </a>
           </li>
-          <li className={styles.orders}>
+          <li
+            className={`${styles.orders} ${
+              activePage === "pedidos" ? styles.active : ""
+            }`}
+          >
             <a href="/painel-admin/pedidos">
               <img
                 src="/images/orders.svg"
@@ -45,7 +58,11 @@ function AsideAdmin() {
               <span>Pedidos</span>
             </a>
           </li>
-          <li className={styles.sales}>
+          <li
+            className={`${styles.sales} ${
+              activePage === "vendas" ? styles.active : ""
+            }`}
+          >
             <a href="/painel-admin/vendas">
               <img
                 src="/images/sale.svg"
@@ -61,19 +78,27 @@ function AsideAdmin() {
             </a>
           </li>
           <h2>Configurações</h2>
-          <li className={styles.noneMobile}>
+          <li
+            className={`${styles.noneMobile} ${
+              activePage === "usuarios" ? styles.active : ""
+            }`}
+          >
             <a href="/painel-admin/usuarios">
               <img src="/images/user.svg" alt="user icon svg" />
               <span>Usuários</span>
             </a>
           </li>
-          <li className={styles.noneMobile}>
+          <li
+            className={`${styles.noneMobile} ${
+              activePage === "configuracoes" ? styles.active : ""
+            }`}
+          >
             <a href="/painel-admin/configuracoes-gerais">
               <img src="/images/restaurant.svg" alt="restaurant icon svg" />
               <span>Gerais</span>
             </a>
           </li>
-          <li className={styles.noneScreen}>
+          <li className={`${styles.noneScreen}`}>
             <a href="/painel-admin/configuracoes-gerais">
               <img src="/images/menu.svg" alt="restaurant icon svg" />
               <span>Mais</span>
@@ -87,4 +112,5 @@ function AsideAdmin() {
     </aside>
   );
 }
+
 export default AsideAdmin;

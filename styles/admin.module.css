@@ -265,6 +265,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  text-transform: capitalize;
 }
 .chartMetrics {
   display: flex;
@@ -290,6 +291,7 @@
   font-size: 20px;
   font-weight: 600;
   color: var(--darkAdmin);
+  text-transform: capitalize;
 }
 .chartInfo span {
   color: var(--grayAdmin);
@@ -518,6 +520,7 @@
   .chartInfo h3,
   .bigChart p h3 {
     font-size: 18px;
+    text-transform: capitalize;
   }
   .chartInfo span,
   .bigChart span {
