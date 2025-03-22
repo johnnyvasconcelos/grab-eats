@@ -1,11 +1,20 @@
+import { useEffect, useState } from "react";
 import styles from "../styles/admin.module.css";
-
 function AsideAdmin({ activePage }) {
+  const [nomeRestaurante, setNomeRestaurante] = useState("");
+  useEffect(() => {
+    fetch("/api/restaurante")
+      .then((res) => res.json())
+      .then((data) => {
+        setNomeRestaurante(data.nome_restaurante);
+      })
+      .catch(() => setError("Erro ao fazer requisição"));
+  }, []);
   return (
     <aside className={styles.asideAdmin}>
       <header className="flex">
         <img src="/images/small-logo.png" alt="logo svg" />
-        <span>Restaurante</span>
+        <span>{nomeRestaurante}</span>
       </header>
       <nav>
         <ul>

@@ -2,14 +2,14 @@ import { queryDb } from "../../lib/db";
 export default async function lucroComparacao(req, res) {
   try {
     const lucroUltimos30Dias = await queryDb(`
-      SELECT COALESCE(SUM(valor_total), 0) AS total 
-      FROM pedidos 
+      SELECT COALESCE(SUM(quantidade * preco), 0) AS total
+      FROM pedidos
       WHERE data_pedido >= CURDATE() - INTERVAL 30 DAY
     `);
     const lucro30DiasAnteriores = await queryDb(`
-      SELECT COALESCE(SUM(valor_total), 0) AS total 
-      FROM pedidos 
-      WHERE data_pedido >= CURDATE() - INTERVAL 60 DAY 
+      SELECT COALESCE(SUM(quantidade * preco), 0) AS total
+      FROM pedidos
+      WHERE data_pedido >= CURDATE() - INTERVAL 60 DAY
       AND data_pedido < CURDATE() - INTERVAL 30 DAY
     `);
     const totalUltimos30Dias = lucroUltimos30Dias[0].total;
@@ -19,9 +19,12 @@ export default async function lucroComparacao(req, res) {
       percentualCrescimento =
         ((totalUltimos30Dias - total30DiasAnteriores) / total30DiasAnteriores) *
         100;
+    } else if (totalUltimos30Dias > 0) {
+      percentualCrescimento = 100;
     }
-    res.json({ percentual: percentualCrescimento.toFixed(2) });
+    res.json({ percentual: Math.round(percentualCrescimento) });
   } catch (error) {
     console.error("Erro ao buscar dados do lucro", error);
+    res.status(500).json({ error: "Erro interno ao calcular lucro" });
   }
 }

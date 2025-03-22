@@ -64,9 +64,9 @@ function PainelAdmin() {
   return (
     <>
       <Head>
-        <title>
-          Painel Administrativo - {nomeRestaurante || "Restaurante"}
-        </title>
+        <title>{`Painel Admnistrativo - ${
+          nomeRestaurante || "Restaurante"
+        }`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main className={styles.mainAdmin}>
@@ -87,13 +87,15 @@ function PainelAdmin() {
                     <div className={styles.textArea}>
                       <h2 className={styles.title}>Bem-vindo(a), Fonseca!</h2>
                       <span>
-                        {percentualCrescimento > 0
-                          ? `O restaurante lucrou ${percentualCrescimento}% a mais que no mês passado. Parabéns!`
-                          : percentualCrescimento < 0
-                          ? `O restaurante teve uma queda de ${Math.abs(
-                              percentualCrescimento
-                            )}% em relação ao mês passado!`
-                          : `O lucro permaneceu o mesmo em relação ao mês passado!`}
+                        {percentualCrescimento !== null
+                          ? percentualCrescimento > 0
+                            ? `O restaurante lucrou ${percentualCrescimento}% a mais que no mês passado. Parabéns!`
+                            : percentualCrescimento < 0
+                            ? `O restaurante teve uma queda de ${Math.abs(
+                                percentualCrescimento
+                              )}% em relação ao mês passado!`
+                            : `O lucro permaneceu o mesmo em relação ao mês passado!`
+                          : `Sem dados suficientes para comparar o lucro com o mês passado.`}
                       </span>
                       <div className={styles.chartMetrics}>
                         <div className={styles.chartMetric}>
@@ -153,7 +155,6 @@ function PainelAdmin() {
                     <table>
                       <thead>
                         <tr>
-                          <th className={styles.noneMobile}>id</th>
                           <th className={styles.noneMobile}>image</th>
                           <th>nome</th>
                           <th className={styles.noneMobile}>usuário</th>
@@ -162,7 +163,6 @@ function PainelAdmin() {
                       </thead>
                       <tbody>
                         <tr>
-                          <td className={styles.noneMobile}>#1</td>
                           <td className={styles.noneMobile}>
                             <img src="/images/user.jpg" alt="img user" />
                           </td>
@@ -171,7 +171,6 @@ function PainelAdmin() {
                           <td>10-11-24</td>
                         </tr>
                         <tr>
-                          <td className={styles.noneMobile}>#1</td>
                           <td className={styles.noneMobile}>
                             <img src="/images/user.jpg" alt="img user" />
                           </td>

@@ -16,7 +16,9 @@ const configuracoesGerais = () => {
   return (
     <>
       <Head>
-        <title>Configurações Gerais - {nomeRestaurante || "Restaurante"}</title>
+        <title>{`Configurações Gerais - ${
+          nomeRestaurante || "Restaurante"
+        }`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main className={styles.mainAdmin}>

@@ -45,6 +45,10 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--grayAdmin);
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .asideAdmin nav h2 {
   text-transform: uppercase;

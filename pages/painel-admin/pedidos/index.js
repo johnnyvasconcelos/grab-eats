@@ -16,7 +16,7 @@ const pedidos = () => {
   return (
     <>
       <Head>
-        <title>Pedidos - {nomeRestaurante || "Restaurante"}</title>
+        <title>{`Pedidos - ${nomeRestaurante || "Restaurante"}`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main className={styles.mainAdmin}>

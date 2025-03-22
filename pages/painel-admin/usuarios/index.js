@@ -16,7 +16,7 @@ const usuarios = () => {
   return (
     <>
       <Head>
-        <title>Usuários - {nomeRestaurante || "Restaurante"}</title>
+        <title>{`Usuários - ${nomeRestaurante || "Restaurante"}`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main className={styles.mainAdmin}>

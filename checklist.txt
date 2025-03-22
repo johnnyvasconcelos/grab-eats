@@ -1,0 +1,4 @@
+exibir usuários na tabela index
+corrigir lucro
+corrigir o "mais pedido"
+colocar todas as apis do index no dashboard.js

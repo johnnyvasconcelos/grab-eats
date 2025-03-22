@@ -16,9 +16,10 @@ const cardapio = () => {
   return (
     <>
       <Head>
-        <title>Cardápio - {nomeRestaurante || "Restaurante"}</title>
+        <title>{`Cardápio - ${nomeRestaurante || "Restaurante"}`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
+
       <main className={styles.mainAdmin}>
         <div className={styles.containerAdmin}>
           <AsideAdmin activePage="cardapio" />
