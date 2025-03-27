@@ -10,6 +10,7 @@ function PainelAdmin() {
   const [lucroDiario, setLucroDiario] = useState("");
   const [pedidosHoje, setPedidosHoje] = useState("");
   const [error, setError] = useState(null);
+  const [usuarios, setUsuarios] = useState([]);
   useEffect(() => {
     fetch("/api/restaurante")
       .then((res) => res.json())
@@ -60,6 +61,14 @@ function PainelAdmin() {
         setMaisPedido(data.nome_pedido);
       })
       .catch(() => setError("Erro ao buscar o pedido mais solicitado"));
+  }, []);
+  useEffect(() => {
+    fetch("/api/usuarios-cadastrados")
+      .then((res) => res.json())
+      .then((data) => {
+        setUsuarios(data);
+      })
+      .catch(() => setError("Erro ao buscar usuários cadastrados"));
   }, []);
   return (
     <>
@@ -155,29 +164,35 @@ function PainelAdmin() {
                     <table>
                       <thead>
                         <tr>
-                          <th className={styles.noneMobile}>image</th>
-                          <th>nome</th>
-                          <th className={styles.noneMobile}>usuário</th>
-                          <th>último login</th>
+                          <th className={styles.noneMobile}>Imagem</th>
+                          <th>Nome</th>
+                          <th className={styles.noneMobile}>Usuário</th>
+                          <th>Último Login</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td className={styles.noneMobile}>
-                            <img src="/images/user.jpg" alt="img user" />
-                          </td>
-                          <td>Rodrigo</td>
-                          <td className={styles.noneMobile}>rodrigo01</td>
-                          <td>10-11-24</td>
-                        </tr>
-                        <tr>
-                          <td className={styles.noneMobile}>
-                            <img src="/images/user.jpg" alt="img user" />
-                          </td>
-                          <td>Rodrigo</td>
-                          <td className={styles.noneMobile}>rodrigo01</td>
-                          <td>10-11-24</td>
-                        </tr>
+                        {usuarios.map((usuario, index) => (
+                          <tr key={index}>
+                            <td className={styles.noneMobile}>
+                              <img
+                                src={
+                                  `images/${usuario.imagem}` ||
+                                  "/images/user.jpg"
+                                }
+                                alt={`Imagem de ${usuario.usuario}`}
+                              />
+                            </td>
+                            <td>{usuario.usuario}</td>
+                            <td className={styles.noneMobile}>
+                              {usuario.usuario}
+                            </td>
+                            <td>
+                              {new Date(
+                                usuario.ultimo_login
+                              ).toLocaleDateString()}
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
