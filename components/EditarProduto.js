@@ -1,51 +1,48 @@
 import { useState } from "react";
 import styles from "../styles/admin.module.css";
-
 export default function EditarProduto({
   produto,
   onClose,
   onUpdate,
   imagemProduto,
 }) {
-  const [formData, setFormData] = useState({ ...produto });
+  const [formData, setFormData] = useState({
+    nome_produto: produto?.nome_produto || "",
+    ingredientes: produto?.ingredientes || "",
+    preco: produto?.preco || "",
+    categoria_produto: produto?.categoria_produto || "",
+    descricao: produto?.descricao || "",
+  });
   const [imagem, setImagem] = useState(null);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleFileChange = (e) => {
-    setImagem(e.target.files[0]); // Guarda o arquivo no estado
+    setImagem(e.target.files[0]);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = new FormData();
-    data.append("id", formData.id);
-    data.append("nome_produto", formData.nome_produto);
-    data.append("ingredientes", formData.ingredientes);
-    data.append("preco", formData.preco);
-    data.append("categoria_produto", formData.categoria_produto);
-    data.append("descricao", formData.descricao);
+    Object.keys(formData).forEach((key) => data.append(key, formData[key]));
     if (imagem) {
       data.append("foto", imagem);
     }
-
-    const response = await fetch("/api/atualizarProduto", {
-      method: "POST",
-      body: data,
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      onUpdate();
-      onClose();
-    } else {
-      alert("Erro ao atualizar: " + result.error);
+    try {
+      const response = await fetch("/api/atualizarProduto", {
+        method: "POST",
+        body: data,
+      });
+      const result = await response.json();
+      if (response.ok) {
+        onUpdate();
+        onClose();
+      } else {
+        alert("Erro ao atualizar: " + result.error);
+      }
+    } catch (error) {
+      alert("Erro ao atualizar: " + error.message);
     }
   };
-
   return (
     <div className={styles.modal}>
       <div className="modal-content">
@@ -59,7 +56,6 @@ export default function EditarProduto({
             onChange={handleChange}
             required
           />
-
           <label>Ingredientes (separados por vírgula):</label>
           <input
             type="text"
@@ -68,7 +64,6 @@ export default function EditarProduto({
             onChange={handleChange}
             required
           />
-
           <label>Preço:</label>
           <input
             type="text"
@@ -77,7 +72,6 @@ export default function EditarProduto({
             onChange={handleChange}
             required
           />
-
           <label>Categoria:</label>
           <input
             type="text"
@@ -86,7 +80,6 @@ export default function EditarProduto({
             onChange={handleChange}
             required
           />
-
           <label>Descrição:</label>
           <textarea
             name="descricao"

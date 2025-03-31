@@ -3,7 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin/cardapio": "pages/painel-admin/cardapio.js",
-  "/api/restaurante": "pages/api/restaurante.js",
-  "/api/produtos": "pages/api/produtos.js",
   "/api/atualizarProduto": "pages/api/atualizarProduto.js"
 }

@@ -5,19 +5,16 @@ import HeaderAdmin from "../../../components/HeaderAdmin";
 import Head from "next/head";
 import EditarProduto from "../../../components/EditarProduto";
 import "boxicons/css/boxicons.min.css";
-
 const Cardapio = () => {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [produtos, setProdutos] = useState([]);
   const [produtoEditando, setProdutoEditando] = useState(null);
-
   useEffect(() => {
     fetch("/api/restaurante")
       .then((res) => res.json())
       .then((data) => setNomeRestaurante(data.nome_restaurante))
       .catch(() => console.error("Erro ao buscar restaurante"));
   }, []);
-
   const fetchProdutos = async () => {
     try {
       const response = await fetch("/api/produtos");
@@ -31,18 +28,15 @@ const Cardapio = () => {
       console.error("Erro ao buscar produtos:", error);
     }
   };
-
   useEffect(() => {
     fetchProdutos();
   }, []);
-
   return (
     <>
       <Head>
         <title>{`Cardápio - ${nomeRestaurante || "Restaurante"}`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-
       <main className={styles.mainAdmin}>
         <div className={styles.containerAdmin}>
           <AsideAdmin activePage="cardapio" />
@@ -116,5 +110,4 @@ const Cardapio = () => {
     </>
   );
 };
-
 export default Cardapio;
