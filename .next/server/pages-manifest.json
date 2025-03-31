@@ -3,19 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin/cardapio": "pages/painel-admin/cardapio.js",
-  "/painel-admin": "pages/painel-admin.js",
-  "/painel-admin/pedidos": "pages/painel-admin/pedidos.js",
   "/api/restaurante": "pages/api/restaurante.js",
   "/api/produtos": "pages/api/produtos.js",
-  "/api/lucro-hoje": "pages/api/lucro-hoje.js",
-  "/api/grafico-lucros": "pages/api/grafico-lucros.js",
-  "/api/pedidos-hoje": "pages/api/pedidos-hoje.js",
-  "/api/lucro-comparacao": "pages/api/lucro-comparacao.js",
-  "/api/grafico-pedidos": "pages/api/grafico-pedidos.js",
-  "/api/clientes-novos": "pages/api/clientes-novos.js",
-  "/api/usuarios-cadastrados": "pages/api/usuarios-cadastrados.js",
-  "/api/mais-pedido": "pages/api/mais-pedido.js",
-  "/painel-admin/vendas": "pages/painel-admin/vendas.js",
-  "/painel-admin/usuarios": "pages/painel-admin/usuarios.js",
-  "/painel-admin/configuracoes-gerais": "pages/painel-admin/configuracoes-gerais.js"
+  "/api/atualizarProduto": "pages/api/atualizarProduto.js"
 }

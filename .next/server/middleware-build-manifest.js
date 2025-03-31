@@ -20,35 +20,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/painel-admin": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin.js"
-    ],
     "/painel-admin/cardapio": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/painel-admin/cardapio.js"
-    ],
-    "/painel-admin/configuracoes-gerais": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/configuracoes-gerais.js"
-    ],
-    "/painel-admin/pedidos": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/pedidos.js"
-    ],
-    "/painel-admin/usuarios": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/usuarios.js"
-    ],
-    "/painel-admin/vendas": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin/vendas.js"
     ]
   },
   "ampFirstPages": []

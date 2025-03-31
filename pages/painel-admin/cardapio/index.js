@@ -3,33 +3,39 @@ import styles from "../../../styles/admin.module.css";
 import AsideAdmin from "../../../components/AsideAdmin";
 import HeaderAdmin from "../../../components/HeaderAdmin";
 import Head from "next/head";
-const cardapio = () => {
+import EditarProduto from "../../../components/EditarProduto";
+import "boxicons/css/boxicons.min.css";
+
+const Cardapio = () => {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [produtos, setProdutos] = useState([]);
+  const [produtoEditando, setProdutoEditando] = useState(null);
+
   useEffect(() => {
     fetch("/api/restaurante")
       .then((res) => res.json())
-      .then((data) => {
-        setNomeRestaurante(data.nome_restaurante);
-      })
-      .catch(() => setError("Erro ao fazer requisição"));
+      .then((data) => setNomeRestaurante(data.nome_restaurante))
+      .catch(() => console.error("Erro ao buscar restaurante"));
   }, []);
-  useEffect(() => {
-    const fetchProdutos = async () => {
-      try {
-        const response = await fetch("/api/produtos");
-        const data = await response.json();
-        if (response.ok) {
-          setProdutos(data);
-        } else {
-          console.error("Erro ao buscar produtos:", data.error);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar produtos:", error);
+
+  const fetchProdutos = async () => {
+    try {
+      const response = await fetch("/api/produtos");
+      const data = await response.json();
+      if (response.ok) {
+        setProdutos(data);
+      } else {
+        console.error("Erro ao buscar produtos:", data.error);
       }
-    };
+    } catch (error) {
+      console.error("Erro ao buscar produtos:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchProdutos();
   }, []);
+
   return (
     <>
       <Head>
@@ -62,21 +68,47 @@ const cardapio = () => {
                       />
                     </div>
                     <div className={styles.menuRestaurantText}>
-                      <h2>{produto.nome_produto}</h2>
-                      <p>{produto.descricao}</p>
-                      <p>{produto.ingredientes}</p>
+                      <h2 className={styles.titleProduct}>
+                        {produto.nome_produto}
+                      </h2>
+                      <h3 className={styles.categoryProduct}>
+                        {produto.categoria_produto}
+                      </h3>
+                      <p className={styles.description}>{produto.descricao}</p>
+                      <p className={styles.ingredients}>
+                        {produto.ingredientes
+                          .split(",")
+                          .map((ingrediente, index, array) => (
+                            <span key={index}>
+                              • {ingrediente.trim()}
+                              {index < array.length - 1 ? ", " : ""}
+                            </span>
+                          ))}
+                      </p>
                       <div className={styles.infoProduct}>
-                        <h3>{produto.categoria_produto}</h3>
-                        <strong>{produto.preco}</strong>
+                        <strong className={styles.productPrice}>
+                          {produto.preco}
+                        </strong>
                       </div>
-                    </div>
-                    <div className={styles.btns}>
-                      <button>Editar</button>
-                      <button>Remover</button>
+                      <div className={styles.btns}>
+                        <button onClick={() => setProdutoEditando(produto)}>
+                          Editar <i className={`${styles.ic} bx bx-pencil`}></i>
+                        </button>
+                        <button className={styles.rm}>
+                          Remover <i className={`${styles.ic} bx bx-trash`}></i>
+                        </button>
+                      </div>
                     </div>
                   </article>
                 ))}
               </div>
+              {produtoEditando && (
+                <EditarProduto
+                  produto={produtoEditando}
+                  onClose={() => setProdutoEditando(null)}
+                  onUpdate={fetchProdutos}
+                />
+              )}
             </section>
           </div>
         </div>
@@ -84,4 +116,5 @@ const cardapio = () => {
     </>
   );
 };
-export default cardapio;
+
+export default Cardapio;

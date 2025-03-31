@@ -368,7 +368,7 @@
 .menuRestaurantItem {
   border: 1px solid var(--grayAdminAlt);
   border-radius: 10px;
-  padding: 20px;
+  padding: 25px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -386,7 +386,7 @@
 
 .menuRestaurantText {
   width: 70%;
-  padding-left: 15px;
+  padding-left: 25px;
 }
 
 .menuRestaurantItem .btns {
@@ -396,23 +396,89 @@
   margin-top: 15px;
 }
 
+.menuRestaurantText p {
+  color: var(--dark-gray);
+}
+
+.categoryProduct {
+  color: var(--color-2);
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.productPrice {
+  font-size: 25px;
+  margin-top: 10px;
+  display: block;
+}
+
+.productPrice::before {
+  content: "R$ ";
+}
+
 .menuRestaurantItem .btns button {
   background-color: var(--color-1);
   color: var(--light);
   font-weight: 700;
-  border: none;
+  border: 2px solid var(--color-1);
   padding: 0x 15px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: 50%;
   height: 40px;
+  transition: var(--transition);
+}
+
+.ic {
+  transform: translateY(1px);
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.menuRestaurantItem .btns .rm {
+  background-color: transparent;
+  border: 1px solid var(--color-3);
+  color: var(--color-3);
 }
 
 .menuRestaurantItem .btns button:hover {
   background-color: var(--color-1-dark);
+  border: 1px solid var(--color-1-dark);
+}
+
+.menuRestaurantItem .btns .rm:hover {
+  background-color: var(--color-3);
+  border: 1px solid var(--color-3);
+  color: white;
+}
+
+.ingredients {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.modal {
+  background-color: var(--light);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.modal form input,
+.modal form textarea {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.modal label {
+  font-size: 20px;
 }
 
 @media (max-width: 1100px) {
@@ -545,6 +611,16 @@
   }
   .largeChart .chartContainer .image {
     justify-content: center;
+  }
+  .menuRestaurantText {
+    padding-left: 15px;
+  }
+  .btns .ic {
+    display: none;
+  }
+  .productPrice,
+  .titleProduct {
+    font-size: 20px;
   }
 }
 @media (max-width: 670px) {
