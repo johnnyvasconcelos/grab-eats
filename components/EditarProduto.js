@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../styles/admin.module.css";
+
 export default function EditarProduto({
   produto,
   onClose,
@@ -7,6 +8,7 @@ export default function EditarProduto({
   imagemProduto,
 }) {
   const [formData, setFormData] = useState({
+    id: produto?.id || "",
     nome_produto: produto?.nome_produto || "",
     ingredientes: produto?.ingredientes || "",
     preco: produto?.preco || "",
@@ -14,12 +16,19 @@ export default function EditarProduto({
     descricao: produto?.descricao || "",
   });
   const [imagem, setImagem] = useState(null);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+    if (name === "preco") {
+      value = value.replace(",", ".");
+    }
+    setFormData({ ...formData, [name]: value });
   };
+
   const handleFileChange = (e) => {
     setImagem(e.target.files[0]);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -43,6 +52,7 @@ export default function EditarProduto({
       alert("Erro ao atualizar: " + error.message);
     }
   };
+
   return (
     <div className={styles.modal}>
       <div className="modal-content">
