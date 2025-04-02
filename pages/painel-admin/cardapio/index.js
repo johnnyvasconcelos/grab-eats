@@ -31,6 +31,28 @@ const Cardapio = () => {
   useEffect(() => {
     fetchProdutos();
   }, []);
+  const removerProduto = async (id) => {
+    if (!window.confirm("Remover este prato?")) {
+      return;
+    }
+    try {
+      const response = await fetch("/api/removerProduto", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+      const data = await response.json();
+      location.reload();
+      if (!response.ok) {
+        alert(`Erro ao remover: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Erro ao remover produto:", error);
+      alert("Erro ao remover produto");
+    }
+  };
   return (
     <>
       <Head>
@@ -88,7 +110,10 @@ const Cardapio = () => {
                         <button onClick={() => setProdutoEditando(produto)}>
                           Editar <i className={`${styles.ic} bx bx-pencil`}></i>
                         </button>
-                        <button className={styles.rm}>
+                        <button
+                          className={styles.rm}
+                          onClick={() => removerProduto(produto.id)}
+                        >
                           Remover <i className={`${styles.ic} bx bx-trash`}></i>
                         </button>
                       </div>
@@ -96,6 +121,10 @@ const Cardapio = () => {
                   </article>
                 ))}
               </div>
+              <button className={`btn flex ${styles.newProduct}`}>
+                <span>Novo Prato</span>
+                <i className="bx bx-plus"></i>
+              </button>
               {produtoEditando && (
                 <EditarProduto
                   produto={produtoEditando}

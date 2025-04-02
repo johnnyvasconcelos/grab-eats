@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "../styles/admin.module.css";
-
 export default function EditarProduto({
   produto,
   onClose,
@@ -16,24 +15,21 @@ export default function EditarProduto({
     descricao: produto?.descricao || "",
   });
   const [imagem, setImagem] = useState(null);
-
-  const handleChange = (e) => {
+  const change = (e) => {
     let { name, value } = e.target;
     if (name === "preco") {
       value = value.replace(",", ".");
     }
     setFormData({ ...formData, [name]: value });
   };
-
-  const handleFileChange = (e) => {
+  const fileChange = (e) => {
     setImagem(e.target.files[0]);
   };
-
-  const handleSubmit = async (e) => {
+  const Submit = async (e) => {
     e.preventDefault();
     const data = new FormData();
     Object.keys(formData).forEach((key) => data.append(key, formData[key]));
-    if (imagem) {
+    if (imagem !== null) {
       data.append("foto", imagem);
     }
     try {
@@ -45,6 +41,7 @@ export default function EditarProduto({
       if (response.ok) {
         onUpdate();
         onClose();
+        location.reload();
       } else {
         alert("Erro ao atualizar: " + result.error);
       }
@@ -52,18 +49,17 @@ export default function EditarProduto({
       alert("Erro ao atualizar: " + error.message);
     }
   };
-
   return (
     <div className={styles.modal}>
       <div className="modal-content">
         <h2>Editar Produto</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={Submit}>
           <label>Nome:</label>
           <input
             type="text"
             name="nome_produto"
             value={formData.nome_produto}
-            onChange={handleChange}
+            onChange={change}
             required
           />
           <label>Ingredientes (separados por vírgula):</label>
@@ -71,7 +67,7 @@ export default function EditarProduto({
             type="text"
             name="ingredientes"
             value={formData.ingredientes}
-            onChange={handleChange}
+            onChange={change}
             required
           />
           <label>Preço:</label>
@@ -79,7 +75,7 @@ export default function EditarProduto({
             type="text"
             name="preco"
             value={formData.preco}
-            onChange={handleChange}
+            onChange={change}
             required
           />
           <label>Categoria:</label>
@@ -87,21 +83,21 @@ export default function EditarProduto({
             type="text"
             name="categoria_produto"
             value={formData.categoria_produto}
-            onChange={handleChange}
+            onChange={change}
             required
           />
           <label>Descrição:</label>
           <textarea
             name="descricao"
             value={formData.descricao}
-            onChange={handleChange}
+            onChange={change}
             required
           />
-          <label>Foto (recomendado 500x500 webp):</label>
+          <label>Foto (fotos leves para não pesar o site):</label>
           <input
             type="file"
             name="foto"
-            onChange={handleFileChange}
+            onChange={fileChange}
             accept="image/*"
           />
           {imagemProduto && (

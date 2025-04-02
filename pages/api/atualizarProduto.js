@@ -2,39 +2,33 @@ import { queryDb } from "../../lib/db";
 import formidable from "formidable";
 import path from "path";
 import fs from "fs/promises";
-
 export const config = {
   api: {
     bodyParser: false,
   },
 };
-
-export default async function handler(req, res) {
+export default async function atualizarProduto(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método não permitido" });
   }
   const uploadDir = path.join(process.cwd(), "public/images");
-
   try {
     try {
       await fs.access(uploadDir);
     } catch {
       await fs.mkdir(uploadDir, { recursive: true });
     }
-
     const form = formidable({
       uploadDir: uploadDir,
       keepExtensions: true,
       multiples: false,
     });
-
     const { fields, files } = await new Promise((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
         if (err) reject(err);
         else resolve({ fields, files });
       });
     });
-
     const {
       id,
       nome_produto,
@@ -48,27 +42,26 @@ export default async function handler(req, res) {
         Array.isArray(value) ? value[0] : value,
       ])
     );
-
     const produtoId = Array.isArray(id)
       ? parseInt(id[0], 10)
       : parseInt(id, 10);
-
     if (isNaN(produtoId)) {
-      console.error("❌ ID do produto é inválido");
+      console.error("ID do produto é inválido");
       return res.status(400).json({ error: "ID do produto é inválido" });
     }
-
     let fotoPath = null;
     if (files.foto) {
       const file = files.foto;
-      if (Array.isArray(file)) {
-        const uploadedFile = file[0];
-        fotoPath = uploadedFile.newFilename;
-      } else {
-        fotoPath = file.newFilename;
+      fotoPath = Array.isArray(file) ? file[0].newFilename : file.newFilename;
+    } else {
+      const produtoAtual = await queryDb(
+        "SELECT foto FROM produtos WHERE id = ?",
+        [produtoId]
+      );
+      if (produtoAtual.length > 0) {
+        fotoPath = produtoAtual[0].foto;
       }
     }
-
     const result = await queryDb(
       "UPDATE produtos SET nome_produto = ?, ingredientes = ?, preco = ?, categoria_produto = ?, descricao = ?, foto = ? WHERE id = ?",
       [
@@ -81,7 +74,6 @@ export default async function handler(req, res) {
         produtoId,
       ]
     );
-
     if (result.affectedRows > 0) {
       return res
         .status(200)
