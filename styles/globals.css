@@ -57,6 +57,7 @@ body {
   background-color: var(--light);
   font-family: "Poppins", sans-serif;
   color: var(--dark);
+  height: 100%;
 }
 a {
   color: inherit;

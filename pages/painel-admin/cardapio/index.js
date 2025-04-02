@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../../../styles/admin.module.css";
 import AsideAdmin from "../../../components/AsideAdmin";
 import HeaderAdmin from "../../../components/HeaderAdmin";
 import Head from "next/head";
 import EditarProduto from "../../../components/EditarProduto";
+import NovoProduto from "../../../components/NovoProduto";
 import "boxicons/css/boxicons.min.css";
 const Cardapio = () => {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
   const [produtos, setProdutos] = useState([]);
   const [produtoEditando, setProdutoEditando] = useState(null);
+  const [adicionandoProduto, setAdicionandoProduto] = useState(false);
   useEffect(() => {
     fetch("/api/restaurante")
       .then((res) => res.json())
@@ -38,9 +40,7 @@ const Cardapio = () => {
     try {
       const response = await fetch("/api/removerProduto", {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
       });
       const data = await response.json();
@@ -107,7 +107,10 @@ const Cardapio = () => {
                         </strong>
                       </div>
                       <div className={styles.btns}>
-                        <button onClick={() => setProdutoEditando(produto)}>
+                        <button
+                          className={styles.ed}
+                          onClick={() => setProdutoEditando(produto)}
+                        >
                           Editar <i className={`${styles.ic} bx bx-pencil`}></i>
                         </button>
                         <button
@@ -121,10 +124,6 @@ const Cardapio = () => {
                   </article>
                 ))}
               </div>
-              <button className={`btn flex ${styles.newProduct}`}>
-                <span>Novo Prato</span>
-                <i className="bx bx-plus"></i>
-              </button>
               {produtoEditando && (
                 <EditarProduto
                   produto={produtoEditando}
@@ -132,6 +131,21 @@ const Cardapio = () => {
                   onUpdate={fetchProdutos}
                 />
               )}
+              {adicionandoProduto && (
+                <NovoProduto
+                  onClose={() => setAdicionandoProduto(false)}
+                  onUpdate={fetchProdutos}
+                />
+              )}
+              <div className={styles.newProductArea}>
+                <button
+                  className={`btn flex ${styles.newProduct}`}
+                  onClick={() => setAdicionandoProduto(true)}
+                >
+                  <span>Novo Prato</span>
+                  <i className="bx bx-plus"></i>
+                </button>
+              </div>
             </section>
           </div>
         </div>

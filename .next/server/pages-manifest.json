@@ -3,9 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin/cardapio": "pages/painel-admin/cardapio.js",
-  "/painel-admin": "pages/painel-admin.js",
-  "/api/restaurante": "pages/api/restaurante.js",
-  "/api/produtos": "pages/api/produtos.js",
-  "/api/removerProduto": "pages/api/removerProduto.js",
+  "/cardapio": "pages/cardapio.js",
   "/produto/[id]": "pages/produto/[id].js"
 }

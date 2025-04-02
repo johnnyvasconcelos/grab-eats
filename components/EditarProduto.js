@@ -52,7 +52,7 @@ export default function EditarProduto({
   return (
     <div className={styles.modal}>
       <div className="modal-content">
-        <h2>Editar Produto</h2>
+        <h2>Editar Prato</h2>
         <form onSubmit={Submit}>
           <label>Nome:</label>
           <input
@@ -93,7 +93,7 @@ export default function EditarProduto({
             onChange={change}
             required
           />
-          <label>Foto (fotos leves para não pesar o site):</label>
+          <label>Foto (fotos leves para melhor desempenho do site):</label>
           <input
             type="file"
             name="foto"
@@ -110,10 +110,14 @@ export default function EditarProduto({
               />
             </div>
           )}
-          <button type="submit">Salvar</button>
-          <button type="button" onClick={onClose}>
-            Cancelar
-          </button>
+          <div className={`flex ${styles.formBtns}`}>
+            <button className="btn" type="submit">
+              Salvar
+            </button>
+            <button className="btn" type="button" onClick={onClose}>
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
