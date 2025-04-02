@@ -35,7 +35,6 @@ export default function NovoProduto({ onClose, onUpdate }) {
       if (response.ok) {
         onUpdate();
         onClose();
-        location.reload();
       } else {
         alert("Erro ao adicionar: " + result.error);
       }

@@ -41,7 +41,6 @@ export default function EditarProduto({
       if (response.ok) {
         onUpdate();
         onClose();
-        location.reload();
       } else {
         alert("Erro ao atualizar: " + result.error);
       }

@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/painel-admin": "pages/painel-admin.js",
   "/painel-admin/cardapio": "pages/painel-admin/cardapio.js",
-  "/cardapio": "pages/cardapio.js",
-  "/painel-admin": "pages/painel-admin.js"
+  "/produto/[id]": "pages/produto/[id].js",
+  "/api/contar-pedidos": "pages/api/contar-pedidos.js"
 }

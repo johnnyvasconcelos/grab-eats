@@ -20,15 +20,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/painel-admin": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/painel-admin.js"
-    ],
     "/painel-admin/cardapio": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/painel-admin/cardapio.js"
+    ],
+    "/produto/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/produto/[id].js"
     ]
   },
   "ampFirstPages": []

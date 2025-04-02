@@ -82,6 +82,13 @@ const Cardapio = () => {
                         src={`/images/${produto.foto}`}
                         alt={produto.nome_produto}
                       />
+                      <a
+                        href={`http://localhost:3000/produto/${produto.id}`}
+                        className={styles.linkArea}
+                        target="_blank"
+                      >
+                        Ver prato&nbsp;<i className="bx bx-show"></i>
+                      </a>
                     </div>
                     <div className={styles.menuRestaurantText}>
                       <h2 className={styles.titleProduct}>

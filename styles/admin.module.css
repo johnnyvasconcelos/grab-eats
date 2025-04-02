@@ -378,6 +378,32 @@
   flex-direction: column;
   gap: 15px;
 }
+.menuRestaurantImage {
+  position: relative;
+}
+.linkArea {
+  position: absolute;
+  transition: var(--transition);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  z-index: 10;
+  right: 0;
+  width: 100%;
+  height: 96%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 600;
+  gap: 5px;
+  padding: 20px;
+  border-radius: 10px 0 0 10px;
+  opacity: 0;
+}
+.menuRestaurantImage:hover .linkArea {
+  opacity: 1;
+}
 .menuRestaurantImage,
 .menuRestaurantText {
   width: 100%;
@@ -497,7 +523,7 @@
 .ingredients {
   padding-top: 10px;
   margin-top: 10px;
-  border-top: 1px solid var(--light-gray);
+  border-top: 1px dotted var(--light-gray-hover);
 }
 
 .modal {
@@ -714,6 +740,9 @@
   .menuRestaurantImage img {
     height: 320px;
   }
+  .linkArea {
+    font-size: 18px;
+  }
 }
 @media (max-width: 670px) {
   .headerImages {
@@ -734,6 +763,9 @@
   }
   .menuRestaurantImage img {
     height: 280px;
+  }
+  .newProduct {
+    font-size: 14px;
   }
 }
 @media (max-width: 560px) {
