@@ -597,8 +597,18 @@
 .adminPedido {
   background-color: white;
   border: 1px solid var(--light-gray);
-  padding: 20px;
+  padding: 25px;
   border-radius: 10px;
+}
+
+.preparando {
+  background-color: var(--color-1-light);
+  border: 2px dashed var(--color-1);
+}
+
+.completo {
+  background-color: var(--color-2-light);
+  border: 2px dashed var(--color-2);
 }
 
 @media (min-width: 1200px) {

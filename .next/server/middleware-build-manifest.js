@@ -20,6 +20,11 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/painel-admin/configuracoes-gerais": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/painel-admin/configuracoes-gerais.js"
+    ],
     "/painel-admin/pedidos": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

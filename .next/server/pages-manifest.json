@@ -3,6 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/painel-admin/pedidos": "pages/painel-admin/pedidos.js",
+  "/painel-admin/configuracoes-gerais": "pages/painel-admin/configuracoes-gerais.js",
   "/api/restaurante": "pages/api/restaurante.js",
-  "/api/pedidos": "pages/api/pedidos.js"
+  "/api/pedidos": "pages/api/pedidos.js",
+  "/api/emPreparo": "pages/api/emPreparo.js"
 }
