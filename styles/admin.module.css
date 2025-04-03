@@ -587,6 +587,20 @@
   color: white;
 }
 
+.adminPedidos {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+.adminPedido {
+  background-color: white;
+  border: 1px solid var(--light-gray);
+  padding: 20px;
+  border-radius: 10px;
+}
+
 @media (min-width: 1200px) {
   .menuRestaurant {
     grid-template-columns: repeat(3, 1fr);

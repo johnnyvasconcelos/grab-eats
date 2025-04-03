@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/painel-admin": "pages/painel-admin.js",
-  "/painel-admin/cardapio": "pages/painel-admin/cardapio.js",
-  "/produto/[id]": "pages/produto/[id].js",
-  "/api/contar-pedidos": "pages/api/contar-pedidos.js"
+  "/painel-admin/pedidos": "pages/painel-admin/pedidos.js",
+  "/api/restaurante": "pages/api/restaurante.js",
+  "/api/pedidos": "pages/api/pedidos.js"
 }
